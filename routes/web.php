@@ -24,18 +24,20 @@ Route::get('/login', function () {
 })->name('login');
 
 
+//Rutas para registro de usuarios
+Route::get('/registro', function () {
+    return view('auth.registro');
+});
+
+Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
+
 Route::middleware(['auth'])->group(function (){
 
     Route::get('/admin', function () {
         return view('admin.admin');
     });
 
-    //Rutas para registro de usuarios
-    Route::get('/registro', function () {
-        return view('auth.registro');
-    });
 
-    Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
 
     //Rutas para incorporacion de bienes
     Route::get('/incorporacion',function (){

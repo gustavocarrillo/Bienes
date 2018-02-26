@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+    protected function validar(Request $request){
 
-    use AuthenticatesUsers;
+        $rules = [
+            "username" => "required",
+            "password" => "required"
+        ];
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+        $validator = [
+            "username.required" => "Debe introducir un Usuario",
+            "password.required" => "Debe introducir una Contraseña",
+        ];
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+        $validar = Validator::make($request->all(),$rules,$validator)->validate();
+    }
+
+    public function autenticar(Request $request){
+
+        $this->validar($request);
+
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            return redirect()->intended('/admin');
+        }
+
+        flash('Usuario o contraseña incorrecta')->error();
+        return redirect('/login');
     }
 }

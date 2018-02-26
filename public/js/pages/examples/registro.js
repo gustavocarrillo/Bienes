@@ -1,5 +1,5 @@
 $(function () {
-    $('#sign_up').validate({
+    $('#registro').validate({
         rules: {
             'terms': {
                 required: true
