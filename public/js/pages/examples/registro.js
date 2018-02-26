@@ -4,7 +4,7 @@ $(function () {
             'terms': {
                 required: true
             },
-            'confirm': {
+            'password_confirmation': {
                 equalTo: '[name="password"]'
             }
         },

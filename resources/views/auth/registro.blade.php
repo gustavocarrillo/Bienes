@@ -21,6 +21,9 @@
     <!-- Animation Css -->
     <link href="{{ asset("plugins/animate-css/animate.css") }}" rel="stylesheet" />
 
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="{{ asset("css/style.css") }}" rel="stylesheet">
 </head>
@@ -69,7 +72,18 @@
                             <input type="password" class="form-control" name="password_confirmation" minlength="6" placeholder="Confirmar Contraseña" required>
                         </div>
                     </div>
-
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">supervisor_account</i>
+                        </span>
+                        <div class="form-line">
+                            <select class="form-control show-tick" required>
+                                <option value="" selected>Seleccione un tipo de Usuario</option>
+                                <option value="consultas">Consultas</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+                    </div>
                     <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRARSE</button>
 
                     <div class="m-t-25 m-b--5 align-center">
@@ -101,6 +115,10 @@
 
     <!-- Validation Plugin Js -->
     <script src="{{ asset("plugins/jquery-validation/jquery.validate.js") }}"></script>
+    <script src="{{ asset("plugins/jquery-validation/localization/messages_es.js") }}"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
 
     <!-- Custom Js -->
     <script src="{{ asset("js/admin.js") }}"></script>
