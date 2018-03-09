@@ -77,7 +77,7 @@
                             <i class="material-icons">supervisor_account</i>
                         </span>
                         <div class="form-line">
-                            <select class="form-control show-tick" required>
+                            <select name="tipo" class="form-control show-tick" required>
                                 <option value="" selected>Seleccione un tipo de Usuario</option>
                                 <option value="consultas">Consultas</option>
                                 <option value="admin">Administrador</option>
@@ -85,13 +85,13 @@
                         </div>
                     </div>
                     <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRARSE</button>
-
                     <div class="m-t-25 m-b--5 align-center">
                         <a href="{{ route("login") }}">Ya tienes un usuario creado?</a>
                     </div>
                 </form>
             </div>
         </div>
+
         @include('flash::message')
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -102,6 +102,7 @@
                 </ul>
             </div>
         @endif
+
     </div>
 
     <!-- Jquery Core Js -->

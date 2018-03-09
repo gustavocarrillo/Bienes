@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('tipo',['consulta','admin'])->default('consulta');
+            $table->enum('estatus',['1','0'])->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

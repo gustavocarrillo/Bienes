@@ -22,7 +22,7 @@ class LoginController extends Controller
             "password.required" => "Debe introducir una Contraseña",
         ];
 
-        $validar = Validator::make($request->all(),$rules,$validator)->validate();
+        return $validar = Validator::make($request->all(),$rules,$validator)->validate();
     }
 
     public function autenticar(Request $request){
@@ -30,7 +30,7 @@ class LoginController extends Controller
         $this->validar($request);
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect()->intended('/admin');
+            return redirect()->intended('/plantilla');
         }
 
         flash('Usuario o contraseña incorrecta')->error();

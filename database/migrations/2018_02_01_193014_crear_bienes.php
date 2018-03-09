@@ -16,7 +16,7 @@ class CrearBienes extends Migration
         Schema::create('bienes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('codigo')->unique();
+            $table->string('codigo',50)->unique();
             $table->string('descripcion','255');
             $table->date('fecha_incorp');
             $table->decimal('valor',8,2);
@@ -25,7 +25,7 @@ class CrearBienes extends Migration
             $table->Integer('elemento')->unsigned();
             $table->integer('usuario')->unsigned()->nullable();
 
-            $table->foreign('nro_orden')->references('id')->on('nro_ordenes')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('nro_orden')->references('id')->on('ordenes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('elemento')->references('id')->on('elementos')->onUpdate('cascade')->onDelete('cascade');
 

@@ -16,9 +16,8 @@ class CrearSubgrupos extends Migration
         Schema::create('sub_grupos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('codigo')->unique();
+            $table->string('codigo',4)->unique();
             $table->string('descripcion','255');
-            $table->timestamps();
         });
     }
 

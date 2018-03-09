@@ -16,13 +16,11 @@ class CrearElementos extends Migration
         Schema::create('elementos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('codigo')->unique();
+            $table->string('codigo',10)->unique();
             $table->string('descripcion','255');
             $table->integer('seccion')->unsigned();
 
             $table->foreign('seccion')->references('id')->on('secciones');
-
-            $table->timestamps();
         });
     }
 

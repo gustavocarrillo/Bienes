@@ -11,6 +11,8 @@
 |
 */
 
+use App\Elemento;
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -29,7 +31,6 @@ Route::get('/registro', function () {
     return view('auth.registro');
 });
 
-Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
 
 Route::middleware(['auth'])->group(function (){
 
@@ -37,14 +38,21 @@ Route::middleware(['auth'])->group(function (){
         return view('admin.admin');
     });
 
-
+    Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
 
     //Rutas para incorporacion de bienes
     Route::get('/incorporacion',function (){
-        return view("gestion_bienes.nuevo");
+        return view("gestion-bienes.incorporacion");
     })->name('incorporacion');
 
     Route::post('/incorporar')->name('incorporar');
+
+    Route::post('/elementos',function (){
+
+        $elementos = Elemento::all();
+
+        return response()->json($elementos);
+    });
 
     //Ruta para salir del sistema.
     Route::get('/salir',function (){

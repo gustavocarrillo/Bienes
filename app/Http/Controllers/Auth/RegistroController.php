@@ -10,21 +10,24 @@ use Validator;
 class RegistroController extends Controller
 {
     protected function validar(Request $request){
+
+        $rules = [
+            "name" => "required",
+            "username" => "required|unique:users",
+            "password" => "required|confirmed",
+            "tipo" => "required"
+        ];
+
         $validator = [
             "name.required" => "Nombre Requerido",
             "username.required" => "Usuario Requerido",
             "username.unique" => "Usuario en Uso",
             "password.required" => "Contraseña Requerida",
             "password.confirmed" => "Debe confirmar la Contraseña",
+            "tipo.required" => "Debe seleccionar un tipo de usuario"
         ];
 
-        $rules = [
-            "name" => "required",
-            "username" => "required|unique:users",
-            "password" => "required|confirmed"
-        ];
-
-        $validar = Validator::make($request->all(),$rules, $validator)->validate();
+        return $validar = Validator::make($request->all(),$rules, $validator)->validate();
     }
 
     public function nuevo(Request $request){
@@ -35,6 +38,7 @@ class RegistroController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
+        $user->tipo = $request->tipo;
 
         $user->save();
 

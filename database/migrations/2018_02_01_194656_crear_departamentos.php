@@ -16,14 +16,12 @@ class CrearDepartamentos extends Migration
         Schema::create('departamentos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->Integer('direccion')->unsigned();
-            $table->tinyInteger('departamento')->unsigned()->unique();
+            $table->string('codigo',2)->unique();
             $table->string('descripcion','255');
             $table->string('responsable','255');
-            $table->string('codigo')->unique();
+            $table->Integer('direccion')->unsigned();
 
             $table->foreign('direccion')->references('id')->on('direcciones')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

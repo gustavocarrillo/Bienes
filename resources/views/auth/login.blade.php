@@ -41,7 +41,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Usuario" required autofocus>
+                            <input type="text" class="form-control" name="username" placeholder="Usuario"  autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -49,7 +49,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+                            <input type="password" class="form-control" name="password" placeholder="Contraseña" >
                         </div>
                     </div>
                     <div class="row">
@@ -66,6 +66,15 @@
             </div>
         </div>
         @include('flash::message')
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 
     <!-- Jquery Core Js -->

@@ -16,10 +16,9 @@ class CrearDirecciones extends Migration
         Schema::create('direcciones', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->tinyInteger('codigo')->unsigned()->unique();
+            $table->string('codigo',2)->unique();
             $table->string('descripcion','255');
             $table->string('responsable','255');
-            $table->timestamps();
         });
     }
 

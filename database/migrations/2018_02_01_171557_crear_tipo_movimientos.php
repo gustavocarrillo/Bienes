@@ -16,9 +16,8 @@ class CrearTipoMovimientos extends Migration
         Schema::create('tipo_movimientos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('codigo')->unique();
+            $table->string('codigo',2)->unique();
             $table->string('descripcion','255');
-            $table->timestamps();
         });
     }
 
