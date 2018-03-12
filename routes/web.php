@@ -31,6 +31,7 @@ Route::get('/registro', function () {
     return view('auth.registro');
 });
 
+Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
 
 Route::middleware(['auth'])->group(function (){
 
@@ -38,7 +39,7 @@ Route::middleware(['auth'])->group(function (){
         return view('admin.admin');
     });
 
-    Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
+
 
     //Rutas para incorporacion de bienes
     Route::get('/incorporacion',function (){
