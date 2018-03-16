@@ -24,6 +24,9 @@
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
+    <!-- Sweetalert Css -->
+    <link href="{{ asset("plugins/sweetalert/sweetalert.css") }}" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="{{ asset("css/style.css") }}" rel="stylesheet">
 
@@ -84,7 +87,7 @@
 <script src="{{ asset("plugins/bootstrap-select/js/bootstrap-select.js") }}"></script>
 
 <!-- Slimscroll Plugin Js -->
-<script src="{{ asset("plugins/jquery-slimscroll/jquery.slimscroll.j") }}s"></script>
+<script src="{{ asset("plugins/jquery-slimscroll/jquery.slimscroll.js") }}"></script>
 
 <!-- Input Mask Plugin Js -->
 <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
@@ -93,7 +96,10 @@
 <script src="{{ asset('plugins/jquery-inputmask/inputmask/inputmask.numeric.extensions.js') }}"></script>
 
 <!-- Waves Effect Plugin Js -->
-<script src="{{ asset("plugins/node-waves/waves") }}.js"></script>
+<script src="{{ asset("plugins/node-waves/waves.js") }}"></script>
+
+<!-- SweetAlert Plugin Js -->
+<script src="{{ asset("plugins/sweetalert/sweetalert.min.js") }}"></script>
 
 <!-- Custom Js -->
 <script src="{{ asset("js/admin.js") }}"></script>

@@ -12,6 +12,8 @@
 */
 
 use App\Elemento;
+use App\Departamento;
+use App\TipoMovimiento;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -39,8 +41,6 @@ Route::middleware(['auth'])->group(function (){
         return view('admin.admin');
     });
 
-
-
     //Rutas para incorporacion de bienes
     Route::get('/incorporacion',function (){
         return view("gestion-bienes.incorporacion");
@@ -48,12 +48,11 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('/incorporar')->name('incorporar');
 
-    Route::post('/elementos',function (){
+    Route::post('/elementos','ElementosController@getElementosAjax');
 
-        $elementos = Elemento::all();
+    Route::post('/departamentos','DepartamentosController@getDepartamentosAjax');
 
-        return response()->json($elementos);
-    });
+    Route::post('/tipo_movimientos','TipoMovimientosController@getTipoMovimientosAjax');
 
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
