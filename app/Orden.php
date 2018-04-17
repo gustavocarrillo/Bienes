@@ -11,11 +11,6 @@ class Orden extends Model
     protected $fillable = [
         'numero',
         'fecha',
-        'proveedor',
-        'f_factura',
-        'nro_factura',
-        'nro_control',
-        'total',
         'idU',
         'usuario'
     ];
@@ -28,10 +23,5 @@ class Orden extends Model
     public function usuario() {
 
         return $this->belongsTo('App\User');
-    }
-
-    public function proveedor() {
-
-        return $this->belongsTo('App\Proveedor');
     }
 }

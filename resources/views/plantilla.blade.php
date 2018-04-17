@@ -21,9 +21,6 @@
     <!-- Animation Css -->
     <link href="{{ asset("plugins/animate-css/animate.css") }}" rel="stylesheet" />
 
-    <!-- JQuery DataTable Css -->
-    <link href="{{ asset("plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css") }}" rel="stylesheet">
-
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
@@ -92,45 +89,23 @@
 <!-- Slimscroll Plugin Js -->
 <script src="{{ asset("plugins/jquery-slimscroll/jquery.slimscroll.js") }}"></script>
 
-<!-- Jquery Validation Plugin Css -->
-<script src="{{ asset('plugins/jquery-validation/jquery.validate.js') }}"></script>
-
 <!-- Input Mask Plugin Js -->
 <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
 
 <!-- Input Mask Plugin Js Extension -->
 <script src="{{ asset('plugins/jquery-inputmask/inputmask/inputmask.numeric.extensions.js') }}"></script>
 
-<!-- Bootstrap Notify Plugin Js -->
-<script src="{{ asset("plugins/bootstrap-notify/bootstrap-notify.js") }}"></script>
-
 <!-- Waves Effect Plugin Js -->
 <script src="{{ asset("plugins/node-waves/waves.js") }}"></script>
-
-<!-- Jquery DataTable Plugin Js -->
-<script src="{{ asset("plugins/jquery-datatable/jquery.dataTables.js") }}"></script>
-<script src="{{ asset("plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js") }}"></script>
-<script src="{{ asset("plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js") }}"></script>
-<script src="{{ asset("plugins/jquery-datatable/extensions/export/buttons.flash.min.js") }}"></script>
-<script src="{{asset("plugins/jquery-datatable/extensions/export/jszip.min.js")}}"></script>
-<script src="{{ asset("plugins/jquery-datatable/extensions/export/pdfmake.min.js") }}"></script>
-<script src="{{ asset("plugins/jquery-datatable/extensions/export/vfs_fonts.js") }}"></script>
-<script src="{{asset("plugins/jquery-datatable/extensions/export/buttons.html5.min.js")}}"></script>
-<script src="{{ asset("plugins/jquery-datatable/extensions/export/buttons.print.min.js") }}"></script>
 
 <!-- SweetAlert Plugin Js -->
 <script src="{{ asset("plugins/sweetalert/sweetalert.min.js") }}"></script>
 
 <!-- Custom Js -->
 <script src="{{ asset("js/admin.js") }}"></script>
-<script src="{{ asset("js/pages/ui/notifications.js") }}"></script>
-<script src="{{ asset("js/pages/forms/form-validation.js") }}"></script>
-<script src="{{ asset("js/pages/tables/jquery-datatable.js") }}"></script>
 
 <!-- Demo Js -->
 <script src="{{ asset("js/demo.js") }}"></script>
-
-
 
 @yield('js')
 
