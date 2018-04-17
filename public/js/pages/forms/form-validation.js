@@ -22,7 +22,7 @@ $(function () {
     //Advanced Form Validation
     $('#form_advanced_validation').validate({
         rules: {
-            'date': {
+            'rif': {
                 customdate: true
             },
             'creditcard': {

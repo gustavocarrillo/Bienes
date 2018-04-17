@@ -21,6 +21,20 @@
             </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript:void(0);" class="menu-toggle">
+                <i class="material-icons">content_copy</i>
+                <span>Proveedores</span>
+            </a>
+            <ul class="ml-menu">
+                <li>
+                    <a href="{{ route('prov-listado') }}">Listado</a>
+                </li>
+                <li>
+                    <a href="{{ route('prov-nuevo') }}">Nuevo</a>
+                </li>
+            </ul>
+        </li>
         <li class="header">LABELS</li>
         <li>
             <a href="javascript:void(0);">

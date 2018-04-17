@@ -54,6 +54,19 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('/tipo_movimientos','TipoMovimientosController@getTipoMovimientosAjax');
 
+    Route::post('/get-bienes/{codigo}','BienesController@getBienAjax')->name('getBienAjax');
+
+    Route::post("/crear-orden","OrdenesController@nueva")->name('crear-orden');
+
+    Route::group(['prefix' => '/proveedores/'], function () {
+
+        Route::get("index","ProveedoresController@index")->name('prov-listado');
+
+        Route::get("nuevo","ProveedoresController@nuevo")->name('prov-nuevo');
+
+        Route::post("store","ProveedoresController@store")->name('prov-guardar');
+    });
+
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
         Auth::logout();
