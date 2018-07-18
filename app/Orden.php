@@ -11,6 +11,12 @@ class Orden extends Model
     protected $fillable = [
         'numero',
         'fecha',
+        'anno',
+        'proveedor',
+        'f_factura',
+        'nro_factura',
+        'nro_control',
+        'total',
         'idU',
         'usuario'
     ];
