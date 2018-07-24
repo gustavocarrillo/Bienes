@@ -7,7 +7,7 @@
                 <h2><b>Registro de Proveedores</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('proveedor.store') }}" method="post">
+                <form action="{{ route('orden.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="row clearfix">
                         <div class="col-md-12 col-lg-12">

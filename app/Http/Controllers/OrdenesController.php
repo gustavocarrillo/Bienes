@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class OrdenesController extends Controller
 {
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         $request->validate([
             'numero' => 'required|numeric',
             'fecha' => 'required',
@@ -51,14 +51,20 @@ class OrdenesController extends Controller
         return view('gestion-ordenes.nueva');
     }
 
-    public function create(){
-
+    public function create()
+    {
         return view('gestion-ordenes.nueva');
     }
 
-    public function index(){
-
+    public function index()
+    {
         $ordenes = Orden::all();
         return view('gestion-ordenes.index')->with('ordenes',$ordenes);
+    }
+
+    public function show($id)
+    {
+        $orden = Orden::with('proveedor')->where('id',$id)->first();
+        return view('gestion-ordenes.ver')->with('orden',$orden);
     }
 }

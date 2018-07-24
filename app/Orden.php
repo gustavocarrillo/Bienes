@@ -12,7 +12,7 @@ class Orden extends Model
         'numero',
         'fecha',
         'anno',
-        'proveedor',
+        'proveedor_id',
         'f_factura',
         'nro_factura',
         'nro_control',
@@ -29,5 +29,10 @@ class Orden extends Model
     public function usuario() {
 
         return $this->belongsTo('App\User');
+    }
+
+    public function proveedor() {
+
+        return $this->belongsTo('App\Proveedor');
     }
 }

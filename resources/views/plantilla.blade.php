@@ -27,6 +27,9 @@
     <!-- Sweetalert Css -->
     <link href="{{ asset("plugins/sweetalert/sweetalert.css") }}" rel="stylesheet" />
 
+    <!-- JQuery DataTable Css -->
+    <link href="{{ asset("plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css") }}" rel="stylesheet">
+
     <!-- Custom Css -->
     <link href="{{ asset("css/style.css") }}" rel="stylesheet">
 
@@ -100,6 +103,10 @@
 
 <!-- SweetAlert Plugin Js -->
 <script src="{{ asset("plugins/sweetalert/sweetalert.min.js") }}"></script>
+
+<!-- JQuery DataTable Js -->
+<script src="{{ asset("plugins/jquery-datatable/jquery.dataTables.js") }}"></script>
+<script src="{{ asset("plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js") }}"></script>
 
 <!-- Custom Js -->
 <script src="{{ asset("js/admin.js") }}"></script>

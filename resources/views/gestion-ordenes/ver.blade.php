@@ -13,46 +13,46 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="numero">Numero:</label>
-                                <div class="form-line">
-                                    <input type="text" name="numero" class="form-control int">
+                                <div>
+                                    {{ $orden->numero }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="fecha">Fecha:</label>
-                                <div class="form-line">
-                                    <input type="text" name="fecha" class="form-control date">
+                                <div>
+                                    {{ $orden->fecha }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="orden">Proveedor:</label>
-                                <select name="proveedores" id="proveedores" class="form-control show-tick">
-                                    <option>Seleccione..</option>
-                                </select>
+                                <div>
+                                    {{ $orden->proveedor }}
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="f_factura">Fecha de Factura:</label>
-                                <div class="form-line">
-                                    <input type="text" name="f_factura" class="form-control date">
+                                <div>
+                                    {{ $orden->f_factura }}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="nro_factura">Numero de Factura:</label>
-                                <div class="form-line">
-                                    <input type="text" name="nro_factura" class="form-control int">
+                                <div>
+                                    {{ $orden->nro_factura }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nro_control">Numero de Control:</label>
-                                <div class="form-line">
-                                    <input type="text" name="nro_control" class="form-control int">
+                                <div>
+                                    {{ $orden->nro_control }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="total">Total:</label>
-                                <div class="form-line">
-                                    <input type="text" name="total" class="form-control decimal">
+                                <div>
+                                    {{ $orden->total }}
                                 </div>
                             </div>
                         </div>

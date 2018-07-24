@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class ProveedoresController extends Controller
 {
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         $request->validate([
             'rif' => 'required|unique:proveedores,rif',
             'nombre' => 'required',
@@ -19,21 +19,22 @@ class ProveedoresController extends Controller
         return view('gestion-proveedores.nuevo');
     }
 
-    public function create(){
-
+    public function create()
+    {
         return view('gestion-proveedores.nuevo');
     }
 
-    public function index(){
-
+    public function index()
+    {
         $proveedores = Proveedor::all();
+
         return view('gestion-proveedores.index')->with('proveedores',$proveedores);
     }
 
-    public function getProveedoresAjax(){
-
+    public function getProveedoresAjax()
+    {
         $proveedores = Proveedor::all();
 
-        return response()->json($proveedores);
+        return response()->json($proveedores,200);
     }
 }

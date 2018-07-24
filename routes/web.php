@@ -59,8 +59,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('orden','OrdenesController');
 
     Route::resource('proveedor','ProveedoresController');
-    Route::post('orden/proveedorJson','ProveedoresController@getProveedoresAjax');
-    Route::post('proveedorJson','ProveedoresController@getProveedoresAjax'); //NO BORRAR
+    Route::post('proveedorJson','ProveedoresController@getProveedoresAjax');
+    Route::post('orden/proveedorJson','ProveedoresController@getProveedoresAjax');//NO BORRAR
 
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
