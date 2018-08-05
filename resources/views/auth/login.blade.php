@@ -9,8 +9,9 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
+    <link href="{{ asset("css/material-icons.css") }}" rel="stylesheet" type="text/css">
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
     <link href="{{ asset("plugins/bootstrap/css/bootstrap.css") }}" rel="stylesheet">
@@ -91,7 +92,7 @@
 
     <!-- Custom Js -->
     <script src="{{ asset("js/admin.js") }}"></script>
-    <script src="{{ asset("login.js") }}"></script>
+    <script src="{{ asset("js/pages/examples/login.js") }}"></script>
 </body>
 
 </html>

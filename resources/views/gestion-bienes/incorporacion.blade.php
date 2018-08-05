@@ -37,10 +37,10 @@
                             </div>
                             <h2 class="card-inside-title">Datos de Incorporación</h2>
                             <div class="row">
-                                <div class="col-md-offset-6 col-md-7 p-r-5">
+                                <div class="col-md-offset-5 col-md-8  p-l-30">
                                     <div class="form-group">
                                         <label for="inc_por">Codigo: </label>
-                                        <span id="codigo">00-0-000-0000</span><span id="separador" class="hidden"> --- </span><span id="cod-lote" class="hidden">00-0-000-0000</span>
+                                        <span id="codigo">00-0-000-0000</span><span id="separador" class="hidden"> -- </span><span id="cod-lote" class="hidden">00-0-000-0000</span>
                                     </div>
                                 </div>
                             </div>
@@ -53,11 +53,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                {{--<div class="col-sm-2">
                                     <div class="p-t-30">
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#smallModal">Nueva</button>
                                     </div>
-                                </div>
+                                </div>--}}
                                 <div class="col-sm-4 col-md-offset-2">
                                     <div class="form-group">
                                         <label for="orden">Valor del Bien:</label>
@@ -127,6 +127,7 @@
     </div>
     {{--Modal--}}
     <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+        <form action="" id="modal">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -232,6 +233,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     {{--Fin - Modal--}}
 @endsection
@@ -255,12 +257,20 @@
             $.each( x, function(i,v){
                 var option = '<option value="'+v.id+'">'+v.codigo+' - '+v.descripcion+'</option>';
                 $(selector).append(option);
-
             })
             $(selector).selectpicker('refresh');
         }).fail(function () {
             alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
         })
+    }
+
+    function attrLote(){
+        $("#inc_por").selectpicker('val','unidad');
+        $("#cantidad_div").addClass('hidden');
+        $("#cantidad").val(0);
+        $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-7');
+        $("#separador").addClass("hidden");
+        $("#cod-lote").addClass("hidden");
     }
 
     //Cargar el select con los elementos
@@ -277,23 +287,57 @@
         if($(this).val() == "lote"){
             $("#cantidad_div").removeClass('hidden');
             $("#inc_div").removeClass('col-md-offset-7').addClass('col-md-offset-4');
+            $("#cantidad").val(0);
             $("#cantidad").focus();
             $("#separador").removeClass("hidden");
             $("#cod-lote").removeClass("hidden");
         }else{
-            $("#cantidad_div").addClass('hidden');
-            $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-7');
-            $("#separador").addClass("hidden");
-            $("#cod-lote").addClass("hidden");
+            attrLote()
         }
     })
     //fin - inc_por
+
+    $("#elementos").change(function () {
+
+        attrLote();
+        cantidad = 0;
+
+        if($("#cantidad").val()){
+            var cantidad = $("#cantidad").val()
+        }
+
+        $.ajax({
+            method: 'get',
+            url: 'bien/' + $(this).val() + "/cantidad/" + cantidad,
+            data : {_token :$('#token').val()},
+            dataType: 'JSON',
+        }).done(function (e) {
+            $("#codigo").html(e.bien);
+            bien = e.bien;
+            $("#cod-lote").html(e.lote);
+        }).fail(function () {
+            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+        })
+    })
+
+    $('#cantidad').change(function () {
+        $.ajax({
+            method: 'get',
+            url: 'bien/' + $("#elementos").val() + "/cantidad/" + $('#cantidad').val(),
+            data : {_token :$('#token').val()},
+            dataType: 'JSON',
+        }).done(function (e) {
+            $("#codigo").html(e.bien);
+            $("#cod-lote").html(e.lote);
+        }).fail(function () {
+            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+        })
+    })
 
     $('.js-modal-buttons .btn').on('click', function () {
         var color = $(this).data('color');
         $('#mdModal .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
         $('#mdModal').modal('show');
     });
-
 </script>
 @endsection

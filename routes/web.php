@@ -54,6 +54,14 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('/tipo_movimientos','TipoMovimientosController@getTipoMovimientosAjax');
 
+    Route::get('/bien/{bien}/cantidad/{cantidad}','BienesController@getLastAjax');
+
+    Route::resource('orden','OrdenesController');
+
+    Route::resource('proveedor','ProveedoresController');
+    Route::post('proveedorJson','ProveedoresController@getProveedoresAjax');
+    Route::post('orden/proveedorJson','ProveedoresController@getProveedoresAjax');//NO BORRAR
+
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
         Auth::logout();
