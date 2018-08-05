@@ -38,7 +38,7 @@ class OrdenesController extends Controller
             "numero" => $request->numero,
             "fecha" => date('Y-m-d',strtotime($request->fecha)),
             "anno" => $now->year,
-            'proveedor' => $request->proveedores,
+            'proveedor_id' => $request->proveedores,
             'f_factura' => date('Y-m-d',strtotime($request->f_factura)),
             'nro_factura' => $request->nro_factura,
             'nro_control' => $request->nro_control,

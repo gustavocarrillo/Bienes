@@ -7,6 +7,10 @@
                 <h2><b>Listado de Proveedores</b></h2>
             </div>
             <div class="body">
+                <div class="align-right">
+                    <a href="{{ route('proveedor.create') }}" class="btn btn-primary">Nuevo Proveedor</a>
+                </div>
+                <br />
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable">
                         <thead>
@@ -22,9 +26,12 @@
                                 <td>{{ $proveedor->rif }}</td>
                                 <td>{{ $proveedor->nombre }}</td>
                                 <td>
-                                    <a href="{{ route('proveedor.show',$proveedor->id) }}" class="btn btn-primary">Ver</a>
-                                    <a href="{{ route('proveedor.update',$proveedor->id) }}" class="btn btn-success">Editar</a>
-                                    <a href="{{ route('proveedor.destroy',$proveedor->id) }}" class="btn btn-danger">Eliminar</a>
+                                    <form method="post" action="{{ route('proveedor.destroy',$proveedor->id) }}">
+                                        <a href="{{ route('proveedor.edit',$proveedor->id) }}" class="btn btn-success">Editar</a>
+                                        {{ method_field('delete') }}
+                                        {{ csrf_field()  }}
+                                        <button class="btn btn-danger" onclick="if (! window.confirm('¿Desea elminar este Proveedor?')){ return false }">Eliminar</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

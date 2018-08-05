@@ -15,12 +15,14 @@ class ModifOrdenes extends Migration
     {
         Schema::table('ordenes', function (Blueprint $table) {
             $table->integer('anno')->unsigned()->after('fecha');
-            $table->integer('proveedor_id')->unsigned()->after('anno');
-            $table->date('f_factura')->after('proveedor');
+            $table->unsignedInteger('proveedor_id')->after('anno');
+            $table->date('f_factura')->after('proveedor_id');
             $table->integer('nro_factura')->after('f_factura');
             $table->integer('nro_control')->after('nro_factura');
             $table->decimal('total',12,2)->after('nro_control');
+        });
 
+        Schema::table('ordenes',function(Blueprint $table){
             $table->foreign('proveedor_id')
                 ->references('id')
                 ->on('proveedores')

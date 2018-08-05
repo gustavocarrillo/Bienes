@@ -4,30 +4,31 @@
     <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="header">
-                <h2><b>Registro de Proveedores</b></h2>
+                <h2><b>Modificar Proveedor</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('proveedor.store') }}" method="post">
+                <form action="{{ route('proveedor.update', $proveedor->id) }}" method="post">
+                    {{ method_field('put')  }}
                     {{ csrf_field() }}
                     <div class="row clearfix">
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
                                 <label for="rif">Rif:</label>
                                 <div class="form-line">
-                                    <input type="text" name="rif" class="form-control rif">
+                                    <input type="text" name="rif" class="form-control rif" value="{{ $proveedor->rif  }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <div class="form-line">
-                                    <input type="text" name="nombre" class="form-control">
+                                    <input type="text" name="nombre" class="form-control" value="{{ $proveedor->nombre  }}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row clearfix">
                         <div class="form-group ">
-                            <input type="submit" class="form-control btn btn-primary" value="Guardar">
+                            <input type="submit" class="form-control btn btn-primary" value="Modificar">
                         </div>
                     </div>
                 </form>
