@@ -7,6 +7,9 @@
                 <h2><b>Listado Ordenes de Compra</b></h2>
             </div>
             <div class="body">
+                <div class="align-right">
+                    <a href="{{ route('orden.create') }}" class="btn btn-primary">Nueva Orden</a>
+                </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover dataTable">
                             <thead>
@@ -21,12 +24,16 @@
                             @foreach($ordenes as $orden)
                                 <tr>
                                     <td>{{ $orden->numero }}</td>
-                                    <td>{{ $orden->fecha }}</td>
+                                    <td>{{ date('d-m-Y',strtotime($orden->fecha)) }}</td>
                                     <td>{{ $orden->nro_factura }}</td>
                                     <td>
-                                        <a href="{{ route('orden.show',$orden->id) }}" class="btn btn-primary">Ver</a>
-                                        <a href="{{ route('orden.update',$orden->id) }}" class="btn btn-success">Editar</a>
-                                        <a href="{{ route('orden.destroy',$orden->id) }}" class="btn btn-danger">Eliminar</a>
+                                        <form method="post" action="{{ route('orden.destroy',$orden->id) }}">
+                                            <a href="{{ route('orden.show',$orden->id) }}" class="btn btn-primary">Ver</a>
+                                            <a href="{{ route('orden.edit',$orden->id) }}" class="btn btn-success">Editar</a>
+                                            {{ method_field('delete') }}
+                                            {{ csrf_field()  }}
+                                            <button class="btn btn-danger" onclick="if (! window.confirm('¿Desea elminar esta Orden?')){ return false }">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

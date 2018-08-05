@@ -4,55 +4,31 @@
     <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="header">
-                <h2><b>Orden de Compra #{{ $orden->numero }}</b></h2>
+                <h2><b>Registro de Tipos de Movimiento</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('orden.store') }}" method="post">
+                <form action="{{ route('tipo-movimiento.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="row clearfix">
-                        <div class="col-md-6 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label for="fecha">Fecha:</label>
-                                <div>
-                                    {{ date('d-m-Y',strtotime($orden->fecha)) }}
+                                <label for="rif">Codigo:</label>
+                                <div class="form-line">
+                                    <input type="text" name="codigo" class="form-control codigo">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="orden">Proveedor:</label>
-                                <div>
-                                    {{ $orden->proveedor->nombre }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="f_factura">Fecha de Factura:</label>
-                                <div>
-                                    {{ date('d-m-Y',strtotime($orden->f_factura)) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="nro_factura">Numero de Factura:</label>
-                                <div>
-                                    {{ $orden->nro_factura }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nro_control">Numero de Control:</label>
-                                <div>
-                                    {{ $orden->nro_control }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="total">Total:</label>
-                                <div>
-                                    {{ $orden->total }}
+                                <label for="descripcion">Descripcion:</label>
+                                <div class="form-line">
+                                    <input type="text" name="descripcion" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <a href="{{ route('orden.index') }}" class="btn btn-block btn-primary">Volver</a>
+                        <div class="form-group ">
+                            <input type="submit" class="form-control btn btn-primary" value="Guardar">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -74,26 +50,10 @@
 <script>
     $(function(){
         $('.int').inputmask('numeric', { placeholder: '' });
-        $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
-        $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
+        $('.codigo').inputmask('99', { placeholder: ""});
+        $('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
         $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
     })
-
-    $.ajax({
-        method: 'POST',
-        url: "proveedorJson",
-        data : {_token : "{{ csrf_token() }}" },
-        dataType: 'JSON',
-    }).done(function (x) {
-        $.each( x, function(i,v){
-            var option = '<option value="'+v.id+'">'+v.nombre+'</option>';
-            $("#proveedores").append(option);
-        })
-        $("#proveedores").selectpicker('refresh');
-    }).fail(function () {
-        alert("NO SE HAN PODIDO CARGAR LOS PROVEEDORES")
-    })
-
 
     /*function attrLote(){
         $("#inc_por").selectpicker('val','unidad');

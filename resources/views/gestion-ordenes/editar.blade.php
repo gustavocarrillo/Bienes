@@ -7,32 +7,36 @@
                 <h2><b>Registro de Orden de Compra</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('orden.store') }}" method="post">
+                <form action="{{ route('orden.update',$orden->id ) }}" method="post">
                     {{ csrf_field() }}
+                    {{ method_field('put') }}
                     <div class="row clearfix">
                         <div class="col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="numero">Numero:</label>
                                 <div class="form-line">
-                                    <input type="text" name="numero" class="form-control int">
+                                    <input type="text" name="numero" class="form-control int" value="{{ $orden->numero }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="fecha">Fecha:</label>
                                 <div class="form-line">
-                                    <input type="text" name="fecha" class="form-control date">
+                                    <input type="text" name="fecha" class="form-control date" value="{{ date('d-m-Y',strtotime($orden->fecha)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="orden">Proveedor:</label>
                                 <select name="proveedores" id="proveedores" class="form-control show-tick">
-                                    <option>Seleccione..</option>
+                                    <option value="">Seleccione..</option>
+                                    @foreach($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id }}" @if($proveedor->id == $orden->proveedor->id) selected @endIf>{{ $proveedor->nombre }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="f_factura">Fecha de Factura:</label>
                                 <div class="form-line">
-                                    <input type="text" name="f_factura" class="form-control date">
+                                    <input type="text" name="f_factura" class="form-control date" value="{{ date('d-m-Y',strtotime($orden->f_factura)) }}">
                                 </div>
                             </div>
                         </div>
@@ -40,26 +44,26 @@
                             <div class="form-group">
                                 <label for="nro_factura">Numero de Factura:</label>
                                 <div class="form-line">
-                                    <input type="text" name="nro_factura" class="form-control int">
+                                    <input type="text" name="nro_factura" class="form-control int" value="{{ $orden->nro_factura }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nro_control">Numero de Control:</label>
                                 <div class="form-line">
-                                    <input type="text" name="nro_control" class="form-control int">
+                                    <input type="text" name="nro_control" class="form-control int" value="{{ $orden->nro_control }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="total">Total:</label>
                                 <div class="form-line">
-                                    <input type="text" name="total" class="form-control decimal">
+                                    <input type="text" name="total" id="total" class="form-control" value="{{ number_format($orden->total,2,',','.') }}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row clearfix">
                         <div class="form-group ">
-                            <input type="submit" class="form-control btn btn-primary" value="Guardar">
+                            <input type="submit" class="form-control btn btn-primary" value="Modificar">
                         </div>
                     </div>
                 </form>
@@ -80,14 +84,24 @@
 
 @section('js')
 <script>
+
+    $('#total').addClass('decimal');
     $(function(){
         $('.int').inputmask('numeric', { placeholder: '' });
         $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
         $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
+        $('.decimal').inputmask('decimal', {
+            radixPoint: ",",
+            groupSeparator: ".",
+            autoGroup: true,
+            //digits: 0,
+            groupSize: 3,
+            placeholder: "0.00",
+            //numericInput: true
+        });
     })
 
-    $.ajax({
+    /*$.ajax({
         method: 'POST',
         url: "proveedorJson",
         data : {_token : "{{ csrf_token() }}" },
@@ -101,8 +115,7 @@
     }).fail(function () {
         alert("NO SE HAN PODIDO CARGAR LOS PROVEEDORES")
     })
-
-
+*/
     /*function attrLote(){
         $("#inc_por").selectpicker('val','unidad');
         $("#cantidad_div").addClass('hidden');

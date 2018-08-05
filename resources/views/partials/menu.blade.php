@@ -28,18 +28,16 @@
             </a>
         </li>
         <li>
-            <a href="javascript:void(0);" class="menu-toggle">
+            <a href="{{ route("orden.index") }}">
                 <i class="material-icons">content_copy</i>
-                <span>Ordenes de Compra</span>
+                <span>Ordenes</span>
             </a>
-            <ul class="ml-menu">
-                <li>
-                    <a href="{{ route('orden.create') }}">Registrar Orden</a>
-                </li>
-                <li>
-                    <a href="{{ route('orden.index') }}">Listar Ordenes</a>
-                </li>
-            </ul>
+        </li>
+        <li>
+            <a href="{{ route("tipo-movimiento.index") }}">
+                <i class="material-icons">content_copy</i>
+                <span>Tipos de Movimiento</span>
+            </a>
         </li>
         {{--<li class="header">LABELS</li>
         <li>

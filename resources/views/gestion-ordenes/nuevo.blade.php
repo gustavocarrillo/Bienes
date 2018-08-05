@@ -4,7 +4,7 @@
     <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="header">
-                <h2><b>Orden de Compra #{{ $orden->numero }}</b></h2>
+                <h2><b>Registro de Orden de Compra</b></h2>
             </div>
             <div class="body">
                 <form action="{{ route('orden.store') }}" method="post">
@@ -12,47 +12,55 @@
                     <div class="row clearfix">
                         <div class="col-md-6 col-lg-6">
                             <div class="form-group">
+                                <label for="numero">Numero:</label>
+                                <div class="form-line">
+                                    <input type="text" name="numero" class="form-control int">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="fecha">Fecha:</label>
-                                <div>
-                                    {{ date('d-m-Y',strtotime($orden->fecha)) }}
+                                <div class="form-line">
+                                    <input type="text" name="fecha" class="form-control date">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="orden">Proveedor:</label>
-                                <div>
-                                    {{ $orden->proveedor->nombre }}
-                                </div>
+                                <select name="proveedores" id="proveedores" class="form-control show-tick">
+                                    <option>Seleccione..</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="f_factura">Fecha de Factura:</label>
-                                <div>
-                                    {{ date('d-m-Y',strtotime($orden->f_factura)) }}
+                                <div class="form-line">
+                                    <input type="text" name="f_factura" class="form-control date">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="nro_factura">Numero de Factura:</label>
-                                <div>
-                                    {{ $orden->nro_factura }}
+                                <div class="form-line">
+                                    <input type="text" name="nro_factura" class="form-control int">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nro_control">Numero de Control:</label>
-                                <div>
-                                    {{ $orden->nro_control }}
+                                <div class="form-line">
+                                    <input type="text" name="nro_control" class="form-control int">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="total">Total:</label>
-                                <div>
-                                    {{ $orden->total }}
+                                <div class="form-line">
+                                    <input type="text" name="total" class="form-control decimal">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <a href="{{ route('orden.index') }}" class="btn btn-block btn-primary">Volver</a>
+                        <div class="form-group ">
+                            <input type="submit" class="form-control btn btn-primary" value="Guardar">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -76,8 +84,15 @@
         $('.int').inputmask('numeric', { placeholder: '' });
         $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
         $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
-    })
+        $('.decimal').inputmask('decimal', {
+            radixPoint: ",",
+            groupSeparator: ".",
+            autoGroup: true,
+            //digits: 0,
+            groupSize: 3,
+            placeholder: "0.00",
+            //numericInput: true
+        });    })
 
     $.ajax({
         method: 'POST',

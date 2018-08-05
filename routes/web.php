@@ -56,11 +56,17 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('/bien/{bien}/cantidad/{cantidad}','BienesController@getLastAjax');
 
+    //Ordenes
     Route::resource('orden','OrdenesController');
 
+    //Proveedores
     Route::resource('proveedor','ProveedoresController');
     Route::post('proveedorJson','ProveedoresController@getProveedoresAjax');
     Route::post('orden/proveedorJson','ProveedoresController@getProveedoresAjax');//NO BORRAR
+    Route::post('orden/{id}/proveedorJson','ProveedoresController@getProveedoresAjax');//NO BORRAR
+
+    //Tipos de movimiento
+    Route::resource('tipo-movimiento','TipoMovimientosController');
 
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
