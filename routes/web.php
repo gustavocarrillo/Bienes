@@ -68,6 +68,9 @@ Route::middleware(['auth'])->group(function (){
     //Tipos de movimiento
     Route::resource('tipo-movimiento','TipoMovimientosController');
 
+    //Direcciones
+    Route::resource('direccion','DireccionesController');
+
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
         Auth::logout();

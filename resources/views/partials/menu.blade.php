@@ -39,6 +39,12 @@
                 <span>Tipos de Movimiento</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route("direccion.index") }}">
+                <i class="material-icons">content_copy</i>
+                <span>Direcciones</span>
+            </a>
+        </li>
         {{--<li class="header">LABELS</li>
         <li>
             <a href="javascript:void(0);">
