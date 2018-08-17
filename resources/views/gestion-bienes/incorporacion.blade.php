@@ -2,18 +2,34 @@
 
 @section('contenido')
     <div class="col-lg-7 col-md-7">
+        @include('flash::message')
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="header">
                 <h2><b>Incorporacion de Bienes</b></h2>
             </div>
             <div class="body">
-                    <input type="hidden" value="{{ csrf_token() }}" id="token">
                     <h2 class="card-inside-title">Seleccionar Elemento</h2>
+                <form action="{{ route('bienes.store') }}" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="codigo" id="codigo_input">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     <div class="row clearfix">
                         <div class="col-md-12">
                             <div class="p-b-15">
-                                <select name="elementos" id="elementos" class="form-control show-tick" data-live-search="true">
+                                <select name="elemento" id="elementos" class="form-control show-tick" data-live-search="true">
                                     <option value="" selected>Seleccione un elemento</option>
+                                    @foreach($elementos as $elemento)
+                                        <option value="{{ $elemento->id }}">{{ $elemento->codigo.' - '.$elemento->descripcion }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="row">
@@ -36,8 +52,19 @@
                                 </div>
                             </div>
                             <h2 class="card-inside-title">Datos de Incorporación</h2>
+                            <hr>
                             <div class="row">
-                                <div class="col-md-offset-5 col-md-8  p-l-30">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="inc_por">Descripcion: </label>
+                                        <div class="form-line">
+                                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="" maxlength="65" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-5 col-md-8  p-l-30 m-t-20">
                                     <div class="form-group">
                                         <label for="inc_por">Codigo: </label>
                                         <span id="codigo">00-0-000-0000</span><span id="separador" class="hidden"> -- </span><span id="cod-lote" class="hidden">00-0-000-0000</span>
@@ -48,9 +75,12 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="orden">Orden de Compra:</label>
-                                        <div class="form-line">
-                                            <input type="text" name="orden" id="orden" class="form-control int" placeholder="" value="" maxlength="4" />
-                                        </div>
+                                        <select name="nro_orden" id="orden" class="form-control show-tick" data-live-search="true">
+                                            <option value="" selected>Seleccione..</option>
+                                            @foreach($ordenes as $orden)
+                                                <option value="{{ $orden->id }}">{{ $orden->numero }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-2">
@@ -62,7 +92,7 @@
                                     <div class="form-group">
                                         <label for="orden">Valor del Bien:</label>
                                         <div class="form-line">
-                                            <input type="text" name="valor_bien" id="valor_bien" class="form-control decimal" maxlength="16"/>
+                                            <input type="text" name="valor" id="valor_bien" class="form-control decimal" maxlength="16"/>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +105,7 @@
                                                 <i class="material-icons">date_range</i>
                                             </span>
                                         <div class="form-line">
-                                            <input type="text" name="f_incorp" id="f_incorp"class="form-control date" placeholder="Ejem: 30/07/2016">
+                                            <input type="text" name="fecha_incorp" id="f_incorp"class="form-control date" placeholder="Ejem: 30/07/2016">
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +113,7 @@
                                     <div class="form-group">
                                         <label for="valor_actual_bien">Valor actual del Bien:</label>
                                         <div class="form-line">
-                                            <input type="text" name="valor_actual_bien" id="valor_actual_bien" class="form-control decimal" maxlength="16"/>
+                                            <input type="text" name="valor_actual" id="valor_actual_bien" class="form-control decimal" maxlength="16"/>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +124,10 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <select name="departamento" id="departamento" class="form-control show-tick" data-live-search="true">
-                                                <option value="" selected>Seleccione un elemento</option>
+                                                <option value="" selected>Seleccione un departamento</option>
+                                                @foreach($departamentos as $departamento)
+                                                    <option value="{{ $departamento->id }}">{{ $departamento->codigo.' - '.$departamento->descripcion }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -107,6 +140,9 @@
                                         <div class="form-group">
                                             <select name="t_movimiento" id="t_movimiento" class="form-control show-tick" data-live-search="true">
                                                 <option value="" selected>Seleccione un elemento</option>
+                                                @foreach($tipos as $tipo)
+                                                    <option value="{{ $tipo->id }}">{{ $tipo->codigo.' - '.$tipo->descripcion }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -122,6 +158,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
         </div>
     </div>
@@ -274,13 +311,13 @@
     }
 
     //Cargar el select con los elementos
-    fillSelect("elementos",'#elementos');
+    //fillSelect("elementos",'#elementos');
 
     //Cargar el select con los departamentos
-    fillSelect("departamentos","#departamento");
+    //fillSelect("departamentos","#departamento");
 
     //Cargar el select con los tipo_movimientos
-    fillSelect("tipo_movimientos","#t_movimiento")
+    //fillSelect("tipo_movimientos","#t_movimiento")
 
     //Cambia estado de div inc_por
     $("#inc_por").change(function () {
@@ -309,12 +346,15 @@
         $.ajax({
             method: 'get',
             url: 'bien/' + $(this).val() + "/cantidad/" + cantidad,
-            data : {_token :$('#token').val()},
+            data : {_token: "{{ csrf_token() }}" },
             dataType: 'JSON',
         }).done(function (e) {
+            //alert(e.bien)
             $("#codigo").html(e.bien);
+            $("#codigo_input").val(e.bien);
             bien = e.bien;
             $("#cod-lote").html(e.lote);
+            $("#codido_lote").val(e.lote);
         }).fail(function () {
             alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
         })

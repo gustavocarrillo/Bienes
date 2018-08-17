@@ -21,17 +21,17 @@ class Bien extends Model
 
     public function elemento() {
 
-        return $this->belongsTo('App\Elemento');
+        return $this->belongsTo('App\Elemento','elememto');
     }
 
-    public function nro_orden() {
+    public function orden() {
 
-        return $this->belongsTo('App\Orden');
+        return $this->belongsTo('App\Orden','nro_orden');
     }
 
     public function usuario() {
 
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','usuario');
     }
 
     public function movimientos() {

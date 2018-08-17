@@ -8,18 +8,10 @@
             </a>
         </li>
         <li>
-            <a href="javascript:void(0);" class="menu-toggle">
+            <a href="{{ route("bienes.index") }}">
                 <i class="material-icons">content_copy</i>
-                <span>Gestion de Bienes</span>
+                <span>Bienes</span>
             </a>
-            <ul class="ml-menu">
-            <li>
-                <a href="{{ route('incorporacion') }}">Incorporación</a>
-            </li>
-            <li>
-                <a href="../../pages/widgets/infobox/infobox-1.html">Busquedas</a>
-            </li>
-            </ul>
         </li>
         <li>
             <a href="{{ route("proveedor.index") }}">

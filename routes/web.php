@@ -42,11 +42,9 @@ Route::middleware(['auth'])->group(function (){
     });
 
     //Rutas para incorporacion de bienes
-    Route::get('/incorporacion',function (){
-        return view("gestion-bienes.incorporacion");
-    })->name('incorporacion');
+    Route::resource('bienes','BienesController');
 
-    Route::post('/incorporar')->name('incorporar');
+
 
     Route::post('/elementos','ElementosController@getElementosAjax');
 
@@ -54,7 +52,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('/tipo_movimientos','TipoMovimientosController@getTipoMovimientosAjax');
 
-    Route::get('/bien/{bien}/cantidad/{cantidad}','BienesController@getLastAjax');
+    Route::get('/bienes/bien/{bien}/cantidad/{cantidad}','BienesController@getLastAjax');
 
     //Ordenes
     Route::resource('orden','OrdenesController');
