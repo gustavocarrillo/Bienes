@@ -4,60 +4,55 @@
     <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="header">
-                <h2><b>Edición de Orden de Compra</b></h2>
+                <h2><b>Edición de BIEN: {{ $bien->codigo }}</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('orden.update',$orden->id ) }}" method="post">
+                <form action="{{ route('bienes.update',$bien->id ) }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('put') }}
                     <div class="row clearfix">
-                        <div class="col-md-6 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label for="numero">Numero:</label>
+                                <label for="numero">Descripcion:</label>
                                 <div class="form-line">
-                                    <input type="text" name="numero" class="form-control int" value="{{ $orden->numero }}">
+                                    <input type="text" name="descripcion" class="form-control" value="{{ $bien->descripcion }}" maxlength="65">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="fecha">Fecha:</label>
+                                <label for="fecha">Fecha de Incorporación:</label>
                                 <div class="form-line">
-                                    <input type="text" name="fecha" class="form-control date" value="{{ date('d-m-Y',strtotime($orden->fecha)) }}">
+                                    <input type="text" name="fecha_incorp" class="form-control date" value="{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="orden">Proveedor:</label>
-                                <select name="proveedores" id="proveedores" class="form-control show-tick">
+                                <label for="total">Valor:</label>
+                                <div class="form-line">
+                                    <input type="text" name="valor" id="valor" class="form-control decimal" value="{{ number_format($bien->valor,2,',','.') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="total">Valor Actual:</label>
+                                <div class="form-line">
+                                    <input type="text" name="valor_actual" id="total" class="form-control decimal" value="{{ number_format($bien->valor_actual,2,',','.') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="orden">Nro de Orden:</label>
+                                <select name="nro_orden" id="nro_orden" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
-                                    @foreach($proveedores as $proveedor)
-                                        <option value="{{ $proveedor->id }}" @if($proveedor->id == $orden->proveedor->id) selected @endIf>{{ $proveedor->nombre }}</option>
+                                    @foreach($ordenes as $orden)
+                                        <option value="{{ $orden->id }}" @if($bien->nro_orden == $orden->id) selected @endIf>{{ $orden->numero }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="f_factura">Fecha de Factura:</label>
-                                <div class="form-line">
-                                    <input type="text" name="f_factura" class="form-control date" value="{{ date('d-m-Y',strtotime($orden->f_factura)) }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="nro_factura">Numero de Factura:</label>
-                                <div class="form-line">
-                                    <input type="text" name="nro_factura" class="form-control int" value="{{ $orden->nro_factura }}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nro_control">Numero de Control:</label>
-                                <div class="form-line">
-                                    <input type="text" name="nro_control" class="form-control int" value="{{ $orden->nro_control }}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="total">Total:</label>
-                                <div class="form-line">
-                                    <input type="text" name="total" id="total" class="form-control" value="{{ number_format($orden->total,2,',','.') }}">
-                                </div>
+                                <label for="orden">Elemento:</label>
+                                <select name="elemento" id="elemento" class="form-control show-tick">
+                                    <option value="">Seleccione..</option>
+                                    @foreach($elementos as $elemento)
+                                        <option value="{{ $elemento->id }}" @if($bien->elemento == $elemento->id) selected @endIf>{{ $elemento->codigo.' -- '.$elemento->descripcion  }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

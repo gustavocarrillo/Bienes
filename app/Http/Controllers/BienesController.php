@@ -42,6 +42,7 @@ class BienesController extends Controller
             'usuario' => Auth::id(),
         ]);
 
+        flash('El bien ha sido registrado exitosamente')->success();
         return response()->redirectToRoute('bienes.index');
     }
 
@@ -57,6 +58,49 @@ class BienesController extends Controller
         $bien = Bien::where('id',$id)->with('orden')->first();
 
         return view('gestion-bienes.ver')->with(compact('bien'));
+    }
+
+    public function edit($id)
+    {
+        $bien = Bien::find($id);
+
+        $elementos = Elemento::all();
+        $departamentos = Departamento::all();
+        $tipos = TipoMovimiento::all();
+        $ordenes = Orden::where('anno',Carbon::now()->year)->get();
+
+        return view('gestion-bienes.editar')->with(compact(['bien','elementos','departamentos','tipos','ordenes']));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $bien = Bien::find($id);
+
+        $this->validate($request,[
+            'descripcion' => 'required',
+            'fecha_incorp' => 'required',
+            'valor' => 'required',
+            'valor_actual' => 'required',
+            'nro_orden' => 'required',
+            'elemento' => 'required',
+        ]);
+
+        $valor = str_replace('.',"",$request->valor);
+        $valor = str_replace(',',".",$valor);
+
+        $valor_actual = str_replace('.',"",$request->valor_actual);
+        $valor_actual = str_replace(',',".",$valor_actual);
+
+        $bien->descripcion = $request->descripcion;
+        $bien->fecha_incorp = date('Y-m-d',strtotime($request->fecha_incorp));
+        $bien->valor = $valor;
+        $bien->valor_actual = $valor_actual;
+        $bien->nro_orden = $request->nro_orden;
+        $bien->elemento = $request->elemento;
+        $bien->save();
+
+        flash('El bien ha sido modificado exitosamente')->success();
+        return response()->redirectToRoute('bienes.index');
     }
 
     public function getLastAjax($bienid,$cantidadid)
