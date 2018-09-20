@@ -103,7 +103,7 @@ class BienesController extends Controller
         return response()->redirectToRoute('bienes.index');
     }
 
-    public function getLastAjax($bienid,$cantidadid)
+    public function getLastAjax($bienid,$cantidadid = 2)
     {
         $bien = Bien::where('elemento',$bienid)->orderBy('codigo',"desc")->first();
 
