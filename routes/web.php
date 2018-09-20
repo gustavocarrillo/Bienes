@@ -44,7 +44,8 @@ Route::middleware(['auth'])->group(function (){
     //Rutas para incorporacion de bienes
     Route::resource('bienes','BienesController');
 
-    //ajax
+
+
     Route::post('/elementos','ElementosController@getElementosAjax');
 
     Route::post('/departamentos','DepartamentosController@getDepartamentosAjax');

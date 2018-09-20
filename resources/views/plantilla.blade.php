@@ -83,12 +83,6 @@
 <!-- Jquery Core Js -->
 <script src="{{ asset("plugins/jquery/jquery.min.j") }}s"></script>
 
-<!-- VUE JS -->
-<script src="{{ asset("js/vue.js") }}"></script>
-
-<!-- VUE RESOURCE -->
-<script src="{{ asset("js/vue-resource.js") }}"></script>
-
 <!-- Bootstrap Core Js -->
 <script src="{{ asset("plugins/bootstrap/js/bootstrap.js") }}"></script>
 
