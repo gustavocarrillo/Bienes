@@ -28,12 +28,9 @@
                                 <td width="55%">{{ $bien->descripcion }}</td>
                                 <td width="10%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
                                 <td width="20%">
-                                    <form method="post" action="{{ route('bienes.destroy',$bien->id) }}">
                                         <a href="{{ route('bienes.show',$bien->id) }}" class="btn btn-xs bg-indigo"><i class="material-icons">remove_red_eye</i></a>
                                         <a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-xs btn-success"><i class="material-icons">create</i></a>
-                                        {{ method_field('delete') }}
-                                        {{ csrf_field()  }}
-                                        <button class="btn btn-xs btn-danger" onclick="if (! window.confirm('¿Desea elminar este Bien?')){ return false }"><i class="material-icons">delete</i></button>
+                                        <a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-xs btn-danger" ><i class="material-icons">delete</i></a>
                                     </form>
                                 </td>
                             </tr>

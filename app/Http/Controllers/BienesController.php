@@ -31,10 +31,12 @@ class BienesController extends Controller
         $valor_actual = str_replace('.',"",$request->valor_actual);
         $valor_actual = str_replace(',',".",$valor_actual);
 
+        //dd($request->all());
+
         Bien::create([
             'codigo' => $request->codigo,
             'descripcion' => ucfirst($request->descripcion),
-            'fecha_incorp' => date('Y-m-d',strtotime($request->fecha_incorp)),
+            'fecha_incorp' => date('Y-m-d',strtotime(trim($request->fecha_incorp))),
             'valor' => $valor,
             'valor_actual' => $valor_actual,
             'nro_orden' => $request->nro_orden,

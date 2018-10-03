@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <label for="cantidad">Cantidad</label>
                                         <div class="form-line">
-                                            <input type="text" name="cantidad" id="cantidad" class="form-control int" placeholder="" maxlength="6"/>
+                                            <input type="text" name="cantidad" id="cantidad" class="form-control int" placeholder="" maxlength="4"/>
                                         </div>
                                     </div>
                                 </div>
@@ -280,7 +280,7 @@
     $(function(){
         $('.int').inputmask('numeric', { placeholder: '0' });
         $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
-        $('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
+        $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
         $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
     })
 

@@ -43,8 +43,8 @@ Route::middleware(['auth'])->group(function (){
 
     //Rutas para incorporacion de bienes
     Route::resource('bienes','BienesController');
-
-
+    Route::get('bienes/{id}/desincorporar','BienesController@desincorporacion');
+    Route::post('bienes/{id}/desincorporar','BienesController@desincorporacion');
 
     Route::post('/elementos','ElementosController@getElementosAjax');
 
