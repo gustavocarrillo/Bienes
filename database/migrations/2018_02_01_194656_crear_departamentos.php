@@ -16,7 +16,7 @@ class CrearDepartamentos extends Migration
         Schema::create('departamentos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('codigo',2)->unique();
+            $table->string('codigo',5)->unique();
             $table->string('descripcion','255');
             $table->string('responsable','255');
             $table->Integer('direccion')->unsigned();
