@@ -48,7 +48,8 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('/elementos','ElementosController@getElementosAjax');
 
-    Route::post('/departamentos','DepartamentosController@getDepartamentosAjax');
+    //Departamentos AJAX
+    Route::post('/bienes/departamentos/{direccion}','DepartamentosController@getDepartamentosAjax');
 
     Route::post('/tipo_movimientos','TipoMovimientosController@getTipoMovimientosAjax');
 

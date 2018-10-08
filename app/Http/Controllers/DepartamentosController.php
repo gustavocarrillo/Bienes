@@ -7,10 +7,14 @@ use App\Departamento;
 
 class DepartamentosController extends Controller
 {
-    public function getDepartamentosAjax(){
+    public function getDepartamentosAjax($direccion){
 
-        $departamentos = Departamento::all();
+        $departamentos = Departamento::where('direccion',$direccion)->get();
 
-        return response()->json($departamentos);
+        if (count($departamentos) == 0){
+            return response()->json(false,404);
+        }
+
+        return response()->json($departamentos,200);
     }
 }

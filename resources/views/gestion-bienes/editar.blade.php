@@ -46,11 +46,20 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="orden">Elemento:</label>
-                                <select name="elemento" id="elemento" class="form-control show-tick">
+                                <label for="orden">Dirección:</label>
+                                <select name="direccion" id="elemento" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
-                                    @foreach($elementos as $elemento)
-                                        <option value="{{ $elemento->id }}" @if($bien->elemento == $elemento->id) selected @endIf>{{ $elemento->codigo.' -- '.$elemento->descripcion  }}</option>
+                                    @foreach($direcciones as $direccion)
+                                        <option value="{{ $direccion->id }}" @if($bien->direccion == $direccion->id) selected @endIf>{{ $direccion->codigo.' -- '.$direccion->descripcion  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="orden">Departamento:</label>
+                                <select name="direccion" id="elemento" class="form-control show-tick">
+                                    <option value="">Seleccione..</option>
+                                    @foreach($departamentos as $departamento)
+                                        <option value="{{ $departamento->id }}" @if($bien->departamento == $departamento->id) selected @endIf>{{ $departamento->codigo.' -- '.$departamento->descripcion  }}</option>
                                     @endforeach
                                 </select>
                             </div>

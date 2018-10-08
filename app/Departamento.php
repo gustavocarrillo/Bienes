@@ -15,9 +15,14 @@ class Departamento extends Model
         'direccion'
     ];
 
-    public function departamentos() {
+    public function direccion() {
 
         return $this->belongsTo('App\Direccion');
+    }
+
+    public function bienes() {
+
+        return $this->hasMany('App\Bien','departamento');
     }
 
     public function movimientos() {

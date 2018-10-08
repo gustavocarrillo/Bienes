@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProveedorsTable extends Migration
+class CreateProveedoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -31,6 +31,6 @@ class CreateProveedorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proveedors');
+        Schema::dropIfExists('proveedores');
     }
 }

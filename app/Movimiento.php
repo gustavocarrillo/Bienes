@@ -17,18 +17,19 @@ class Movimiento extends Model
         'usuario'
     ];
 
-    public function bien() {
+    public function bienes() {
 
-        return $this->belongsTo('App\TipoMovimiento');
+        return $this->belongsToMany('App\Bien','movimientos','t_movimiento','bien')
+            ->withPivot('fecha','departamento');
     }
 
-    public function departamento() {
+    public function _departamento() {
 
         return $this->belongsTo('App\Departamento');
     }
 
-    public function usuario() {
+    public function _usuario() {
 
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','usuario');
     }
 }

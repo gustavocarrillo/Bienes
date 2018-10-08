@@ -42,6 +42,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <div>
+                                    {{ $bien->_direccion->descripcion }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="departamento">Departamento:</label>
+                                <div>
+                                    @if($bien->_departamento)
+                                        {{ $bien->_departamento->descripcion }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row clearfix">
                         <a href="{{ route('bienes.index') }}" class="btn btn-block btn-primary">Volver</a>

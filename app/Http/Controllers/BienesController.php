@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Direccion;
 use App\Orden;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class BienesController extends Controller
             'fecha_incorp' => 'required',
             'valor' => 'required',
             'valor_actual' => 'required',
-            'nro_orden' => 'required',
+            't_movimiento' => 'required',
+            'nro_orden' => 'required_unless:t_movimiento,11',
+            'direccion' => 'required',
             'elemento' => 'required',
         ]);
 
@@ -41,6 +44,8 @@ class BienesController extends Controller
             'valor_actual' => $valor_actual,
             'nro_orden' => $request->nro_orden,
             'elemento' => $request->elemento,
+            'direccion' => $request->direccion,
+            'departamento' => $request->departamento,
             'usuario' => Auth::id(),
         ]);
 
@@ -57,7 +62,7 @@ class BienesController extends Controller
 
     public function show($id)
     {
-        $bien = Bien::where('id',$id)->with('orden')->first();
+        $bien = Bien::where('id',$id)->with('orden','_direccion','_departamento')->first();
 
         return view('gestion-bienes.ver')->with(compact('bien'));
     }
@@ -67,11 +72,12 @@ class BienesController extends Controller
         $bien = Bien::find($id);
 
         $elementos = Elemento::all();
+        $direcciones = Direccion::all();
         $departamentos = Departamento::all();
         $tipos = TipoMovimiento::all();
         $ordenes = Orden::where('anno',Carbon::now()->year)->get();
 
-        return view('gestion-bienes.editar')->with(compact(['bien','elementos','departamentos','tipos','ordenes']));
+        return view('gestion-bienes.editar')->with(compact(['bien','elementos','direcciones','departamentos','tipos','ordenes']));
     }
 
     public function update(Request $request,$id)
@@ -130,7 +136,19 @@ class BienesController extends Controller
 
         $bien = explode('-',$bien->codigo);
 
-        $bien = $bien[3] + 1;
+        //dd($bien);
+
+        $bien[4] += 1;
+
+        if (strlen($bien[4]) == 1){
+            $bien[4] = '000'.$bien[4];
+        }elseif (strlen($bien[4]) == 2){
+            $bien[4] = '00'.$bien[4];
+        }elseif (strlen($bien[4]) == 3){
+            $bien[4] = '0'.$bien[4];
+        }
+
+        $bien = join('-',$bien);
 
         return response()->json(["bien" => $bien],200);
     }
@@ -138,11 +156,12 @@ class BienesController extends Controller
     public function create()
     {
         $elementos = Elemento::all();
+        $direcciones = Direccion::all();
         $departamentos = Departamento::all();
-        $tipos = TipoMovimiento::all();
+        $tipos = TipoMovimiento::where('descripcion','like','incorporacion%')->get();
         $ordenes = Orden::where('anno',Carbon::now()->year)->get();
 
-        return view('gestion-bienes.incorporacion')->with(compact(['elementos','departamentos','tipos','ordenes']));
+        return view('gestion-bienes.incorporacion')->with(compact(['elementos','direcciones','departamentos','tipos','ordenes']));
     }
 
     public function destroy($id)

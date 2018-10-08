@@ -19,5 +19,10 @@ class Direccion extends Model
         return $this->hasMany('App\Departamento','direccion');
     }
 
+    public function bienes() {
+
+        return $this->hasMany('App\Bien','direccion');
+    }
+
     public $timestamps = false;
 }

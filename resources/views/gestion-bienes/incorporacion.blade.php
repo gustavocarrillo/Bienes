@@ -121,13 +121,23 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h2 class="card-inside-title">Destino</h2>
+                                    <hr>
                                     <div class="form-group">
                                         <div class="form-group">
+                                            <label for="orden">Dirección</label>
+                                            <select name="direccion" id="direccion" class="form-control show-tick" data-live-search="true">
+                                                <option value="" selected>Seleccione una dirección</option>
+                                                @foreach($direcciones as $direccion)
+                                                    <option value="{{ $direccion->id }}">{{ $direccion->codigo.' - '.$direccion->descripcion }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden" id="departamentos_div">
+                                        <div class="form-group">
+                                            <label for="orden">Departamento</label>
                                             <select name="departamento" id="departamento" class="form-control show-tick" data-live-search="true">
                                                 <option value="" selected>Seleccione un departamento</option>
-                                                @foreach($departamentos as $departamento)
-                                                    <option value="{{ $departamento->id }}">{{ $departamento->codigo.' - '.$departamento->descripcion }}</option>
-                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -139,7 +149,7 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <select name="t_movimiento" id="t_movimiento" class="form-control show-tick" data-live-search="true">
-                                                <option value="" selected>Seleccione un elemento</option>
+                                                <option value="" selected>Seleccione un tipo</option>
                                                 @foreach($tipos as $tipo)
                                                     <option value="{{ $tipo->id }}">{{ $tipo->codigo.' - '.$tipo->descripcion }}</option>
                                                 @endforeach
@@ -279,12 +289,12 @@
 <script>
     $(function(){
         $('.int').inputmask('numeric', { placeholder: '0' });
-        $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
+        //$('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
         $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
         $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
     })
 
-    function fillSelect(url,selector){
+    function fillSelect(url,selector,selector_class,ph){
         $.ajax({
             method: 'POST',
             url: url,
@@ -292,12 +302,17 @@
             dataType: 'JSON',
         }).done(function (x) {
             $.each( x, function(i,v){
-                var option = '<option value="'+v.id+'">'+v.codigo+' - '+v.descripcion+'</option>';
-                $(selector).append(option);
+                var option = '<option>'+'Seleccione '+ph+'</option>' +
+                    '<option value="'+v.id+'">'+v.codigo+' - '+v.descripcion+'</option>';
+                $(selector).html(option);
+
+                if (selector_class !== undefined){
+                    $(selector_class).removeClass("hidden");
+                }
             })
             $(selector).selectpicker('refresh');
         }).fail(function () {
-            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+            $(selector_class).addClass("hidden");
         })
     }
 
@@ -314,7 +329,9 @@
     //fillSelect("elementos",'#elementos');
 
     //Cargar el select con los departamentos
-    //fillSelect("departamentos","#departamento");
+    $('#direccion').change(function () {
+        dep = fillSelect("departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
+    })
 
     //Cargar el select con los tipo_movimientos
     //fillSelect("tipo_movimientos","#t_movimiento")
@@ -372,6 +389,16 @@
         }).fail(function () {
             alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
         })
+    })
+
+    $('#t_movimiento').change(function () {
+        if ($(this).val() == 11){
+            $('#orden').val(0);
+            $('#orden').selectpicker('refresh');
+            $('#orden').prop('disabled',true);
+        }else{
+            $('#orden').prop('disabled',false);
+        }
     })
 
     $('.js-modal-buttons .btn').on('click', function () {
