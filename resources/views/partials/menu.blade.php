@@ -37,6 +37,12 @@
                 <span>Direcciones</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route("departamento.index") }}">
+                <i class="material-icons">content_copy</i>
+                <span>Departamentos</span>
+            </a>
+        </li>
         {{--<li class="header">LABELS</li>
         <li>
             <a href="javascript:void(0);">

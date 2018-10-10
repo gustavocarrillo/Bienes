@@ -21,6 +21,7 @@
                 <form action="{{ route('bienes.store') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="codigo" id="codigo_input">
+                    <input type="hidden" name="lote" id="lote_input">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     <div class="row clearfix">
                         <div class="col-md-12">
@@ -345,6 +346,7 @@
             $("#cantidad").focus();
             $("#separador").removeClass("hidden");
             $("#cod-lote").removeClass("hidden");
+            $("#lote_input").val("hidden");
         }else{
             attrLote()
         }

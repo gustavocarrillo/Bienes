@@ -16,7 +16,7 @@ class BienesController extends Controller
 {
     public function store(Request $request)
     {
-        $this->validate($request,[
+       $this->validate($request,[
             'codigo' => 'required|unique:bienes,codigo',
             'descripcion' => 'required',
             'fecha_incorp' => 'required',
@@ -34,7 +34,38 @@ class BienesController extends Controller
         $valor_actual = str_replace('.',"",$request->valor_actual);
         $valor_actual = str_replace(',',".",$valor_actual);
 
-        //dd($request->all());
+        if($request->cantidad) {
+
+            $codigo = explode('-',$request->codigo);
+
+            for ($i = 0; $i < $request->cantidad; $i++) {
+
+                $codigo[4] += 1;
+
+                if (strlen($codigo[4]) == 1){
+                    $codigo[4] = "000".$codigo[4];
+                }elseif (strlen($codigo[4]) == 2){
+                    $codigo[4] = "00".$codigo[4];
+                }elseif (strlen($codigo[4]) == 3){
+                    $codigo[4] = "0".$codigo[4];
+                }
+
+                $_codigo = join('-',$codigo);
+
+                Bien::create([
+                    'codigo' => $_codigo,
+                    'descripcion' => ucfirst($request->descripcion),
+                    'fecha_incorp' => date('Y-m-d',strtotime(trim($request->fecha_incorp))),
+                    'valor' => $valor,
+                    'valor_actual' => $valor_actual,
+                    'nro_orden' => $request->nro_orden,
+                    'elemento' => $request->elemento,
+                    'direccion' => $request->direccion,
+                    'departamento' => $request->departamento,
+                    'usuario' => Auth::id(),
+                ]);
+            }
+        }
 
         Bien::create([
             'codigo' => $request->codigo,
@@ -148,9 +179,26 @@ class BienesController extends Controller
             $bien[4] = '0'.$bien[4];
         }
 
+        $lote = "";
+
+        if ($cantidadid){
+
+            $_lote = $bien[4] + $cantidadid;
+
+            if (strlen($_lote) == 1){
+                $lote = '000'.$_lote;
+            }elseif (strlen($_lote) == 2){
+                $lote = '00'.$_lote;
+            }elseif (strlen($_lote) == 3){
+                $lote = '0'.$_lote;
+            }
+
+            $lote = $bien[0].'-'.$bien[1].'-'.$bien[2].'-'.$bien[3].'-'.$lote;
+        }
+
         $bien = join('-',$bien);
 
-        return response()->json(["bien" => $bien],200);
+        return response()->json(["bien" => $bien,'lote' => $lote],200);
     }
 
     public function create()

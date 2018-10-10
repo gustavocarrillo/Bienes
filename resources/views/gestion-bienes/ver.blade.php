@@ -38,7 +38,11 @@
                             <div class="form-group">
                                 <label for="orden">Nro de Orden:</label>
                                 <div>
-                                    {{ $bien->orden->numero }}
+                                    @if(isset($bien->orden->numero))
+                                        {{ $bien->orden->numero }}
+                                    @else
+                                        N/A
+                                    @endif
                                 </div>
                             </div>
                         </div>

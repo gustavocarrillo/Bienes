@@ -51,8 +51,10 @@ Route::middleware(['auth'])->group(function (){
     //Departamentos AJAX
     Route::post('/bienes/departamentos/{direccion}','DepartamentosController@getDepartamentosAjax');
 
+    //Tipos de movimientos AJAX
     Route::post('/tipo_movimientos','TipoMovimientosController@getTipoMovimientosAjax');
 
+    //Ultimo bien por codigo AJAX
     Route::get('/bienes/bien/{bien}/cantidad/{cantidad}','BienesController@getLastAjax');
 
     //Ordenes
@@ -69,6 +71,9 @@ Route::middleware(['auth'])->group(function (){
 
     //Direcciones
     Route::resource('direccion','DireccionesController');
+
+    //Departamentos
+    Route::resource('departamento','DepartamentosController');
 
     //Ruta para salir del sistema.
     Route::get('/salir',function (){
