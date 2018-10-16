@@ -120,7 +120,8 @@ class BienesController extends Controller
             'valor' => 'required',
             'valor_actual' => 'required',
             'nro_orden' => 'required',
-            'elemento' => 'required',
+            'direccion' => 'required',
+            'departamento' => 'required',
         ]);
 
         $valor = str_replace('.',"",$request->valor);
@@ -134,7 +135,8 @@ class BienesController extends Controller
         $bien->valor = $valor;
         $bien->valor_actual = $valor_actual;
         $bien->nro_orden = $request->nro_orden;
-        $bien->elemento = $request->elemento;
+        $bien->direccion = $request->direccion;
+        $bien->departamento = $request->departamento;
         $bien->save();
 
         flash('El bien ha sido modificado exitosamente')->success();
