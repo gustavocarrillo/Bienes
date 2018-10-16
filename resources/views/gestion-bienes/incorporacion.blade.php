@@ -295,28 +295,6 @@
         $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
     })
 
-    function fillSelect(url,selector,selector_class,ph){
-        $.ajax({
-            method: 'POST',
-            url: url,
-            data : {_token :$('#token').val()},
-            dataType: 'JSON',
-        }).done(function (x) {
-            $.each( x, function(i,v){
-                var option = '<option>'+'Seleccione '+ph+'</option>' +
-                    '<option value="'+v.id+'">'+v.codigo+' - '+v.descripcion+'</option>';
-                $(selector).html(option);
-
-                if (selector_class !== undefined){
-                    $(selector_class).removeClass("hidden");
-                }
-            })
-            $(selector).selectpicker('refresh');
-        }).fail(function () {
-            $(selector_class).addClass("hidden");
-        })
-    }
-
     function attrLote(){
         $("#inc_por").selectpicker('val','unidad');
         $("#cantidad_div").addClass('hidden');

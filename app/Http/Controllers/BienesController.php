@@ -101,10 +101,9 @@ class BienesController extends Controller
     public function edit($id)
     {
         $bien = Bien::find($id);
-
         $elementos = Elemento::all();
         $direcciones = Direccion::all();
-        $departamentos = Departamento::all();
+        $departamentos = Departamento::where('direccion',$bien->direccion)->get();
         $tipos = TipoMovimiento::all();
         $ordenes = Orden::where('anno',Carbon::now()->year)->get();
 

@@ -8,7 +8,7 @@
             </div>
             <div class="body">
                 <form action="{{ route('bienes.update',$bien->id ) }}" method="post">
-                    {{ csrf_field() }}
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     {{ method_field('put') }}
                     <div class="row clearfix">
                         <div class="col-md-12 col-lg-12">
@@ -47,16 +47,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="orden">Dirección:</label>
-                                <select name="direccion" id="elemento" class="form-control show-tick">
+                                <select name="direccion" id="direccion" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
                                     @foreach($direcciones as $direccion)
                                         <option value="{{ $direccion->id }}" @if($bien->direccion == $direccion->id) selected @endIf>{{ $direccion->codigo.' -- '.$direccion->descripcion  }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="departamentos_div">
                                 <label for="orden">Departamento:</label>
-                                <select name="direccion" id="elemento" class="form-control show-tick">
+                                <select name="departamento" id="departamento" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
                                     @foreach($departamentos as $departamento)
                                         <option value="{{ $departamento->id }}" @if($bien->departamento == $departamento->id) selected @endIf>{{ $departamento->codigo.' -- '.$departamento->descripcion  }}</option>
@@ -105,95 +105,8 @@
         });
     })
 
-    /*$.ajax({
-        method: 'POST',
-        url: "proveedorJson",
-        data : {_token : "{{ csrf_token() }}" },
-        dataType: 'JSON',
-    }).done(function (x) {
-        $.each( x, function(i,v){
-            var option = '<option value="'+v.id+'">'+v.nombre+'</option>';
-            $("#proveedores").append(option);
-        })
-        $("#proveedores").selectpicker('refresh');
-    }).fail(function () {
-        alert("NO SE HAN PODIDO CARGAR LOS PROVEEDORES")
+    $('#direccion').change(function () {
+        dep = fillSelect("../departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
     })
-*/
-    /*function attrLote(){
-        $("#inc_por").selectpicker('val','unidad');
-        $("#cantidad_div").addClass('hidden');
-        $("#cantidad").val(0);
-        $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-7');
-        $("#separador").addClass("hidden");
-        $("#cod-lote").addClass("hidden");
-    }
-
-    //Cargar el select con los elementos
-    fillSelect("elementos",'#elementos');
-
-    //Cargar el select con los departamentos
-    fillSelect("departamentos","#departamento");
-
-    //Cargar el select con los tipo_movimientos
-    fillSelect("tipo_movimientos","#t_movimiento")
-
-    //Cambia estado de div inc_por
-    $("#inc_por").change(function () {
-        if($(this).val() == "lote"){
-            $("#cantidad_div").removeClass('hidden');
-            $("#inc_div").removeClass('col-md-offset-7').addClass('col-md-offset-4');
-            $("#cantidad").val(0);
-            $("#cantidad").focus();
-            $("#separador").removeClass("hidden");
-            $("#cod-lote").removeClass("hidden");
-        }else{
-            attrLote()
-        }
-    })
-    //fin - inc_por
-
-    $("#elementos").change(function () {
-
-        attrLote();
-        cantidad = 0;
-
-        if($("#cantidad").val()){
-            var cantidad = $("#cantidad").val()
-        }
-
-        $.ajax({
-            method: 'get',
-            url: 'bien/' + $(this).val() + "/cantidad/" + cantidad,
-            data : {_token :$('#token').val()},
-            dataType: 'JSON',
-        }).done(function (e) {
-            $("#codigo").html(e.bien);
-            bien = e.bien;
-            $("#cod-lote").html(e.lote);
-        }).fail(function () {
-            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
-        })
-    })
-
-    $('#cantidad').change(function () {
-        $.ajax({
-            method: 'get',
-            url: 'bien/' + $("#elementos").val() + "/cantidad/" + $('#cantidad').val(),
-            data : {_token :$('#token').val()},
-            dataType: 'JSON',
-        }).done(function (e) {
-            $("#codigo").html(e.bien);
-            $("#cod-lote").html(e.lote);
-        }).fail(function () {
-            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
-        })
-    })
-
-    $('.js-modal-buttons .btn').on('click', function () {
-        var color = $(this).data('color');
-        $('#mdModal .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
-        $('#mdModal').modal('show');
-    });*/
 </script>
 @endsection

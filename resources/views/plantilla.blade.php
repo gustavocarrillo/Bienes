@@ -114,6 +114,9 @@
 <!-- Demo Js -->
 <script src="{{ asset("js/demo.js") }}"></script>
 
+<!-- Select Generico -->
+<script src="{{ asset("js/select-generico.js") }}"></script>
+
 @yield('js')
 
 </body>
