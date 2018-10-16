@@ -112,6 +112,7 @@ class BienesController extends Controller
 
     public function update(Request $request,$id)
     {
+        //dd($request->all());
         $bien = Bien::find($id);
 
         $this->validate($request,[
@@ -121,7 +122,7 @@ class BienesController extends Controller
             'valor_actual' => 'required',
             'nro_orden' => 'required',
             'direccion' => 'required',
-            'departamento' => 'required',
+            //'departamento' => 'required',
         ]);
 
         $valor = str_replace('.',"",$request->valor);
@@ -136,7 +137,7 @@ class BienesController extends Controller
         $bien->valor_actual = $valor_actual;
         $bien->nro_orden = $request->nro_orden;
         $bien->direccion = $request->direccion;
-        $bien->departamento = $request->departamento;
+        $bien->departamento = (isset($request->departamento) && $request->departamento != 'Seleccione un departamento' ? $request->departamento : null);
         $bien->save();
 
         flash('El bien ha sido modificado exitosamente')->success();

@@ -54,7 +54,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group" id="departamentos_div">
+                            <div class="form-group @if(count($departamentos) == 0) hidden @endif" id="departamentos_div">
                                 <label for="orden">Departamento:</label>
                                 <select name="departamento" id="departamento" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
