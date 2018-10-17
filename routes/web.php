@@ -41,10 +41,10 @@ Route::middleware(['auth'])->group(function (){
         return view('admin.admin');
     });
 
-    //Rutas para incorporacion de bienes
+    //Bienes
     Route::resource('bienes','BienesController');
-    Route::get('bienes/{id}/desincorporar','BienesController@desincorporacion');
-    Route::post('bienes/{id}/desincorporar','BienesController@desincorporacion');
+    Route::get('bienes/{id}/desincorporar','BienesController@desincorporacion')->name('bienes.desincorporar');
+    Route::put('bienes/{id}/desincorporar','BienesController@desincorporado')->name('bienes.desincorporado');
 
     Route::post('/elementos','ElementosController@getElementosAjax');
 

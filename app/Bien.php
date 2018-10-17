@@ -18,6 +18,7 @@ class Bien extends Model
         'elemento',
         'direccion',
         'departamento',
+        'estatus',
         'usuario'
     ];
 
@@ -48,7 +49,7 @@ class Bien extends Model
 
     public function movimientos() {
 
-        return $this->belongsToMany('App\Movimiento','movimientos','bien','t_movimiento')
-            ->withPivot('fecha','departamento');
+        return $this->belongsToMany('App\TipoMovimiento','movimientos','bien','t_movimiento')
+            ->withPivot('fecha','direccion','departamento','usuario');
     }
 }

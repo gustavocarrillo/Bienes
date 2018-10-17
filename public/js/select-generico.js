@@ -7,7 +7,7 @@ function fillSelect(url,selector,selector_class,ph){
         dataType: 'JSON',
     }).done(function (x) {
 
-        $(selector).html('<option>'+'Seleccione '+ph+'</option>');
+        $(selector).html('<option value="">'+'Seleccione '+ph+'</option>');
 
         $.each( x, function(i,v){
             var option = '<option value="'+v.id+'">'+v.codigo+' - '+v.descripcion+'</option>';
@@ -20,6 +20,6 @@ function fillSelect(url,selector,selector_class,ph){
         $(selector).selectpicker('refresh');
     }).fail(function () {
         $(selector_class).addClass("hidden");
-        $(selector).html('');
+        $(selector).html('').selectpicker('refresh');
     })
 }

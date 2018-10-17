@@ -12,20 +12,28 @@ class Movimiento extends Model
         'bien',
         't_movimiento',
         'fecha',
+        'direccion',
         'departamento',
         'idU',
+        'observacion',
         'usuario'
     ];
 
-    public function bienes() {
+    protected $hidden = ['idU'];
 
-        return $this->belongsToMany('App\Bien','movimientos','t_movimiento','bien')
-            ->withPivot('fecha','departamento');
+    public function tipo() {
+
+        return $this->belongsTo('App\TipoMovimiento','t_movimiento');
+    }
+
+    public function _direccion() {
+
+        return $this->belongsTo('App\Direccion','direccion');
     }
 
     public function _departamento() {
 
-        return $this->belongsTo('App\Departamento');
+        return $this->belongsTo('App\Departamento','departamento');
     }
 
     public function _usuario() {

@@ -30,7 +30,7 @@
                                 <td width="20%">
                                         <a href="{{ route('bienes.show',$bien->id) }}" class="btn btn-xs bg-indigo"><i class="material-icons">remove_red_eye</i></a>
                                         <a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-xs btn-success"><i class="material-icons">create</i></a>
-                                        <a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-xs btn-danger" ><i class="material-icons">delete</i></a>
+                                        <a href="{{ route('bienes.desincorporar',$bien->id) }}" class="btn btn-xs btn-danger" ><i class="material-icons">delete</i></a>
                                     </form>
                                 </td>
                             </tr>

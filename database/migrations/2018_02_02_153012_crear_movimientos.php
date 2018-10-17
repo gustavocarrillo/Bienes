@@ -19,12 +19,15 @@ class CrearMovimientos extends Migration
             $table->integer('bien')->unsigned();
             $table->Integer('t_movimiento')->unsigned();
             $table->date('fecha');
-            $table->Integer('departamento')->unsigned();
+            $table->Integer('direccion')->unsigned();
+            $table->Integer('departamento')->unsigned()->nullable();
             $table->string('idU')->unique();
+            $table->string('observacion')->nullable();
             $table->integer('usuario')->nullable()->unsigned();
 
             $table->foreign('bien')->references('id')->on('bienes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('departamento')->references('id')->on('departamentos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('direccion')->references('id')->on('direcciones')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('t_movimiento')->references('id')->on('tipo_movimientos')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('usuario')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
 

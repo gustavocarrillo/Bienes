@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Direccion;
+use App\Movimiento;
 use App\Orden;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -86,7 +87,10 @@ class BienesController extends Controller
 
     public function index()
     {
-        $bienes = Bien::with('orden')->orderBy('fecha_incorp','desc')->get();
+        $bienes = Bien::with('orden')
+            ->orderBy('fecha_incorp','desc')
+            ->where('estatus','=','activo')
+            ->get();
 
         return view('gestion-bienes.index')->with(compact('bienes'));
     }
@@ -94,8 +98,12 @@ class BienesController extends Controller
     public function show($id)
     {
         $bien = Bien::where('id',$id)->with('orden','_direccion','_departamento')->first();
+        $movimientos = Movimiento::with('tipo','_direccion','_departamento','_usuario')
+            ->where('bien',$bien->id)
+            ->get();
 
-        return view('gestion-bienes.ver')->with(compact('bien'));
+        //dd($movimientos->toarray());
+        return view('gestion-bienes.ver')->with(compact('bien','movimientos'));
     }
 
     public function edit($id)
@@ -137,7 +145,7 @@ class BienesController extends Controller
         $bien->valor_actual = $valor_actual;
         $bien->nro_orden = $request->nro_orden;
         $bien->direccion = $request->direccion;
-        $bien->departamento = (isset($request->departamento) && $request->departamento != 'Seleccione un departamento' ? $request->departamento : null);
+        $bien->departamento = ($request->departamento || isset($request->departamento) ? $request->departamento : null);
         $bien->save();
 
         flash('El bien ha sido modificado exitosamente')->success();
@@ -214,11 +222,38 @@ class BienesController extends Controller
         return view('gestion-bienes.incorporacion')->with(compact(['elementos','direcciones','departamentos','tipos','ordenes']));
     }
 
-    public function destroy($id)
+    public function desincorporacion($id)
     {
-        $bienes = Bien::find($id);
-        $bienes->delete();
+        $bien = Bien::find($id);
+        $tmovimientos = TipoMovimiento::where('descripcion','like','desincorporacion%')->get();
 
+        return view('gestion-bienes.desincorporar')->with(['bien' => $bien,'movimientos' => $tmovimientos]);
+    }
+
+    public function desincorporado(Request $request,$id)
+    {
+        $this->validate($request,[
+            "movimiento" => "required"
+        ]);
+
+        //dd($request->all());
+        $bien = Bien::find($id);
+        $bien->estatus = 'desincorporado';
+        $bien->save();
+
+        $fecha = Carbon::now()->toDateString();
+
+        Movimiento::create([
+            "bien" => $id,
+            "t_movimiento" => $request->movimiento,
+            "fecha" => $fecha,
+            "direccion" => $bien->direccion,
+            "departamento" => $bien->departamento,
+            "idU" => $id.'-'. $fecha.'-'.$request->movimiento,
+            "usuario" => Auth::id()
+        ]);
+
+        flash('El bien ha sido desincorporado','success');
         return response()->redirectToRoute('bienes.index');
     }
 }

@@ -1,16 +1,14 @@
 @extends('plantilla')
 
 @section('contenido')
-    <div class="col-lg-8 col-md-8">
+    <div class="col-lg-11 col-md-11">
         <div class="card">
             <div class="header">
                 <h2><b>BIEN: {{ $bien->codigo }}</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('bienes.store') }}" method="post">
-                    {{ csrf_field() }}
-                    <div class="row clearfix">
-                        <div class="col-md-6 col-lg-6">
+                <div class="row clearfix">
+                    <div class="col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="orden">Descripción:</label>
                                 <div>
@@ -35,18 +33,18 @@
                                     {{ $bien->valor_actual }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="orden">Nro de Orden:</label>
-                                <div>
-                                    @if(isset($bien->orden->numero))
-                                        {{ $bien->orden->numero }}
-                                    @else
-                                        N/A
-                                    @endif
-                                </div>
+                        </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="orden">Nro de Orden:</label>
+                            <div>
+                                @if(isset($bien->orden->numero))
+                                    {{ $bien->orden->numero }}
+                                @else
+                                    N/A
+                                @endif
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="direccion">Dirección:</label>
                                 <div>
@@ -63,14 +61,53 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="estatus">Estatus:</label>
+                                <div>
+                                    <span class="label @if($bien->estatus == 'activo') label-success @else label-danger @endif">{{ strtoupper($bien->estatus) }}</span>
+                                </div>
+                            </div>
                         </div>
+                </div>
+                <hr>
+                <div class="row clearfix">
+                    <div class="col-md-12 col-lg-12 ">
+                        <h2 class="card-inside-title">Movimientos</h2>
+                        <table class="table table-bordered table-striped table-hover data-table">
+                            <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Movimiento</th>
+                                <th>Fecha</th>
+                                <th>Dirección</th>
+                                <th>Departamento</th>
+                                <th>Usuario</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{ $cont = 1 }}
+                            @foreach($movimientos as $movimiento)
+                                <tr>
+                                    <td>{{ $cont }}</td>
+                                    <td>{{ $movimiento->tipo->descripcion }}</td>
+                                    <td>{{ date('d-m-Y',strtotime($movimiento->fecha )) }}</td>
+                                    <td>{{ $movimiento->_direccion->descripcion}}</td>
+                                    <td>{{ $movimiento->_departamento->descripcion }}</td>
+                                    <td>{{ $movimiento->_usuario->username }}</td>
+                                </tr>
+                                {{ $cont++ }}
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="row clearfix">
-                        <a href="{{ route('bienes.index') }}" class="btn btn-block btn-primary">Volver</a>
-                    </div>
-                </form>
+                </div>
+                <hr>
+                <div class="row clearfix">
+                    <a href="{{ route('bienes.index') }}" class="btn btn-block btn-primary">Volver</a>
+                </div>
             </div>
         </div>
+
         @include('flash::message')
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -82,4 +119,10 @@
             </div>
         @endif
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(".table").dataTable();
+    </script>
 @endsection

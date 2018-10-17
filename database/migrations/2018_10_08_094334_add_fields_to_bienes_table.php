@@ -16,6 +16,7 @@ class AddFieldsToBienesTable extends Migration
         Schema::table('bienes', function (Blueprint $table) {
             $table->unsignedInteger('direccion')->after('elemento');
             $table->unsignedInteger('departamento')->nullable()->after('direccion');
+            $table->string('estatus')->default('activo');
 
             $table->foreign('direccion')
                 ->references('id')
