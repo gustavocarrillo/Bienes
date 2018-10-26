@@ -18,21 +18,26 @@
                                 <th>Codigo</th>
                                 <th>Descripcion</th>
                                 <th>Responsable</th>
+                                <th>Cargo</th>
+                                <th>Resolución</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach($departamentos as $departamento)
                             <tr>
-                                <td width="10%">{{ $departamento->codigo }}</td>
+                                <td width="7%">{{ $departamento->codigo }}</td>
                                 <td width="30%">{{ $departamento->descripcion }}</td>
-                                <td width="30%">{{ $departamento->responsable }}</td>
+                                <td width="20%">{{ $departamento->responsable }}</td>
+                                <td width="10%">{{ strtoupper($departamento->cargo_responsable) }}</td>
+                                <td width="10%">{{ $departamento->resolucion }}</td>
                                 <td width="30%">
                                     <form method="post" action="{{ route('departamento.destroy',$departamento->id) }}">
-                                        <a href="{{ route('departamento.edit',$departamento->id) }}" class="btn btn-success">Editar</a>
+                                        <a href="{{ route('departamento.edit',$departamento->id) }}" class="btn btn-xs btn-success"><i class="material-icons">remove_red_eye</i></a>
                                         {{ method_field('delete') }}
                                         {{ csrf_field()  }}
-                                        <button class="btn btn-danger" onclick="if (! window.confirm('¿Desea elminar este Departamento?')){ return false }">Eliminar</button>
+                                        <a href="{{ route('reportes.bm1',['departamento',$departamento->id]) }}" class="btn btn-xs btn-primary @if(count($departamento->bienes) == 0) disabled @endif"><i class="material-icons">assignment_returned</i></a>
+                                        <button class="btn btn-xs btn-danger" onclick="if (! window.confirm('¿Desea elminar este Departamento?')){ return false }"><i class="material-icons">delete</i></button>
                                     </form>
                                 </td>
                             </tr>

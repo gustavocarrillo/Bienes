@@ -256,4 +256,9 @@ class BienesController extends Controller
         flash('El bien ha sido desincorporado','success');
         return response()->redirectToRoute('bienes.index');
     }
+
+    public function reportes()
+    {
+        return view('gestion-bienes.reportes');
+    }
 }

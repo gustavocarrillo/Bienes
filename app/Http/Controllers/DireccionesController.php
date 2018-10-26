@@ -27,7 +27,7 @@ class DireccionesController extends Controller
 
     public function index()
     {
-        $direcciones = Direccion::all();
+        $direcciones = Direccion::with('bienes')->get();
 
         return view('gestion-direcciones.index')->with('direcciones',$direcciones);
     }

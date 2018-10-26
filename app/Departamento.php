@@ -12,12 +12,14 @@ class Departamento extends Model
         'codigo',
         'descripcion',
         'responsable',
-        'direccion'
+        'direccion',
+        'cargo_responsable',
+        'resolucion',
     ];
 
-    public function direccion() {
+    public function _direccion() {
 
-        return $this->belongsTo('App\Direccion');
+        return $this->belongsTo('App\Direccion','direccion');
     }
 
     public function bienes() {

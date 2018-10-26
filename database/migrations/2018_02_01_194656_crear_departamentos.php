@@ -19,6 +19,8 @@ class CrearDepartamentos extends Migration
             $table->string('codigo',5)->unique();
             $table->string('descripcion','255');
             $table->string('responsable','255');
+            $table->string('cargo_responsable','255')->default('director');
+            $table->string('resolucion','255');
             $table->Integer('direccion')->unsigned();
 
             $table->foreign('direccion')->references('id')->on('direcciones')->onUpdate('cascade')->onDelete('cascade');

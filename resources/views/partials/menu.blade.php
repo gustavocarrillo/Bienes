@@ -8,10 +8,22 @@
             </a>
         </li>
         <li>
-            <a href="{{ route("bienes.index") }}">
+            <a href="javascript:void(0);" class="menu-toggle">
                 <i class="material-icons">content_copy</i>
                 <span>Bienes</span>
             </a>
+            <ul class="ml-menu">
+                <li>
+                    <a href="{{ route("bienes.index") }}">
+                        <span>Gestión</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route("bienes.reportes") }}">
+                        <span>Reportes</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="{{ route("proveedor.index") }}">

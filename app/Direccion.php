@@ -11,7 +11,9 @@ class Direccion extends Model
     protected $fillable = [
         'codigo',
         'descripcion',
-        'responsable'
+        'responsable',
+        'cargo_responsable',
+        'resolucion',
     ];
 
     public function departamentos() {

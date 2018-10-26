@@ -31,7 +31,7 @@ class DepartamentosController extends Controller
 
     public function index()
     {
-        $departamentos = Departamento::all();
+        $departamentos = Departamento::with('bienes')->get();
 
         return view('gestion-departamentos.index')->with('departamentos',$departamentos);
     }

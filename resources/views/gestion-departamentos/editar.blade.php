@@ -31,6 +31,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="nombre">Cargo:</label>
+                                <div class="form-line">
+                                    <input type="text" name="cargo_responsable" class="form-control" value="{{ $departamento->cargo_responsable  }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Resolución:</label>
+                                <div class="form-line">
+                                    <input type="text" name="resolucion" class="form-control" value="{{ $departamento->resolucion  }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="nombre">Dirección:</label>
                                 <select name="direccion" class="form-control">
                                     <option value="" selected>Seleccione una dirección</option>

@@ -19,6 +19,8 @@ class CrearDirecciones extends Migration
             $table->string('codigo',2)->unique();
             $table->string('descripcion','255');
             $table->string('responsable','255');
+            $table->string('cargo_responsable','255')->default('director');
+            $table->string('resolucion','255');
         });
     }
 
