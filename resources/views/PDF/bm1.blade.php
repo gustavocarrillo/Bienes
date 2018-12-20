@@ -21,6 +21,52 @@
 <br>
 <br>
 <div class="col-lg-6 col-md-6">
+    <div style="text-align: justify">
+        <p>Yo, <strong>{{ $bienes_dep->responsable }}</strong>, en mi carácter de <strong>Jefe Dpto. Bienes Municipales  </strong><strong>Resolución N°{{ $bienes_dep->resolucion }}</strong>,
+            adscrita a la <strong>Dirección de Administración</strong> de la Alcaldía del Municipio Maturín,
+            hago constar que en esta fecha <strong>{{ date('d-m-Y',strtotime(today())) }}</strong> se realizó  inventario a la  <strong>{{ $unidad->descripcion }}</strong> de la Alcaldía del Municipio Maturín,
+            dicha inspección se pudo constatar la cantidad de  (190) Bienes Muebles, por un
+            valor de BS Setenta y uno con Cuarenta Céntimos (71,40, BS), según se  detalla en el inventario anexo.
+        </p>
+        <p>El Departamento de Bienes Públicos le hace   entrega del Inventario realizado  al
+            funcionario/a <strong>{{ $unidad->responsable }}</strong>, titular de la cédula de identidad <strong>N° @{{ COLOCAR CEDULA DEL RESPONSABLE }}</strong>,
+            <strong>Resolución nro. {{ $unidad->resolucion }}</strong>, la <strong>{{ $unidad->descripcion }}</strong>, quien declara
+            “Recibo el Bien o Bienes Municipales especificados en el inventario e identificados
+            con sus <strong>respectivas etiquetas anexo</strong>, en buenas condiciones  de uso y conservación,
+            para ser utilizado(s) por mi persona, dentro de las Instalaciones de la Alcaldía del Municipio
+            Maturín o fuera de su recinto, cuando sea requerido o autorizado para ello, únicamente
+            para el desempeño de mis funciones como. En virtud de la presente asignación, en mi condición
+            de  Uso y custodio de los bienes descritos en el inventario, me comprometo a cumplir las siguientes cláusulas:
+        </p>
+        <p><strong>PRIMERA:</strong> Utilizar los bienes bajo mi custodia de manera responsable y tomar las medidas
+            de resguardo necesarias para evitar el deterioro acelerado, hurto, robo, extravío
+            o pérdida de los mismos. <strong>SEGUNDA:</strong> Mostrar los bienes en custodia al personal de la Alcaldía del Municipio
+            Maturín encargado de realizar los inventarios o auditorias, cuando lo requieran.
+            <strong>TERCERA</strong>: No instalar a los equipos de informática dispositivos, programas o aplicaciones
+            no autorizadas por la Dirección de Tecnología e Informática de la Alcaldía del Municipio Maturín.
+            <strong>CUARTA:</strong> En caso de fallas o defectos en el funcionamiento del bien, me comprometo a notificarlo,
+            dentro de las cuarenta y ocho (48) horas siguientes, a la Dirección de Tecnología e Informática,
+            Departamento de Servicios Generales o Departamento de Contabilidad, según sea el caso, para la
+            evaluación, reparación o desincorporación del bien. <strong>QUINTA</strong>: En caso de robo, hurto,
+            apropiación indebida, extravío o pérdida de algún bien municipal asignado en la presente Acta,
+            deberé formular la denuncia ante el Cuerpo de Investigaciones Científicas, Penales y Criminalísticas (CICPC)
+            y notificarlo al Responsable Patrimonial Primario mediante informe detallado, con indicación de las
+            circunstancias de modo, tiempo y lugar del hecho ocurrido, para que se inicien los procedimientos a que
+            haya lugar. <strong>SEXTA</strong>: Quedo en cuenta que la negligencia o impericia en el manejo de los bienes, así como
+            la omisión o retardo en las notificaciones antes mencionadas, podrá generar responsabilidades disciplinarias,
+            administrativas, penales o civiles, de acuerdo a lo establecido en la Ley Orgánica de la Contraloría
+            General de la República y Sistema Nacional de Control Fiscal, la Ley Contra la Corrupción,
+            la Ley Orgánica de Bienes Públicos y demás leyes que regulan la materia.
+        </p>
+        <p>Se hacen Dos  (2) ejemplares de un mismo tenor y a un solo efecto, en Maturín, Estado Monagas,
+            a los (04) días del mes de Diciembre  de  2018
+        </p>
+        <p>Nota. El listado de Inventario debe ser Colocado en un lugar Visibles con carácter obligatorio.</p>
+        <p>abe señalar que el inventario de la Dirección de Catastro Municipal, está distribuido de la
+            siguiente manera: Dirección 141 Bienes, Dpto. Mantenimiento Vial  13 Bienes, Dpto.
+        </p>
+    </div>
+    <div class="saltopagina"></div>
     <{{--div>
         <p>Entidad propietaria: <strong>ALCALDIA DE MATURIN</strong></p>
         <p>Servicio:<strong> @if($data->_direccion) {{ $data->_direccion->descripcion }} @else {{ $data->descripcion }} @endif</strong></p>
@@ -39,7 +85,8 @@
                         <th>Codigo</th>
                         <th>Descripcion</th>
                         <th>Cantidad</th>
-                        <th width="15%">Valor Unit.</th>
+                        <th>Valor Unit.</th>
+                        <th>Valor Total</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,18 +94,19 @@
                     {{ $n = 1 }}
                     @foreach($data as $bien)
                         <tr>
-                            <td width="3%">{{ $n }}</td>
-                            <td width="5%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
-                            <td width="10%">{{ $bien->codigo }}</td>
-                            <td width="30%">{{ $bien->descripcion }}</td>
-                            <td width="30%">{{ $bien->count }}</td>
-                            <td width="5%">{{ $bien->valor_actual }}</td>
+                            <td>{{ $n }}</td>
+                            <td>{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
+                            <td>{{ $bien->codigo }}</td>
+                            <td>{{ $bien->descripcion }}</td>
+                            <td>{{ $bien->count }}</td>
+                            <td>{{ $bien->valor_actual }}</td>
+                            <td>{{ $bien->valor_actual * $bien->count }}</td>
                         </tr>
                         {{ $n++ }}
                         {{ $total+= $bien->valor_actual}}
                     @endforeach
                     <tr style="background-color: #b8e834">
-                        <td colspan="5"><strong>TOTAL:</strong></td>
+                        <td colspan="6"><strong>TOTAL:</strong></td>
                         <td><strong>{{ $total }}</strong></td>
                     </tr>
                     </tbody>
@@ -70,7 +118,7 @@
     <br>
     <br>
 </div>
-<div class="saltopagina"></div>
+{{--<div class="saltopagina"></div>--}}
 <table class="table-responsive" style="border: 0px">
     {{--<tr>
         <td class="align-center">DEPARTAMENTO DE BIENES</td>

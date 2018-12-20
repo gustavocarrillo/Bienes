@@ -16,12 +16,16 @@ class ReportesController extends Controller
         $data = '';
         $count = [];
         $elementos = Elemento::all();
+        $bienes_dep = Departamento::where('codigo','10-06')->first();
+        $unidad = '';
 
         foreach ($elementos as $elemento) {
             if($tipoUnidad == "direccion") {
+                $unidad = Direccion::find($id);
                 $data = Bien::where('direccion', $id)
                     ->where('codigo', 'like', $elemento->codigo . '%');
             }elseif ($tipoUnidad == "departamento"){
+                $unidad = Departamento::find($id);
                 $data = Bien::where('departamento', $id)
                     ->where('codigo', 'like', $elemento->codigo . '%');
             }
@@ -33,10 +37,10 @@ class ReportesController extends Controller
             }
         }
         $data = $count;
-        $pdf = PDF::loadView('PDF.bm1', compact('data'));
-        $pdf->setPaper('A4','landscape');
+        $pdf = PDF::loadView('PDF.bm1', compact('data','bienes_dep','unidad'));
+//        $pdf->setPaper('A4','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->download("bm1.pdf");
+        return $pdf->stream("bm1.pdf");
     }
 
     public function BM2($tipoUnidad ,$id)
@@ -51,7 +55,7 @@ class ReportesController extends Controller
         }
 //        dd($data->toArray());
         $pdf = PDF::loadView('PDF.bm1', compact('data'));
-        $pdf->setPaper('A4','landscape');
+        $pdf->setPaper('letter');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
         return $pdf->download("bm1.pdf");
     }

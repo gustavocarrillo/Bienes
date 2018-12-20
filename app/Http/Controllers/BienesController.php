@@ -236,7 +236,6 @@ class BienesController extends Controller
             "movimiento" => "required"
         ]);
 
-        //dd($request->all());
         $bien = Bien::find($id);
         $bien->estatus = 'desincorporado';
         $bien->save();
