@@ -57,7 +57,7 @@
             la Ley Orgánica de Bienes Públicos y demás leyes que regulan la materia.
         </p>
         <p>Se hacen Dos  (2) ejemplares de un mismo tenor y a un solo efecto, en Maturín, Estado Monagas,
-            a los {{ $fecha }}
+            a los {{ $fecha }}.
         </p>
 {{--        <p>Nota. El listado de Inventario debe ser Colocado en un lugar Visibles con carácter obligatorio.</p>
         <p>Cabe señalar que el inventario de la Dirección de Catastro Municipal, está distribuido de la
