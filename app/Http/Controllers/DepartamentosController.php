@@ -63,16 +63,20 @@ class DepartamentosController extends Controller
         }
 
         $this->validate($request,[
-            'codigo' => 'required|unique:direcciones,codigo,'.$departamento->id,
+            'codigo' => 'required|unique:departamentos,codigo,'.$departamento->id,
             'descripcion' => 'required',
             'responsable' => 'required',
+            'cedula_responsable' => 'required',
             'direccion' => 'required',
         ]);
 
         $departamento->codigo = $request->codigo;
         $departamento->descripcion = $request->descripcion;
         $departamento->responsable = $request->responsable;
+        $departamento->cedula_responsable = $request->cedula_responsable;
         $departamento->direccion = $request->direccion;
+        $departamento->cargo_responsable = $request->cargo_responsable;
+        $departamento->resolucion = $request->resolucion;
         $departamento->save();
 
         flash('El departamento ha sido modificada exitosamente')->success();

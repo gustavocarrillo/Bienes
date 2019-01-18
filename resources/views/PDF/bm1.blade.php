@@ -18,7 +18,7 @@
     <div style="text-align: justify">
         <h3 style="text-align: center">Alcaldía Bolivariana del Municipio Maturín Estado Monagas</h3>
         <br>
-        <h4 style="text-align: right">ACTA DE INVENTARIO  DE BIENES MUEBLES</h4>
+        <h4 style="text-align: right">ACTA DE ASIGNACIÓN DE BIENES (INVENTARIO)</h4>
         <br>
         <p>Yo, <strong>{{ $bienes_dep->responsable }}</strong>, en mi carácter de <strong>Jefe Dpto. Bienes Municipales  </strong><strong>Resolución N°{{ $bienes_dep->resolucion }}</strong>,
             adscrita a la <strong>Dirección de Administración</strong> de la Alcaldía del Municipio Maturín,
@@ -27,7 +27,7 @@
             valor de BS {{ strtolower($totalLetras) }} ({{ $total }}, BS), según se  detalla en el inventario anexo.
         </p>
         <p>El Departamento de Bienes Públicos le hace   entrega del Inventario realizado  al
-            funcionario/a <strong>{{ $unidad->responsable }}</strong>, titular de la cédula de identidad <strong>N° @{{ COLOCAR CEDULA DEL RESPONSABLE }}</strong>,
+            funcionario/a <strong>{{ $unidad->responsable }}</strong>, titular de la cédula de identidad <strong>N° {{ $unidad->cedula_responsable }}</strong>,
             <strong>Resolución nro. {{ $unidad->resolucion }}</strong>, la <strong>{{ $unidad->descripcion }}</strong>, quien declara
             “Recibo el Bien o Bienes Municipales especificados en el inventario e identificados
             con sus <strong>respectivas etiquetas anexo</strong>, en buenas condiciones  de uso y conservación,
@@ -59,18 +59,20 @@
         <p>Se hacen Dos  (2) ejemplares de un mismo tenor y a un solo efecto, en Maturín, Estado Monagas,
             a los {{ $fecha }}.
         </p>
-{{--        <p>Nota. El listado de Inventario debe ser Colocado en un lugar Visibles con carácter obligatorio.</p>
-        <p>Cabe señalar que el inventario de la Dirección de Catastro Municipal, está distribuido de la
-            siguiente manera: Dirección 141 Bienes, Dpto. Mantenimiento Vial  13 Bienes, Dpto.
-        </p>--}}
+        {{--        <p>Nota. El listado de Inventario debe ser Colocado en un lugar Visibles con carácter obligatorio.</p>
+                <p>Cabe señalar que el inventario de la Dirección de Catastro Municipal, está distribuido de la
+                    siguiente manera: Dirección 141 Bienes, Dpto. Mantenimiento Vial  13 Bienes, Dpto.
+                </p>--}}
+
+        <p><strong>Nota: el listado de inventario debe ser colocado en un lugar visible con carácter obligatorio.</strong></p>
     </div>
     <div class="saltopagina"></div>
     <div>
         <h3 style="text-align: center"><strong>DEPARTAMENTO DE BIENES MUNICIPALES</strong></h3>
-        <h4 style="text-align: center"><strong>INVENTARIO DE BIENES MUEBLES</strong></h4>
+        <h4 style="text-align: center"><strong>INVENTARIO DE BIENES MUNICIPALES</strong></h4>
         <p style="text-align: right"><strong>Formulario BM-1</strong></p>
         <p></p>
-        <p>Entidad propietaria: <strong>ALCALDIA DE MATURIN</strong></p>
+        <p>Entidad propietaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
         <p>Servicio:<strong> @if($unidad->_direccion) {{ $unidad_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
         <p>Unida de trabajo o dependencia:<strong> @if($unidad->_direccion) {{ $unidad->_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
         <p>Dirección o lugar: <strong>Calle Azcúe, Edificio Palacio Municipal, Maturín Estado Monagas. </strong></p>
@@ -97,18 +99,18 @@
                             <td>{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
                             <td>{{ $bien->codigo }}</td>
                             <td>{{ $bien->descripcion }}</td>
-{{--
-                            <td>{{ $bien->count }}</td>
---}}
+                            {{--
+                                                        <td>{{ $bien->count }}</td>
+                            --}}
                             <td>{{ $bien->valor_actual }}</td>
-{{--
-                            <td>{{ $bien->valor_actual * $bien->count }}</td>
---}}
+                            {{--
+                                                        <td>{{ $bien->valor_actual * $bien->count }}</td>
+                            --}}
                         </tr>
                         {{ $n++ }}
-{{--
-                        {{ $total += $bien->valor_actual }}
---}}
+                        {{--
+                                                {{ $total += $bien->valor_actual }}
+                        --}}
                         {{--{{ $total+= ($bien->valor_actual * $bien->count )}}--}}
                     @endforeach
                     <tr style="background-color: #b8e834">
@@ -131,6 +133,10 @@
         <td class="align-center">@if($data->_direccion) {{ $data->_direccion->descripcion }} @else {{ $data->descripcion }} @endif</td>
     </tr>--}}
     <tr>
+        <td width="340px" class="align-center"><span>Quien entrega:</span></td>
+        <td width="340px" class="align-center"><span>Quien recibe:</span></td>
+    </tr>
+    <tr>
         <td><span style="color: white">texto</span></td>
         <td><span style="color: white">texto</span></td>
     </tr>
@@ -142,18 +148,19 @@
         <td class="align-center">_______________________</td>
         <td class="align-center">_______________________</td>
     </tr>
-     <tr>
-         <td width="340px" class="align-center">{{ strtoupper($bienes_dep->responsable) }}</td>
-         <td width="340px" class="align-center">{{ strtoupper($unidad->responsable) }}</td>
-     </tr>
-     <tr>
-         <td width="340px" class="align-center">{{ strtoupper($bienes_dep->resolucion) }}</td>
-         <td width="340px" class="align-center">{{ $unidad->resolucion }}</td>
-     </tr>
     <tr>
         <td width="340px" class="align-center">{{ strtoupper($bienes_dep->cargo_responsable.' '.$bienes_dep->descripcion) }}</td>
         <td width="340px" class="align-center">{{ strtoupper($unidad->cargo_responsable.' '.$unidad->descripcion) }}</td>
     </tr>
+    <tr>
+        <td width="340px" class="align-center">{{ strtoupper($bienes_dep->responsable) }}</td>
+        <td width="340px" class="align-center">{{ strtoupper($unidad->responsable) }}</td>
+    </tr>
+    <tr>
+        <td width="340px" class="align-center"><strong>Resolucion N°:</strong>{{ strtoupper($bienes_dep->resolucion) }}</td>
+        <td width="340px" class="align-center"><strong>Resolucion N°:</strong>{{ $unidad->resolucion }}</td>
+    </tr>
+
 </table>
 </body>
 </html>

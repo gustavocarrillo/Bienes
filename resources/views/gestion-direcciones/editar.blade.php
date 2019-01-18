@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <label for="rif">Codigo:</label>
                                 <div class="form-line">
-                                    <input type="text" name="codigo" class="form-control codigo" value="{{ $direccion->codigo  }}">
+                                    <input type="text" name="codigo" class="form-control" value="{{ $direccion->codigo  }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -28,6 +28,12 @@
                                 <label for="nombre">Responsable:</label>
                                 <div class="form-line">
                                     <input type="text" name="responsable" class="form-control" value="{{ $direccion->responsable  }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Cedula:</label>
+                                <div class="form-line">
+                                    <input type="text" name="cedula_responsable" class="form-control int" maxlength="8" value="{{ $direccion->cedula_responsable }}">
                                 </div>
                             </div>
                             <div class="form-group">

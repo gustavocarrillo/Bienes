@@ -4,7 +4,7 @@
     <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="header">
-                <h2><b>Modificar Direccion</b></h2>
+                <h2><b>Modificar Departamento</b></h2>
             </div>
             <div class="body">
                 <form action="{{ route('departamento.update', $departamento->id) }}" method="post">
@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <label for="rif">Codigo:</label>
                                 <div class="form-line">
-                                    <input type="text" name="codigo" class="form-control codigo" value="{{ $departamento->codigo  }}">
+                                    <input type="text" name="codigo" class="form-control" value="{{ $departamento->codigo  }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -28,6 +28,12 @@
                                 <label for="nombre">Responsable:</label>
                                 <div class="form-line">
                                     <input type="text" name="responsable" class="form-control" value="{{ $departamento->responsable  }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Cedula:</label>
+                                <div class="form-line">
+                                    <input type="text" name="cedula_responsable" class="form-control int" maxlength="8" value="{{ $departamento->cedula_responsable }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -78,7 +84,7 @@
 <script>
     $(function(){
         $('.int').inputmask('numeric', { placeholder: '' });
-        $('.codigo').inputmask('99', { placeholder: ""});
+        $('.codigo').inputmask('99-99', { placeholder: ""});
         $('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
         $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
     })

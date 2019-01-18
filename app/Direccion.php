@@ -12,6 +12,7 @@ class Direccion extends Model
         'codigo',
         'descripcion',
         'responsable',
+        'cedula_responsable',
         'cargo_responsable',
         'resolucion',
     ];

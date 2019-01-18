@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label for="rif">Codigo:</label>
                                 <div class="form-line">
-                                    <input type="text" name="codigo" class="form-control codigo">
+                                    <input type="text" name="codigo" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -27,6 +27,12 @@
                                 <label for="nombre">Responsable:</label>
                                 <div class="form-line">
                                     <input type="text" name="responsable" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Cedula:</label>
+                                <div class="form-line">
+                                    <input type="text" name="cedula_responsable" class="form-control int" maxlength="8">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -78,7 +84,7 @@
 <script>
     $(function(){
         $('.int').inputmask('numeric', { placeholder: '' });
-        $('.codigo').inputmask('99', { placeholder: ""});
+        $('.codigo').inputmask('99-99', { placeholder: ""});
         $('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
         $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
     })

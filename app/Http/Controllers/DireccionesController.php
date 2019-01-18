@@ -66,6 +66,9 @@ class DireccionesController extends Controller
         $direccion->codigo = $request->codigo;
         $direccion->descripcion = $request->descripcion;
         $direccion->responsable = $request->responsable;
+        $direccion->cedula_responsable = $request->cedula_responsable;
+        $direccion->cargo_responsable = $request->cargo_responsable;
+        $direccion->resolucion = $request->resolucion;
         $direccion->save();
 
         flash('La Direccion ha sido modificada exitosamente')->success();

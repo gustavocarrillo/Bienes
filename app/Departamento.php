@@ -12,6 +12,7 @@ class Departamento extends Model
         'codigo',
         'descripcion',
         'responsable',
+        'cedula_responsable',
         'direccion',
         'cargo_responsable',
         'resolucion',
