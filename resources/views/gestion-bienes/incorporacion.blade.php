@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="inc_por">Descripcion: </label>
                                         <div class="form-line">
-                                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="" maxlength="65" />
+                                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="" maxlength="100" />
                                         </div>
                                     </div>
                                 </div>
@@ -84,12 +84,18 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="">N/A</label>
+                                        <input type="radio" name="orden_na" id="orden_na">
+                                    </div>
+                                </div>
                                 {{--<div class="col-sm-2">
                                     <div class="p-t-30">
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#smallModal">Nueva</button>
                                     </div>
                                 </div>--}}
-                                <div class="col-sm-4 col-md-offset-2">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="orden">Valor del Bien:</label>
                                         <div class="form-line">
@@ -292,7 +298,7 @@
         $('.int').inputmask('numeric', { placeholder: '0' });
         //$('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
         $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
+        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000", numericInput: true});
     })
 
     function attrLote(){

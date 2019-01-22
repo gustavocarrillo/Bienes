@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="nombre">Resolución:</label>
                                 <div class="form-line">
-                                    <input type="text" name="resolucion" class="form-control" value="{{ $direccion->resolucion  }}">
+                                    <input type="text" name="resolucion" class="form-control" value="{{ $direccion->resolucion  }}" maxlength="10">
                                 </div>
                             </div>
                         </div>

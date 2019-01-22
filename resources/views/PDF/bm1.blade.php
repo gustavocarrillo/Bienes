@@ -80,8 +80,8 @@
     <br>
     <div class="">
         <div class="">
-            <div class="table-responsive">
-                <table class="table table-bordered">
+            <div class="" style="max-width: 750px">
+                <table class="table table-bordered" style="font-size: 10px">
                     <thead>
                     <tr>
                         <th>N°</th>
@@ -95,14 +95,14 @@
                     {{ $n = 1 }}
                     @foreach($data as $bien)
                         <tr>
-                            <td>{{ $n }}</td>
-                            <td>{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
-                            <td>{{ $bien->codigo }}</td>
-                            <td>{{ $bien->descripcion }}</td>
+                            <td width="7%">{{ $n }}</td>
+                            <td width="13%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
+                            <td width="15%">{{ $bien->codigo }}</td>
+                            <td width="50%">{{ $bien->descripcion }}</td>
                             {{--
                                                         <td>{{ $bien->count }}</td>
                             --}}
-                            <td>{{ $bien->valor_actual }}</td>
+                            <td width="15%">{{ $bien->valor_actual }}</td>
                             {{--
                                                         <td>{{ $bien->valor_actual * $bien->count }}</td>
                             --}}
