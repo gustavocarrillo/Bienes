@@ -24,8 +24,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="">N/A</label>
-                                <input type="checkbox" name="orden_na" id="orden_na" class="checkbox">
+                                <label for="">Tipo:</label>
+                                <select name="tipo" name="tipo" class="form-control">
+                                    <option value="1">Incorporación</option>
+                                    <option value="0">Desincorporación</option>
+                                </select>
                             </div>
                         </div>
                     </div>

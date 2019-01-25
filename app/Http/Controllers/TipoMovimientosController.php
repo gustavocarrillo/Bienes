@@ -12,6 +12,7 @@ class TipoMovimientosController extends Controller
         $this->validate($request,[
             'codigo' => 'required|unique:tipo_movimientos,codigo',
             'descripcion' => 'required',
+            'tipo' => 'required',
         ]);
 
         TipoMovimiento::create($request->all());
@@ -63,6 +64,7 @@ class TipoMovimientosController extends Controller
 
         $tipo->codigo = $request->codigo;
         $tipo->descripcion = $request->descripcion;
+        $tipo->tipo = $request->tipo;
         $tipo->save();
 
         flash('El tipo de movimiento ha sido modificado exitosamente')->success();

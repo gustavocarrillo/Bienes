@@ -10,7 +10,8 @@ class TipoMovimiento extends Model
 
     protected $fillable = [
         'codigo',
-        'descripcion'
+        'descripcion',
+        'tipo',
     ];
 
     public function movimientos() {

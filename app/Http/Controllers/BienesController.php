@@ -233,7 +233,7 @@ class BienesController extends Controller
         $elementos = Elemento::all();
         $direcciones = Direccion::all();
         $departamentos = Departamento::all();
-        $tipos = TipoMovimiento::where('descripcion','like','incorporacion%')->get();
+        $tipos = TipoMovimiento::where('tipo',1)->get();
         $ordenes = Orden::where('anno',Carbon::now()->year)->get();
 
         return view('gestion-bienes.incorporacion')->with(compact(['elementos','direcciones','departamentos','tipos','ordenes']));

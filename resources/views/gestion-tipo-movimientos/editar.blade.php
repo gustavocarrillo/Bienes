@@ -24,6 +24,13 @@
                                     <input type="text" name="descripcion" class="form-control" value="{{ $tipo->descripcion }}">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="">Tipo:</label>
+                                <select name="tipo" name="tipo" class="form-control">
+                                    <option value="1">Incorporación</option>
+                                    <option value="0">Desincorporación</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row clearfix">
