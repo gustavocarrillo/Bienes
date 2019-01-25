@@ -17,7 +17,7 @@
                 <h2><b>Incorporacion de Bienes</b></h2>
             </div>
             <div class="body">
-                    <h2 class="card-inside-title">Seleccionar Elemento</h2>
+                <h2 class="card-inside-title">Seleccionar Elemento</h2>
                 <form action="{{ route('bienes.store') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="codigo" id="codigo_input">
@@ -85,9 +85,9 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label for="">N/A</label>
-                                        <input type="radio" name="orden_na" id="orden_na">
+                                    <div class="form-group m-t-30">
+                                        <input type="checkbox" id="basic_checkbox_2" name="n_a" class="filled-in"/>
+                                        <label for="basic_checkbox_2">N/A</label>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-2">
@@ -182,215 +182,228 @@
     {{--Modal--}}
     <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
         <form action="" id="modal">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="smallModalLabel">Nueva Orden de Compra</h4>
-                </div>
-                <div class="modal-body">
-                   <div class="row">
-                       <div class="col-md-5">
-                           <div class="form-group">
-                               <label for="">N° de Orden:</label>
-                               <div class="form-line">
-                                   <input type="text" id="nro_ordenModal" class="form-control int-">
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-7">
-                           <div class="form-group">
-                               <label for="">Fecha:</label>
-                               <div class="input-group">
-                                   <span class="input-group-addon">
-                                       <i class="material-icons">date_range</i>
-                                   </span>
-                                   <div class="form-line">
-                                       <input type="text" id="fechaModal"class="form-control date" placeholder="">
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Proveedor:</label>
-                                <div class="form-line">
-                                    <input type="text" id="proveedorModal" class="form-control">
-                                </div>
-                            </div>
-                        </div>
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="smallModalLabel">Nueva Orden de Compra</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Rif:</label>
-                                <div class="form-line">
-                                    <input type="text" id="rifModal" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="">Factura N°:</label>
-                                <div class="form-line">
-                                    <input type="text" id="nro_ordenModal" class="form-control int">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label for="">Fecha:</label>
-                                <div class="input-group">
-                                   <span class="input-group-addon">
-                                       <i class="material-icons">date_range</i>
-                                   </span>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">N° de Orden:</label>
                                     <div class="form-line">
-                                        <input type="text" id="fechaFacturaModal" class="form-control date" placeholder="">
+                                        <input type="text" id="nro_ordenModal" class="form-control int-">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="">Fecha:</label>
+                                    <div class="input-group">
+                                   <span class="input-group-addon">
+                                       <i class="material-icons">date_range</i>
+                                   </span>
+                                        <div class="form-line">
+                                            <input type="text" id="fechaModal"class="form-control date" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Proveedor:</label>
+                                    <div class="form-line">
+                                        <input type="text" id="proveedorModal" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Rif:</label>
+                                    <div class="form-line">
+                                        <input type="text" id="rifModal" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">Factura N°:</label>
+                                    <div class="form-line">
+                                        <input type="text" id="nro_ordenModal" class="form-control int">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="">Fecha:</label>
+                                    <div class="input-group">
+                                   <span class="input-group-addon">
+                                       <i class="material-icons">date_range</i>
+                                   </span>
+                                        <div class="form-line">
+                                            <input type="text" id="fechaFacturaModal" class="form-control date" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">Control N°:</label>
+                                    <div class="form-line">
+                                        <input type="text" id="nro_controlModal" class="form-control int">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="">Total:</label>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" id="totalModal"class="form-control decimal" placeholder="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="">Control N°:</label>
-                                <div class="form-line">
-                                    <input type="text" id="nro_controlModal" class="form-control int">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label for="">Total:</label>
-                                <div class="input-group">
-                                    <div class="form-line">
-                                        <input type="text" id="totalModal"class="form-control decimal" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" id="guardarModal" class="btn btn-primary waves-effect">
+                            <i class="material-icons">save</i>
+                            <span>GUARDAR</span>
+                        </button>
+                        <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">
+                            <i class="material-icons">cancel</i>
+                            <span>Cancelar</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="guardarModal" class="btn btn-primary waves-effect">
-                        <i class="material-icons">save</i>
-                        <span>GUARDAR</span>
-                    </button>
-                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">
-                        <i class="material-icons">cancel</i>
-                        <span>Cancelar</span>
-                    </button>
                 </div>
             </div>
-        </div>
         </form>
     </div>
     {{--Fin - Modal--}}
 @endsection
 
 @section('js')
-<script>
-    $(function(){
-        $('.int').inputmask('numeric', { placeholder: '0' });
-        //$('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
-        $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000", numericInput: true});
-    })
-
-    function attrLote(){
-        $("#inc_por").selectpicker('val','unidad');
-        $("#cantidad_div").addClass('hidden');
-        $("#cantidad").val(0);
-        $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-7');
-        $("#separador").addClass("hidden");
-        $("#cod-lote").addClass("hidden");
-    }
-
-    //Cargar el select con los elementos
-    //fillSelect("elementos",'#elementos');
-
-    //Cargar el select con los departamentos
-    $('#direccion').change(function () {
-        dep = fillSelect("departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
-    })
-
-    //Cargar el select con los tipo_movimientos
-    //fillSelect("tipo_movimientos","#t_movimiento")
-
-    //Cambia estado de div inc_por
-    $("#inc_por").change(function () {
-        if($(this).val() == "lote"){
-            $("#cantidad_div").removeClass('hidden');
-            $("#inc_div").removeClass('col-md-offset-7').addClass('col-md-offset-4');
-            $("#cantidad").val(0);
-            $("#cantidad").focus();
-            $("#separador").removeClass("hidden");
-            $("#cod-lote").removeClass("hidden");
-            $("#lote_input").val("hidden");
-        }else{
-            attrLote()
-        }
-    })
-    //fin - inc_por
-
-    $("#elementos").change(function () {
-
-        attrLote();
-        cantidad = 0;
-
-        if($("#cantidad").val()){
-            var cantidad = $("#cantidad").val()
-        }
-
-        $.ajax({
-            method: 'get',
-            url: 'bien/' + $(this).val() + "/cantidad/" + cantidad,
-            data : {_token: "{{ csrf_token() }}" },
-            dataType: 'JSON',
-        }).done(function (e) {
-            //alert(e.bien)
-            $("#codigo").html(e.bien);
-            $("#codigo_input").val(e.bien);
-            bien = e.bien;
-            $("#cod-lote").html(e.lote);
-            $("#codido_lote").val(e.lote);
-        }).fail(function () {
-            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+    <script>
+        $(function(){
+            $('.int').inputmask('numeric', { placeholder: '0' });
+            //$('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
+            $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
+            $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000", numericInput: true});
         })
-    })
 
-    $('#cantidad').change(function () {
-        $.ajax({
-            method: 'get',
-            url: 'bien/' + $("#elementos").val() + "/cantidad/" + $('#cantidad').val(),
-            data : {_token :$('#token').val()},
-            dataType: 'JSON',
-        }).done(function (e) {
-            $("#codigo").html(e.bien);
-            $("#cod-lote").html(e.lote);
-        }).fail(function () {
-            alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+        $('#basic_checkbox_2').change(function (){
+            if(this.checked){
+                $('#orden').prop('disabled',true);
+            }else{
+                $('#orden').prop('disabled',false);
+            }
         })
-    })
 
-    $('#t_movimiento').change(function () {
-        if ($(this).val() == 11){
-            $('#orden').val(0);
-            $('#orden').selectpicker('refresh');
+        /*if($('#basic_checkbox_2').change === true ){
+            alert('checked')
             $('#orden').prop('disabled',true);
-        }else{
-            $('#orden').prop('disabled',false);
-        }
-    })
+        */
 
-    $('.js-modal-buttons .btn').on('click', function () {
-        var color = $(this).data('color');
-        $('#mdModal .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
-        $('#mdModal').modal('show');
-    });
-</script>
+        function attrLote(){
+            $("#inc_por").selectpicker('val','unidad');
+            $("#cantidad_div").addClass('hidden');
+            $("#cantidad").val(0);
+            $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-7');
+            $("#separador").addClass("hidden");
+            $("#cod-lote").addClass("hidden");
+        }
+
+        //Cargar el select con los elementos
+        //fillSelect("elementos",'#elementos');
+
+        //Cargar el select con los departamentos
+        $('#direccion').change(function () {
+            dep = fillSelect("departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
+        })
+
+        //Cargar el select con los tipo_movimientos
+        //fillSelect("tipo_movimientos","#t_movimiento")
+
+        //Cambia estado de div inc_por
+        $("#inc_por").change(function () {
+            if($(this).val() == "lote"){
+                $("#cantidad_div").removeClass('hidden');
+                $("#inc_div").removeClass('col-md-offset-7').addClass('col-md-offset-4');
+                $("#cantidad").val(0);
+                $("#cantidad").focus();
+                $("#separador").removeClass("hidden");
+                $("#cod-lote").removeClass("hidden");
+                $("#lote_input").val("hidden");
+            }else{
+                attrLote()
+            }
+        })
+        //fin - inc_por
+
+        $("#elementos").change(function () {
+
+            attrLote();
+            cantidad = 0;
+
+            if($("#cantidad").val()){
+                var cantidad = $("#cantidad").val()
+            }
+
+            $.ajax({
+                method: 'get',
+                url: 'bien/' + $(this).val() + "/cantidad/" + cantidad,
+                data : {_token: "{{ csrf_token() }}" },
+                dataType: 'JSON',
+            }).done(function (e) {
+                //alert(e.bien)
+                $("#codigo").html(e.bien);
+                $("#codigo_input").val(e.bien);
+                bien = e.bien;
+                $("#cod-lote").html(e.lote);
+                $("#codido_lote").val(e.lote);
+            }).fail(function () {
+                alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+            })
+        })
+
+        $('#cantidad').change(function () {
+            $.ajax({
+                method: 'get',
+                url: 'bien/' + $("#elementos").val() + "/cantidad/" + $('#cantidad').val(),
+                data : {_token :$('#token').val()},
+                dataType: 'JSON',
+            }).done(function (e) {
+                $("#codigo").html(e.bien);
+                $("#cod-lote").html(e.lote);
+            }).fail(function () {
+                alert("NO SE HAN PODIDO CARGAR LOS ELEMENTOS")
+            })
+        })
+
+        $('#t_movimiento').change(function () {
+            if ($(this).val() == 11){
+                $('#orden').val(0);
+                $('#orden').selectpicker('refresh');
+                $('#orden').prop('disabled',true);
+            }else{
+                $('#orden').prop('disabled',false);
+            }
+        })
+
+        $('.js-modal-buttons .btn').on('click', function () {
+            var color = $(this).data('color');
+            $('#mdModal .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
+            $('#mdModal').modal('show');
+        });
+    </script>
 @endsection
