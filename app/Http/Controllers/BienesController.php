@@ -37,7 +37,7 @@ class BienesController extends Controller
             'valor' => 'required',
             'valor_actual' => 'required',
             't_movimiento' => 'required',
-            'nro_orden' => 'required_unless:t_movimiento,11',
+            //'nro_orden' => 'required_unless:t_movimiento,11',
             'direccion' => 'required',
             'elemento' => 'required',
         ]);
