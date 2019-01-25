@@ -242,7 +242,7 @@ class BienesController extends Controller
     public function desincorporacion($id)
     {
         $bien = Bien::find($id);
-        $tmovimientos = TipoMovimiento::where('descripcion','like','desincorporacion%')->get();
+        $tmovimientos = TipoMovimiento::where('tipo',0)->get();
 
         return view('gestion-bienes.desincorporar')->with(['bien' => $bien,'movimientos' => $tmovimientos]);
     }
