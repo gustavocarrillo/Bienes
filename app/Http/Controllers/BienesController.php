@@ -12,12 +12,25 @@ use App\Elemento;
 use App\Departamento;
 use App\TipoMovimiento;
 use Auth;
+use Validator;
 
 class BienesController extends Controller
 {
     public function store(Request $request)
     {
-       $this->validate($request,[
+        /*$this->validate($request,[
+             'codigo' => 'required|unique:bienes,codigo',
+             'descripcion' => 'required',
+             'fecha_incorp' => 'required',
+             'valor' => 'required',
+             'valor_actual' => 'required',
+             't_movimiento' => 'required',
+             'nro_orden' => 'required_unless:t_movimiento,11',
+             'direccion' => 'required',
+             'elemento' => 'required',
+         ]);*/
+
+        $validator = Validator::make($request->all(),[
             'codigo' => 'required|unique:bienes,codigo',
             'descripcion' => 'required',
             'fecha_incorp' => 'required',
@@ -28,6 +41,10 @@ class BienesController extends Controller
             'direccion' => 'required',
             'elemento' => 'required',
         ]);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $valor = str_replace('.',"",$request->valor);
         $valor = str_replace(',',".",$valor);

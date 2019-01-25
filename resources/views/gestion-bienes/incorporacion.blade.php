@@ -38,8 +38,8 @@
                                     <div class="form-group">
                                         <label for="inc_por">Incorporación por: </label>
                                         <select name="inc_por" id="inc_por" class="form-control show-tick">
-                                            <option value="unidad">Unidad</option>
-                                            <option value="lote">Lote</option>
+                                            <option value="unidad" @if(old('inc_por') == 'unidad') selected @endIf>Unidad</option>
+                                            <option value="lote" @if(old('inc_por') == 'lote') selected @endIf>Lote</option>
                                         </select>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <label for="cantidad">Cantidad</label>
                                         <div class="form-line">
-                                            <input type="text" name="cantidad" id="cantidad" class="form-control int" placeholder="" maxlength="4"/>
+                                            <input type="text" name="cantidad" id="cantidad" class="form-control int" placeholder="" maxlength="4" value="{{ old('cantidad')  }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="inc_por">Descripcion: </label>
                                         <div class="form-line">
-                                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="" maxlength="100" />
+                                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="{{ old('descripcion')  }}" maxlength="100" />
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                     <div class="form-group">
                                         <label for="orden">Valor del Bien:</label>
                                         <div class="form-line">
-                                            <input type="text" name="valor" id="valor_bien" class="form-control decimal" maxlength="16"/>
+                                            <input type="text" name="valor" id="valor_bien" value="{{ old('valor')  }}" class="form-control decimal" maxlength="16"/>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                                 <i class="material-icons">date_range</i>
                                             </span>
                                         <div class="form-line">
-                                            <input type="text" name="fecha_incorp" id="f_incorp"class="form-control date" placeholder="Ejem: 30/07/2016">
+                                            <input type="text" name="fecha_incorp" id="f_incorp" class="form-control date" placeholder="Ejem: 30/07/2016" value="{{ old('fecha_incorp') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                     <div class="form-group">
                                         <label for="valor_actual_bien">Valor actual del Bien:</label>
                                         <div class="form-line">
-                                            <input type="text" name="valor_actual" id="valor_actual_bien" class="form-control decimal" maxlength="16"/>
+                                            <input type="text" name="valor_actual" id="valor_actual_bien" class="form-control decimal" maxlength="16" value="{{ old('valor_actual')  }}" />
                                         </div>
                                     </div>
                                 </div>
