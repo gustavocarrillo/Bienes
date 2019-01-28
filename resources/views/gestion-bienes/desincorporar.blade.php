@@ -23,8 +23,16 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="">Fecha:</label>
+                                <div class="form-line">
+                                    <input type="text" name="fecha" class="form-control date">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="orden">Observación:</label>
-                                <textarea name="observacion" id="" cols="30" rows="4" class="form-control show-tick"></textarea>
+                                <div class="form-line">
+                                    <textarea name="observacion" id="" cols="30" rows="4" class="form-control show-tick"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,5 +59,8 @@
 
 @section('js')
 <script>
+    $(function(){
+        $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
+    })
 </script>
 @endsection
