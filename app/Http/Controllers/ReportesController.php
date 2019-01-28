@@ -23,16 +23,19 @@ class ReportesController extends Controller
 
         if($tipoUnidad == "direccion") {
             $unidad = Direccion::find($id);
-            $data = Bien::where('direccion', $id)->get();
-            foreach ($data as $bien){
-                $total+=$bien->valor;
+            $data = Bien::where('direccion', $id);
+            $count = $data->count();
+            foreach ($data->get() as $bien){
+                $total+=(float)$bien->valor;
                 $totalLetras = NumerosEnLetras::convertir($total);
             }
         }elseif ($tipoUnidad == "departamento"){
             $unidad = Departamento::where('id',$id)->with('_direccion')->first();
-            $data = Bien::where('departamento', $id)->get();
-            foreach ($data as $bien){
-                $total+=$bien->valor;
+            $data = Bien::where('departamento', $id);
+            $count = $data->count();
+            foreach ($data->get() as $bien){
+                $total+=(float)$bien->valor;
+//                $total = money_format($total,8,5);
                 $totalLetras = NumerosEnLetras::convertir($total);
             }
         }
@@ -43,12 +46,13 @@ class ReportesController extends Controller
              array_push($count, $bien);
          }*/
 
+        $data = $data->get();
         $fecha = date('d',strtotime(today())).' del mes de '.$this->meses((date('m',strtotime(today())) - 1)).' de '.date('Y',strtotime(today()));
         /*        $data = $count;*/
-        $pdf = PDF::loadView('PDF.bm1', compact('data','bienes_dep','unidad','fecha','total','totalLetras'));
+        $pdf = PDF::loadView('PDF.bm1', compact('data','bienes_dep','unidad','fecha','total','totalLetras','count'));
 //        $pdf->setPaper('A4','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->stream("bm1.pdf");
+        return $pdf->download("bm1.pdf");
     }
 
     public function BM2($tipoUnidad ,$id)
