@@ -1,7 +1,7 @@
 @extends('plantilla')
 
 @section('contenido')
-    <div class="col-lg-11 col-md-11">
+    <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="header">
                 <h2><b>BIEN: {{ $bien->codigo }}</b></h2>
@@ -81,6 +81,7 @@
                                 <th>Fecha</th>
                                 <th>Dirección</th>
                                 <th>Departamento</th>
+                                <th>Observación</th>
                                 <th>Usuario</th>
                             </tr>
                             </thead>
@@ -93,6 +94,7 @@
                                     <td>{{ date('d-m-Y',strtotime($movimiento->fecha )) }}</td>
                                     <td>{{ $movimiento->_direccion->descripcion}}</td>
                                     <td>{{ $movimiento->_departamento->descripcion }}</td>
+                                    <td>{{ $movimiento->observacion }}</td>
                                     <td>{{ $movimiento->_usuario->username }}</td>
                                 </tr>
                                 {{ $cont++ }}

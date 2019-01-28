@@ -140,7 +140,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group hidden" id="departamentos_div">
+                                    <div class="form-group" id="departamentos_div">
                                         <div class="form-group">
                                             <label for="orden">Departamento</label>
                                             <select name="departamento" id="departamento" class="form-control show-tick" data-live-search="true">

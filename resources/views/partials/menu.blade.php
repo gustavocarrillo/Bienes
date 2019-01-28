@@ -15,12 +15,12 @@
             <ul class="ml-menu">
                 <li>
                     <a href="{{ route("bienes.index") }}">
-                        <span>Incorporación</span>
+                        <span>Activos</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route("desincorporacion.index") }}">
-                        <span>Desincorporación</span>
+                        <span>Desincorporados</span>
                     </a>
                 </li>
                 {{--<li>

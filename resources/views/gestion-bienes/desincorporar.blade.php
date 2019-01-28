@@ -15,13 +15,36 @@
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
                                 <label for="orden">Tipo de desincorporacón:</label>
-                                <select name="movimiento" id="movimiento" class="form-control show-tick">
+                                <select name="movimiento" id="movimiento" class="form-control show-tick" data-live-search="true">
                                     <option value="">Seleccione..</option>
-                                    @foreach($movimientos as $movimiento)
-                                        <option value="{{ $movimiento->id }}">{{ $movimiento->codigo.' -- '.$movimiento->descripcion }}</option>
+                                    @foreach($tipos as $tipo)
+                                        <option value="{{ $tipo->id }}">{{ $tipo->codigo.' -- '.$tipo->descripcion }}</option>
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div id="traspaso" class="hidden">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="orden">Dirección</label>
+                                        <select name="direccion" id="direccion" class="form-control show-tick" data-live-search="true">
+                                            <option value="" selected>Seleccione una dirección</option>
+                                            @foreach($direcciones as $direccion)
+                                                <option value="{{ $direccion->id }}">{{ $direccion->codigo.' - '.$direccion->descripcion }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group hidden" id="departamentos_div">
+                                    <div class="form-group">
+                                        <label for="orden">Departamento</label>
+                                        <select name="departamento" id="departamento" class="form-control show-tick" data-live-search="true">
+                                            <option value="" selected>Seleccione un departamento</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="">Fecha:</label>
                                 <div class="form-line">
@@ -58,9 +81,21 @@
 @endsection
 
 @section('js')
-<script>
-    $(function(){
-        $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-    })
-</script>
+    <script>
+        $(function(){
+            $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
+        })
+        //Cargar el select con los departamentos
+        $('#direccion').change(function () {
+            dep = fillSelect("../departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
+        })
+
+        $('#movimiento').change(function () {
+            if ($("#movimiento").val() === "18") {
+                $("#traspaso").removeClass('hidden');
+            } else {
+                $("#traspaso").addClass('hidden');
+            }
+        })
+    </script>
 @endsection

@@ -242,33 +242,64 @@ class BienesController extends Controller
     public function desincorporacion($id)
     {
         $bien = Bien::find($id);
-        $tmovimientos = TipoMovimiento::where('tipo',0)->get();
+        $direcciones = Direccion::all();
+        $departamentos = Departamento::all();
+        $tipos = TipoMovimiento::where('tipo',0)->get();
 
-        return view('gestion-bienes.desincorporar')->with(['bien' => $bien,'movimientos' => $tmovimientos]);
+        return view('gestion-bienes.desincorporar')->with(compact(['bien','direcciones','departamentos','tipos']));
     }
 
     public function desincorporado(Request $request,$id)
     {
+//        dd($request->all());
+
         $this->validate($request,[
-            "movimiento" => "required"
+            "movimiento" => "required",
+            "fecha" => "required",
         ]);
 
-        $bien = Bien::find($id);
-        $bien->estatus = 'desincorporado';
-        $bien->save();
+        $tmovimiento = TipoMovimiento::find($request->movimiento);
 
-        $fecha = Carbon::now()->toDateString();
+//        dd($tmovimiento->codigo);
+
+        $bien = Bien::find($id);
+
+        if ($tmovimiento->codigo !== "51"){
+            $bien->estatus = 'desincorporado';
+        }
+
+        //$fecha = Carbon::now()->toDateString();
 
         Movimiento::create([
             "bien" => $id,
             "t_movimiento" => $request->movimiento,
-            "fecha" => $fecha,
+            "fecha" => date('Y-m-d',strtotime($request->fecha)),
             "direccion" => $bien->direccion,
             "departamento" => $bien->departamento,
-            "idU" => $id.'-'. $fecha.'-'.$request->movimiento,
+            "idU" => $id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$request->movimiento,
+            "observacion" => $request->observacion,
             "usuario" => Auth::id()
         ]);
 
+        if ($tmovimiento->codigo === "51"){
+
+            $bien->direccion = $request->direccion;
+            $bien->departamento = $request->departamento;
+            $inc_traspaso = TipoMovimiento::where('codigo',2)->first();
+
+            Movimiento::create([
+                "bien" => $id,
+                "t_movimiento" => $inc_traspaso->id,
+                "fecha" => date('Y-m-d',strtotime($request->fecha)),
+                "direccion" => $request->direccion,
+                "departamento" => $request->departamento,
+                "idU" => $id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$inc_traspaso->id,
+                "observacion" => $request->observacion,
+                "usuario" => Auth::id()
+            ]);
+        }
+
+        $bien->save();
         flash('El bien ha sido desincorporado','success');
         return response()->redirectToRoute('bienes.index');
     }
