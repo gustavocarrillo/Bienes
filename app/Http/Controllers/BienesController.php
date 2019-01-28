@@ -256,6 +256,13 @@ class BienesController extends Controller
         $this->validate($request,[
             "movimiento" => "required",
             "fecha" => "required",
+            "direccion" => "required_if:movimiento,18",
+            "departamento" => "required_if:movimiento,18",
+        ],[
+            "movimiento.required" => "Debe selccionar un tipo de movimiento",
+            "fecha.required" => "Debe introducir un fecha",
+            "direccion.required_if" => "Debe seleccionar una dirección",
+            "departamento.required_if" => "Debe seleccionar un departamento",
         ]);
 
         $tmovimiento = TipoMovimiento::find($request->movimiento);

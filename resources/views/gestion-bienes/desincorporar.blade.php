@@ -2,6 +2,16 @@
 
 @section('contenido')
     <div class="col-lg-6 col-md-6">
+        @include('flash::message')
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="header">
                 <h2><b>Desincorpación de BIEN: {{ $bien->codigo }}</b></h2>
@@ -67,16 +77,6 @@
                 </form>
             </div>
         </div>
-        @include('flash::message')
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
 @endsection
 
