@@ -26,7 +26,7 @@ class ReportesController extends Controller
             $data = Bien::where('direccion', $id);
             $count = $data->count();
             foreach ($data->get() as $bien){
-                $total+=(float)$bien->valor;
+                $total+=$bien->valor_actual;
                 $totalLetras = NumerosEnLetras::convertir($total);
             }
         }elseif ($tipoUnidad == "departamento"){
@@ -34,8 +34,7 @@ class ReportesController extends Controller
             $data = Bien::where('departamento', $id);
             $count = $data->count();
             foreach ($data->get() as $bien){
-                $total+=(float)$bien->valor;
-//                $total = money_format($total,8,5);
+                $total+=$bien->valor_actual;
                 $totalLetras = NumerosEnLetras::convertir($total);
             }
         }
