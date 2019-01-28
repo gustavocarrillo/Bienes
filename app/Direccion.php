@@ -17,14 +17,20 @@ class Direccion extends Model
         'resolucion',
     ];
 
-    public function departamentos() {
-
+    public function departamentos()
+    {
         return $this->hasMany('App\Departamento','direccion');
     }
 
-    public function bienes() {
-
+    public function bienes()
+    {
         return $this->hasMany('App\Bien','direccion');
+    }
+
+    public function movimientos()
+    {
+        return $this->belongsToMany('App\Bien','movmimientos','direccion','bien')
+            ->withPivot('t_movimiento','fecha','direccion','departamento','observacion','usuario');
     }
 
     public $timestamps = false;

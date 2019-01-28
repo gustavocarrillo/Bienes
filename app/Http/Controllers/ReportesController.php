@@ -68,7 +68,7 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('PDF.bm1', compact('data'));
         $pdf->setPaper('letter');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->download("bm1.pdf");
+        return $pdf->download("bm2.pdf");
     }
 
     private function meses($mes)
