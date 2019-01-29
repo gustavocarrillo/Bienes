@@ -56,9 +56,11 @@ class BienesController extends Controller
 
             $codigo = explode('-',$request->codigo);
 
+            $cont = 0;
+
             for ($i = 0; $i < $request->cantidad; $i++) {
 
-                $codigo[4] += 1;
+                $codigo[4] += $cont;
 
                 if (strlen($codigo[4]) == 1){
                     $codigo[4] = "000".$codigo[4];
@@ -94,6 +96,8 @@ class BienesController extends Controller
                     "tipo" => 1,
                     "usuario" => Auth::id()
                 ]);
+
+                $cont = 1;
             }
         }else{
             $bien = Bien::create([
@@ -234,7 +238,7 @@ class BienesController extends Controller
 
         if ($cantidadid){
 
-            $_lote = $bien[4] + $cantidadid;
+            $_lote = $bien[4] + $cantidadid - 1;
 
             if (strlen($_lote) == 1){
                 $lote = '000'.$_lote;
