@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bien;
 use App\Elemento;
+use App\Movimiento;
 use Illuminate\Http\Request;
 use App\Departamento;
 use App\Direccion;
@@ -54,19 +55,30 @@ class ReportesController extends Controller
         return $pdf->download("bm1.pdf");
     }
 
-    public function BM2($tipoUnidad ,$id)
+    public function BM2($tipoUnidad ,$id,$mes,$ano)
     {
-        $data = '';
-        $bienes_dep = Departamento::where('codigo','10-06')->first();
+        $fecha = $ano.'-'.$mes;
+        $fecha = '2019-01';
+        $data = [];
 
         if($tipoUnidad == "direccion"){
-            $data = Direccion::with('bienes')->where('id',$id)->first();
+            $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
+            $movimientos = Movimiento::where(['direccion' => $id])
+                ->where('fecha','like',$fecha.'%')
+                ->with('_bien')
+                ->get();
+            $data['movimientos'] = $movimientos;
         }elseif ($tipoUnidad == "departamento"){
-            $data = Departamento::with('bienes','_direccion')->where('id',$id)->first();
+            $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
+            $movimientos = Movimiento::where(['departamento' => $id])
+                ->where('fecha','like',$fecha.'%')
+                ->with('_bien')
+                ->get();
+            $data['movimientos'] = $movimientos;
         }
-//        dd($data->toArray());
-        $pdf = PDF::loadView('PDF.bm1', compact('data'));
-        $pdf->setPaper('letter');
+//        dd($data);
+        $pdf = PDF::loadView('PDF.bm2', compact('data'));
+        $pdf->setPaper('letter','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
         return $pdf->download("bm2.pdf");
     }

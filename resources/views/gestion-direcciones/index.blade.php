@@ -33,11 +33,12 @@
                                 <td width="10%">{{ $direccion->resolucion }}</td>
                                 <td width="30%">
                                     <form method="post" action="{{ route('direccion.destroy',$direccion->id) }}">
-                                        <a href="{{ route('direccion.edit',$direccion->id) }}" class="btn btn-xs btn-success"><i class="material-icons">create</i></a>
+                                        <a href="{{ route('direccion.edit',$direccion->id) }}" title="EDITAR" class="btn btn-xs btn-success"><i class="material-icons">create</i></a>
                                         {{ method_field('delete') }}
                                         {{ csrf_field()  }}
-                                        <a href="{{ route('reportes.bm1',['direccion',$direccion->id]) }}" class="btn btn-xs btn-primary  @if(count($direccion->bienes) == 0) disabled @endif"><i class="material-icons">assignment_returned</i></a>
-                                        <button class="btn btn-xs btn-danger" onclick="if (! window.confirm('¿Desea elminar esta Direccion?')){ return false }"><i class="material-icons">delete</i></button>
+                                        <a href="{{ route('reportes.bm1',['direccion',$direccion->id]) }}" title="BM1" class="btn btn-xs btn-primary  @if(count($direccion->bienes) == 0) disabled @endif"><i class="material-icons">assignment_returned</i></a>
+                                        <a href="{{ route('reportes.bm2',['direccion',$direccion->id,'01','2019']) }}" title="BM2" class="btn btn-xs btn-warning  @if(count($direccion->bienes) == 0) disabled @endif"><i class="material-icons">assignment_returned</i></a>
+                                        <button title="ELIMINAR" class="btn btn-xs btn-danger" onclick="if (! window.confirm('¿Desea elminar esta Direccion?')){ return false }"><i class="material-icons">delete</i></button>
                                     </form>
                                 </td>
                             </tr>

@@ -16,28 +16,34 @@ class Movimiento extends Model
         'departamento',
         'idU',
         'observacion',
-        'usuario'
+        'usuario',
+        'tipo'
     ];
 
     protected $hidden = ['idU'];
 
-    public function tipo() {
+    public function _bien()
+    {
+        return $this->hasOne('App\Bien','id','bien');
+    }
 
+    public function _tipo()
+    {
         return $this->belongsTo('App\TipoMovimiento','t_movimiento');
     }
 
-    public function _direccion() {
-
+    public function _direccion()
+    {
         return $this->belongsTo('App\Direccion','direccion');
     }
 
-    public function _departamento() {
-
+    public function _departamento()
+    {
         return $this->belongsTo('App\Departamento','departamento');
     }
 
-    public function _usuario() {
-
+    public function _usuario()
+    {
         return $this->belongsTo('App\User','usuario');
     }
 }

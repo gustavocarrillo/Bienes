@@ -70,7 +70,7 @@ class BienesController extends Controller
 
                 $_codigo = join('-',$codigo);
 
-                Bien::create([
+                $bien = Bien::create([
                     'codigo' => $_codigo,
                     'descripcion' => ucfirst($request->descripcion),
                     'fecha_incorp' => date('Y-m-d',strtotime(trim($request->fecha_incorp))),
@@ -82,21 +82,45 @@ class BienesController extends Controller
                     'departamento' => $request->departamento,
                     'usuario' => Auth::id(),
                 ]);
-            }
-        }
 
-        Bien::create([
-            'codigo' => $request->codigo,
-            'descripcion' => ucfirst($request->descripcion),
-            'fecha_incorp' => date('Y-m-d',strtotime(trim($request->fecha_incorp))),
-            'valor' => $valor,
-            'valor_actual' => $valor_actual,
-            'nro_orden' => $request->nro_orden,
-            'elemento' => $request->elemento,
-            'direccion' => $request->direccion,
-            'departamento' => $request->departamento,
-            'usuario' => Auth::id(),
-        ]);
+                Movimiento::create([
+                    "bien" => $bien->id,
+                    "t_movimiento" => $request->t_movimiento,
+                    "fecha" => date('Y-m-d',strtotime($request->fecha_incorp)),
+                    "direccion" => $request->direccion,
+                    "departamento" => $request->departamento,
+                    "idU" => $bien->id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$request->t_movimiento,
+                    "observacion" => $request->observacion,
+                    "tipo" => 1,
+                    "usuario" => Auth::id()
+                ]);
+            }
+        }else{
+            $bien = Bien::create([
+                'codigo' => $request->codigo,
+                'descripcion' => ucfirst($request->descripcion),
+                'fecha_incorp' => date('Y-m-d',strtotime(trim($request->fecha_incorp))),
+                'valor' => $valor,
+                'valor_actual' => $valor_actual,
+                'nro_orden' => $request->nro_orden,
+                'elemento' => $request->elemento,
+                'direccion' => $request->direccion,
+                'departamento' => $request->departamento,
+                'usuario' => Auth::id(),
+            ]);
+
+            Movimiento::create([
+                "bien" => $bien->id,
+                "t_movimiento" => $request->t_movimiento,
+                "fecha" => date('Y-m-d',strtotime($request->fecha_incorp)),
+                "direccion" => $request->direccion,
+                "departamento" => $request->departamento,
+                "idU" => $bien->id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$request->t_movimiento,
+                "observacion" => $request->observacion,
+                "tipo" => 1,
+                "usuario" => Auth::id()
+            ]);
+        }
 
         flash('El bien ha sido registrado exitosamente')->success();
         return response()->redirectToRoute('bienes.index');
@@ -115,7 +139,7 @@ class BienesController extends Controller
     public function show($id)
     {
         $bien = Bien::where('id',$id)->with('orden','_direccion','_departamento')->first();
-        $movimientos = Movimiento::with('tipo','_direccion','_departamento','_usuario')
+        $movimientos = Movimiento::with('_tipo','_direccion','_departamento','_usuario')
             ->where('bien',$bien->id)
             ->get();
 
@@ -285,6 +309,7 @@ class BienesController extends Controller
             "departamento" => $bien->departamento,
             "idU" => $id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$request->movimiento,
             "observacion" => $request->observacion,
+            "tipo" => 0,
             "usuario" => Auth::id()
         ]);
 
@@ -302,6 +327,7 @@ class BienesController extends Controller
                 "departamento" => $request->departamento,
                 "idU" => $id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$inc_traspaso->id,
                 "observacion" => $request->observacion,
+                "tipo" => 1,
                 "usuario" => Auth::id()
             ]);
         }

@@ -14,27 +14,37 @@
     </style>
 </head>
 <body style="background-color: white">
-<div class="col-lg-6 col-md-6">
+<div class="col-lg-12 col-md-2">
     {{--<div class="saltopagina"></div>--}}
     <div>
-        <h3 style="text-align: center"><strong>DEPARTAMENTO DE BIENES MUNICIPALES</strong></h3>
-        <h4 style="text-align: center"><strong>RELACION DEL MOVIMIENTO DE BIENES MUEBLES</strong></h4>
-        <p style="text-align: right"><strong>Formulario BM-2</strong></p>
+        <h4 style="text-align: center"><strong>DEPARTAMENTO DE BIENES MUNICIPALES</strong></h4>
+        <h5 style="text-align: center"><strong>RELACION DEL MOVIMIENTO DE BIENES MUEBLES</strong></h5>
+        <p style="text-align: right; font-size: 12px"><strong>Formulario BM-2</strong></p>
         <p></p>
-        <p>Entidad propietaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
-        <p>Servicio:<strong> @if($unidad->_direccion) {{ $unidad_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
-        <p>Unida de trabajo o dependencia:<strong> @if($unidad->_direccion) {{ $unidad->_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
-        <p>Dirección o lugar: <strong>Calle Azcúe, Edificio Palacio Municipal, Maturín Estado Monagas. </strong></p>
-        <p>PERIODO DE LA CUENTA:   @{{ mes }} @{{ año }}</p>
+        <table style="font-size: 11px">
+            <tr>
+                <td>
+                    <p>Estado: <strong>Monagas</strong></p>
+                    <p>Municipio: <strong>Maturín</strong></p>
+                    <p>Dirección: <strong>Calle Azcúe, Edificio Palacio Municipal, Maturín Estado Monagas. </strong></p>
+                </td>
+                <td style="padding-left: 10px">
+                    <p>Dependencia o unidad primaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
+                    <p>Servicio:<strong> @if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
+                    <p>Unida de trabajo o dependencia:<strong>@if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
+                </td>
+            </tr>
+        </table>
     </div>
     <br>
     <div class="">
         <div class="">
-            <div class="" style="max-width: 750px">
-                <table class="table table-bordered" style="font-size: 10px">
+            <div class="" style="max-width: 1000px">
+                {{--<p><strong>PERIODO DE LA CUENTA:   @{{ mes }} @{{ año }}</strong></p>--}}
+                <table class="table table-bordered table-condensed" style="font-size: 10px; border: black 1px solid">
                     <thead>
                     <tr>
-                        <th><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
+                        <th colspan="5" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
                     </tr>
                     <tr>
                         <th>N°</th>
@@ -45,14 +55,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{ $n = 1 }}
-                    @foreach($data as $bien)
+                    {{ $n = 1 }}{{ $total_incorp = 0 }}{{ $total_desincorp = 0}}
+                    @foreach($data['movimientos'] as $mov)
                         <tr>
-                            <td width="7%">{{ $n }}</td>
-                            <td width="13%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
-                            <td width="15%">{{ $bien->codigo }}</td>
-                            <td width="50%">{{ $bien->descripcion }}</td>
-                            <td width="15%">{{ $bien->valor_actual }}</td>
+                            <td width="5%">{{ $n }}</td>
+                            <td width="15%">{{ $mov->_bien->codigo }}</td>
+                            <td width="50%">{{ $mov->_bien->descripcion }}</td>
+                            <td width="15%">@if($mov->tipo === 1){{ $mov->_bien->valor_actual }} <span style="display: none">{{ $total_incorp += $mov->_bien->valor_actual }}</span>@endIf</td>
+                            <td width="15%">@if($mov->tipo === 0){{ $mov->_bien->valor_actual }} <span style="display: none">{{ $total_desincorp += $mov->_bien->valor_actual }}</span>@endIf</td>
                         </tr>
                         {{ $n++ }}
                     @endforeach
@@ -71,41 +81,6 @@
     <br>
 </div>
 {{--<div class="saltopagina"></div>--}}
-<table class="table-responsive" style="border: 0px">
-    {{--<tr>
-        <td class="align-center">DEPARTAMENTO DE BIENES</td>
-        <td class="align-center">@if($data->_direccion) {{ $data->_direccion->descripcion }} @else {{ $data->descripcion }} @endif</td>
-    </tr>--}}
-    <tr>
-        <td width="340px" class="align-center"><span>Quien entrega:</span></td>
-        <td width="340px" class="align-center"><span>Quien recibe:</span></td>
-    </tr>
-    <tr>
-        <td><span style="color: white">texto</span></td>
-        <td><span style="color: white">texto</span></td>
-    </tr>
-    <tr>
-        <td><span style="color: white">texto</span></td>
-        <td><span style="color: white">texto</span></td>
-    </tr>
-    <tr>
-        <td class="align-center">_______________________</td>
-        <td class="align-center">_______________________</td>
-    </tr>
-    <tr>
-        <td width="340px" class="align-center">{{ strtoupper($bienes_dep->cargo_responsable.' '.$bienes_dep->descripcion) }}</td>
-        <td width="340px" class="align-center">{{ strtoupper($unidad->cargo_responsable.' '.$unidad->descripcion) }}</td>
-    </tr>
-    <tr>
-        <td width="340px" class="align-center">{{ strtoupper($bienes_dep->responsable) }}</td>
-        <td width="340px" class="align-center">{{ strtoupper($unidad->responsable) }}</td>
-    </tr>
-    <tr>
-        <td width="340px" class="align-center"><strong>Resolucion N°:</strong>{{ strtoupper($bienes_dep->resolucion) }}</td>
-        <td width="340px" class="align-center"><strong>Resolucion N°:</strong>{{ $unidad->resolucion }}</td>
-    </tr>
-
-</table>
 </body>
 </html>
 

@@ -90,7 +90,7 @@
                             @foreach($movimientos as $movimiento)
                                 <tr>
                                     <td>{{ $cont }}</td>
-                                    <td>{{ $movimiento->tipo->descripcion }}</td>
+                                    <td>{{ $movimiento->_tipo->descripcion }}</td>
                                     <td>{{ date('d-m-Y',strtotime($movimiento->fecha )) }}</td>
                                     <td>{{ $movimiento->_direccion->descripcion}}</td>
                                     <td>{{ $movimiento->_departamento->descripcion }}</td>
