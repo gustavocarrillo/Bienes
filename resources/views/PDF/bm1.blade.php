@@ -73,8 +73,8 @@
         <p style="text-align: right"><strong>Formulario BM-1</strong></p>
         <p></p>
         <p>Entidad propietaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
-        <p>Servicio:<strong> @if($unidad->_direccion) {{ $unidad_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
-        <p>Unida de trabajo o dependencia:<strong> @if($unidad->_direccion) {{ $unidad->_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
+        <p>Servicio:<strong> @if($unidad->_direccion) {{ $unidad->_direccion->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
+        <p>Unida de trabajo o dependencia:<strong> @if($unidad->_direccion) {{ $unidad->descripcion }} @else {{ $unidad->descripcion }} @endif</strong></p>
         <p>Dirección o lugar: <strong>Calle Azcúe, Edificio Palacio Municipal, Maturín Estado Monagas. </strong></p>
     </div>
     <br>
