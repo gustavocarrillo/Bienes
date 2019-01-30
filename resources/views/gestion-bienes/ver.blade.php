@@ -8,7 +8,7 @@
             </div>
             <div class="body">
                 <div class="row clearfix">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-3 col-lg-3">
                             <div class="form-group">
                                 <label for="orden">Descripción:</label>
                                 <div>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-4 col-lg-4">
                         <div class="form-group">
                             <label for="orden">Nro de Orden:</label>
                             <div>
@@ -68,7 +68,15 @@
                                 </div>
                             </div>
                         </div>
-                </div>
+                    <div class="col-md-5 col-lg-5">
+                        <div class="form-group">
+                            <label for="orden">FOTO</label>
+                            <div>
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQveNKQFSihONZ5aQeLCmANV46UcTMHVc2-nXXVZEQQu5VefHksQw" alt="" class="image" style="max-width: 400px">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 <hr>
                 <div class="row clearfix">
                     <div class="col-md-12 col-lg-12 ">

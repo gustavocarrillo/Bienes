@@ -59,7 +59,8 @@
                                     <div class="form-group">
                                         <label for="inc_por">Descripcion: </label>
                                         <div class="form-line">
-                                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="{{ old('descripcion')  }}" maxlength="100" />
+                                            {{--<input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="" value="{{ old('descripcion')  }}" maxlength="100" />--}}
+                                            <textarea name="descripcion" class="form-control" rows="3">{{ old('descripcion') }}</textarea>
                                         </div>
                                     </div>
                                 </div>

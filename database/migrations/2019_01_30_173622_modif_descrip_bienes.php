@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifValorInBienes extends Migration
+class ModifDescripBienes extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class ModifValorInBienes extends Migration
     public function up()
     {
         Schema::table('bienes', function (Blueprint $table) {
-            $table->unsignedDecimal('valor',25,5)->change();
-            $table->unsignedDecimal('valor_actual',25,5)->change();
+            $table->text('descripcion')->change();
         });
     }
 

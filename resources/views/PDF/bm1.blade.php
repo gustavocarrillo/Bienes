@@ -67,7 +67,7 @@
         <p><strong>Nota: el listado de inventario debe ser colocado en un lugar visible con carácter obligatorio.</strong></p>
     </div>
     <div class="saltopagina"></div>
-    <div>
+    <div style="font-size: 10px">
         <h3 style="text-align: center"><strong>DEPARTAMENTO DE BIENES MUNICIPALES</strong></h3>
         <h4 style="text-align: center"><strong>INVENTARIO DE BIENES MUNICIPALES</strong></h4>
         <p style="text-align: right"><strong>Formulario BM-1</strong></p>
@@ -80,8 +80,8 @@
     <br>
     <div class="">
         <div class="">
-            <div class="" style="max-width: 750px">
-                <table class="table table-bordered" style="font-size: 10px">
+            <div class="" style="max-width: 780px">
+                <table class="table table-bordered" style="font-size: 9px">
                     <thead>
                     <tr>
                         <th>N°</th>
@@ -95,14 +95,14 @@
                     {{ $n = 1 }}
                     @foreach($data as $bien)
                         <tr>
-                            <td width="7%">{{ $n }}</td>
-                            <td width="13%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
-                            <td width="15%">{{ $bien->codigo }}</td>
-                            <td width="50%">{{ $bien->descripcion }}</td>
+                            <td width="4%">{{ $n }}</td>
+                            <td width="10%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
+                            <td width="14%">{{ $bien->codigo }}</td>
+                            <td width="58%">{{ $bien->descripcion }}</td>
                             {{--
                                                         <td>{{ $bien->count }}</td>
                             --}}
-                            <td width="15%">{{ $bien->valor_actual }}</td>
+                            <td width="14%">{{ $bien->valor_actual }}</td>
                             {{--
                                                         <td>{{ $bien->valor_actual * $bien->count }}</td>
                             --}}
@@ -127,7 +127,7 @@
     <br>
 </div>
 {{--<div class="saltopagina"></div>--}}
-<table class="table-responsive" style="border: 0px">
+<table class="table-responsive" style="border: 0px; font-size: 12px">
     {{--<tr>
         <td class="align-center">DEPARTAMENTO DE BIENES</td>
         <td class="align-center">@if($data->_direccion) {{ $data->_direccion->descripcion }} @else {{ $data->descripcion }} @endif</td>
