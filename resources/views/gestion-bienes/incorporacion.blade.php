@@ -34,7 +34,7 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-sm-4 col-md-offset-7" id="inc_div">
+                                <div class="col-md-4 col-sm-4 col-md-offset-8" id="inc_div">
                                     <div class="form-group">
                                         <label for="inc_por">Incorporación por: </label>
                                         <select name="inc_por" id="inc_por" class="form-control show-tick">
@@ -74,29 +74,32 @@
                                 </div>
                             </div>
                             <div class="row ">
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="orden">Orden de Compra:</label>
-                                        <select name="nro_orden" id="orden" class="form-control show-tick" data-live-search="true">
+                                        <div class="form-line">
+                                            <input type="text" id="orden" name="nro_orden" class="form-control">
+                                        </div>
+                                        {{--<select name="nro_orden" id="orden" class="form-control show-tick" data-live-search="true">
                                             <option value="" selected>Seleccione..</option>
                                             @foreach($ordenes as $orden)
                                                 <option value="{{ $orden->id }}">{{ $orden->numero }}</option>
                                             @endforeach
-                                        </select>
+                                        </select>--}}
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                {{--<div class="col-sm-2">
                                     <div class="form-group m-t-30">
                                         <input type="checkbox" id="basic_checkbox_2" name="n_a" class="filled-in"/>
                                         <label for="basic_checkbox_2">N/A</label>
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{--<div class="col-sm-2">
                                     <div class="p-t-30">
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#smallModal">Nueva</button>
                                     </div>
                                 </div>--}}
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-md-offset-3">
                                     <div class="form-group">
                                         <label for="orden">Valor del Bien:</label>
                                         <div class="form-line">
@@ -106,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="row ">
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <label>Fecha de Incorporación</label>
                                     <div class="input-group">
                                             <span class="input-group-addon">
@@ -117,7 +120,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4  col-md-offset-2">
+                                <div class="col-sm-4  col-md-offset-3">
                                     <div class="form-group">
                                         <label for="valor_actual_bien">Valor actual del Bien:</label>
                                         <div class="form-line">
@@ -319,7 +322,7 @@
             $("#inc_por").selectpicker('val','unidad');
             $("#cantidad_div").addClass('hidden');
             $("#cantidad").val(0);
-            $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-7');
+            $("#inc_div").removeClass('col-md-offset-4').addClass('col-md-offset-8');
             $("#separador").addClass("hidden");
             $("#cod-lote").addClass("hidden");
         }
@@ -339,7 +342,7 @@
         $("#inc_por").change(function () {
             if($(this).val() == "lote"){
                 $("#cantidad_div").removeClass('hidden');
-                $("#inc_div").removeClass('col-md-offset-7').addClass('col-md-offset-4');
+                $("#inc_div").removeClass('col-md-offset-8').addClass('col-md-offset-4');
                 $("#cantidad").val(0);
                 $("#cantidad").focus();
                 $("#separador").removeClass("hidden");
