@@ -7,7 +7,7 @@
                 <h2><b>Edición de BIEN: {{ $bien->codigo }}</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('bienes.update',$bien->id ) }}" method="post">
+                <form action="{{ route('bienes.update',$bien->id ) }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     {{ method_field('put') }}
                     <div class="row clearfix">
@@ -27,23 +27,20 @@
                             <div class="form-group">
                                 <label for="total">Valor:</label>
                                 <div class="form-line">
-                                    <input type="text" name="valor" id="valor" class="form-control decimal" value="{{ number_format($bien->valor,2,',','.') }}">
+                                    <input type="text" name="valor" id="valor" class="form-control decimal" value="{{ $bien->valor }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="total">Valor Actual:</label>
                                 <div class="form-line">
-                                    <input type="text" name="valor_actual" id="total" class="form-control decimal" value="{{ number_format($bien->valor_actual,2,',','.') }}">
+                                    <input type="text" name="valor_actual" id="total" class="form-control decimal" value="{{ $bien->valor_actual }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="orden">Nro de Orden:</label>
-                                <select name="nro_orden" id="nro_orden" class="form-control show-tick">
-                                    <option value="">Seleccione..</option>
-                                    @foreach($ordenes as $orden)
-                                        <option value="{{ $orden->id }}" @if($bien->nro_orden == $orden->id) selected @endIf>{{ $orden->numero }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="nro_orden" value="{{ $bien->nro_orden }}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="orden">Dirección:</label>
@@ -62,6 +59,10 @@
                                         <option value="{{ $departamento->id }}" @if($bien->departamento == $departamento->id) selected @endIf>{{ $departamento->codigo.' -- '.$departamento->descripcion  }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Foto</label>
+                                <input type="file" name="foto">
                             </div>
                         </div>
                     </div>
@@ -87,26 +88,19 @@
 @endsection
 
 @section('js')
-<script>
+    <script>
 
-    $('#total').addClass('decimal');
-    $(function(){
-        $('.int').inputmask('numeric', { placeholder: '' });
-        $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
-        $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-        $('.decimal').inputmask('decimal', {
-            radixPoint: ",",
-            groupSeparator: ".",
-            autoGroup: true,
-            //digits: 0,
-            groupSize: 3,
-            placeholder: "0.00",
-            //numericInput: true
-        });
-    })
+        $('#total').addClass('decimal');
+        $(function(){
+            $('.int').inputmask('numeric', { placeholder: '' });
+            $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
+            $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
+            $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000", numericInput: true});
 
-    $('#direccion').change(function () {
-        dep = fillSelect("../departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
-    })
-</script>
+        })
+
+        $('#direccion').change(function () {
+            dep = fillSelect("../departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
+        })
+    </script>
 @endsection

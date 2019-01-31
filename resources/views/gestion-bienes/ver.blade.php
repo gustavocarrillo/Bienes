@@ -9,31 +9,31 @@
             <div class="body">
                 <div class="row clearfix">
                     <div class="col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <label for="orden">Descripción:</label>
-                                <div>
-                                    {{ $bien->descripcion }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="fecha">Fecha de Incorporacón:</label>
-                                <div>
-                                    {{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="orden">Valor:</label>
-                                <div>
-                                    {{ $bien->valor }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="orden">Valor Actual:</label>
-                                <div>
-                                    {{ $bien->valor_actual }}
-                                </div>
+                        <div class="form-group">
+                            <label for="orden">Descripción:</label>
+                            <div>
+                                {{ $bien->descripcion }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha de Incorporacón:</label>
+                            <div>
+                                {{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orden">Valor:</label>
+                            <div>
+                                {{ $bien->valor }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orden">Valor Actual:</label>
+                            <div>
+                                {{ $bien->valor_actual }}
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-4 col-lg-4">
                         <div class="form-group">
                             <label for="orden">Nro de Orden:</label>
@@ -45,38 +45,38 @@
                                 @endif
                             </div>
                         </div>
-                            <div class="form-group">
-                                <label for="direccion">Dirección:</label>
-                                <div>
-                                    {{ $bien->_direccion->descripcion }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="departamento">Departamento:</label>
-                                <div>
-                                    @if($bien->_departamento)
-                                        {{ $bien->_departamento->descripcion }}
-                                    @else
-                                        N/A
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="estatus">Estatus:</label>
-                                <div>
-                                    <span class="label @if($bien->estatus == 'activo') label-success @else label-danger @endif">{{ strtoupper($bien->estatus) }}</span>
-                                </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <div>
+                                {{ $bien->_direccion->descripcion }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="departamento">Departamento:</label>
+                            <div>
+                                @if($bien->_departamento)
+                                    {{ $bien->_departamento->descripcion }}
+                                @else
+                                    N/A
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="estatus">Estatus:</label>
+                            <div>
+                                <span class="label @if($bien->estatus == 'activo') label-success @else label-danger @endif">{{ strtoupper($bien->estatus) }}</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-5 col-lg-5">
                         <div class="form-group">
                             <label for="orden">FOTO</label>
                             <div>
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQveNKQFSihONZ5aQeLCmANV46UcTMHVc2-nXXVZEQQu5VefHksQw" alt="" class="image" style="max-width: 400px">
+                                <img src="../fotos/{{ $bien->foto }}" alt="" class="image" style="max-width: 250px; border-radius: 5px 5px 5px 5px">
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <hr>
                 <div class="row clearfix">
                     <div class="col-md-12 col-lg-12 ">
@@ -101,7 +101,7 @@
                                     <td>{{ $movimiento->_tipo->descripcion }}</td>
                                     <td>{{ date('d-m-Y',strtotime($movimiento->fecha )) }}</td>
                                     <td>{{ $movimiento->_direccion->descripcion}}</td>
-                                    <td>{{ $movimiento->_departamento->descripcion }}</td>
+                                    <td>@if($movimiento->_departamento){{ $movimiento->_departamento->descripcion }}@endif</td>
                                     <td>{{ $movimiento->observacion }}</td>
                                     <td>{{ $movimiento->_usuario->username }}</td>
                                 </tr>

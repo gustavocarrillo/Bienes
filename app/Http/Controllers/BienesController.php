@@ -13,11 +13,13 @@ use App\Departamento;
 use App\TipoMovimiento;
 use Auth;
 use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class BienesController extends Controller
 {
     public function store(Request $request)
     {
+//        dd($request->all());
         /*$this->validate($request,[
              'codigo' => 'required|unique:bienes,codigo',
              'descripcion' => 'required',
@@ -126,6 +128,15 @@ class BienesController extends Controller
             ]);
         }
 
+        if($request->hasFile('foto')){
+            $bien = Bien::find($bien->id);
+            $foto = $request->file('foto');
+            $bien->foto = $request->codigo.'.'.$request->file('foto')->extension();
+            $foto->move(public_path().'/fotos/',$request->codigo.'.'.$request->file('foto')->extension());
+//            Storage::put('public/bienes/'.$request->codigo.'.'.$request->file('foto')->extension(), $request->file('foto'));
+            $bien->save();
+        }
+
         flash('El bien ha sido registrado exitosamente')->success();
         return response()->redirectToRoute('bienes.index');
     }
@@ -173,7 +184,7 @@ class BienesController extends Controller
             'fecha_incorp' => 'required',
             'valor' => 'required',
             'valor_actual' => 'required',
-            'nro_orden' => 'required',
+            //'nro_orden' => 'required',
             'direccion' => 'required',
             //'departamento' => 'required',
         ]);
@@ -192,6 +203,14 @@ class BienesController extends Controller
         $bien->direccion = $request->direccion;
         $bien->departamento = ($request->departamento || isset($request->departamento) ? $request->departamento : null);
         $bien->save();
+
+        if($request->hasFile('foto')){
+            $bien = Bien::find($id);
+            $foto = $request->file('foto');
+            $bien->foto = $request->codigo.'.'.$request->file('foto')->extension();
+            $foto->move(public_path().'/fotos/',$request->codigo.'.'.$request->file('foto')->extension());
+            $bien->save();
+        }
 
         flash('El bien ha sido modificado exitosamente')->success();
         return response()->redirectToRoute('bienes.index');

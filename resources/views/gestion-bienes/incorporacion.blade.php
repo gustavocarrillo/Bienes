@@ -18,7 +18,7 @@
             </div>
             <div class="body">
                 <h2 class="card-inside-title">Seleccionar Elemento</h2>
-                <form action="{{ route('bienes.store') }}" method="post">
+                <form action="{{ route('bienes.store') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="codigo" id="codigo_input">
                     <input type="hidden" name="lote" id="lote_input">
@@ -170,11 +170,25 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 class="card-inside-title">Foto</h2>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <input type="file" name="foto">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-12 p-t-10 p-b-8">
                                     <button id="btnGuardar" class="btn btn-primary waves-effect">
                                         <i class="material-icons">save</i>
                                         <span>GUARDAR</span>
                                     </button>
+                                    <a href="{{ route('bienes.index') }}" class="btn btn-danger waves-effect pull-right">
+                                        <i class="material-icons">cancel</i>
+                                        <span>Volver</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
