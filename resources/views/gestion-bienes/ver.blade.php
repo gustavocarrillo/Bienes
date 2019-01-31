@@ -72,7 +72,7 @@
                         <div class="form-group">
                             <label for="orden">FOTO</label>
                             <div>
-                                <img src="../fotos/{{ $bien->foto }}" alt="" class="image" style="max-width: 250px; border-radius: 5px 5px 5px 5px">
+                                <img src="@if($bien->foto)../fotos/{{ $bien->foto }}@else ../fotos/none.png @endif" alt="" class="image" style="max-width: 250px; border-radius: 5px 5px 5px 5px">
                             </div>
                         </div>
                     </div>
