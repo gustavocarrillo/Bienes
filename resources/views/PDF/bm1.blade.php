@@ -24,7 +24,7 @@
             adscrita a la <strong>Dirección de Administración</strong> de la Alcaldía del Municipio Maturín,
             hago constar que en esta fecha <strong>{{ date('d-m-Y',strtotime(today())) }}</strong> se realizó  inventario a la  <strong>{{ $unidad->descripcion }}</strong> de la Alcaldía del Municipio Maturín,
             dicha inspección se pudo constatar la cantidad de  ({{ $count }}) Bienes Muebles, por un
-            valor de BS {{ strtolower($totalLetras) }} ({{ $total }}, BS), según se  detalla en el inventario anexo.
+            valor de BS {{ strtolower($totalLetras) }} ({{ number_format($total ,5,',','.') }}, BS), según se  detalla en el inventario anexo.
         </p>
         <p>El Departamento de Bienes Públicos le hace   entrega del Inventario realizado  al
             funcionario/a <strong>{{ $unidad->responsable }}</strong>, titular de la cédula de identidad <strong>N° {{ $unidad->cedula_responsable }}</strong>,
@@ -102,7 +102,7 @@
                             {{--
                                                         <td>{{ $bien->count }}</td>
                             --}}
-                            <td width="14%">{{ $bien->valor_actual }}</td>
+                            <td width="14%">{{ number_format($bien->valor_actual ,5,',','.') }}</td>
                             {{--
                                                         <td>{{ $bien->valor_actual * $bien->count }}</td>
                             --}}
@@ -115,7 +115,7 @@
                     @endforeach
                     <tr style="background-color: #b8e834">
                         <td colspan="4"><strong>TOTAL:</strong></td>
-                        <td><strong>{{ $total }}</strong></td>
+                        <td><strong>{{ number_format($total ,5,',','.')}}</strong></td>
                     </tr>
                     </tbody>
                 </table>
