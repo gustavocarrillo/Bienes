@@ -58,7 +58,7 @@ class ReportesController extends Controller
     public function BM2($tipoUnidad ,$id,$mes,$ano)
     {
         $fecha = $ano.'-'.$mes;
-        $fecha = '2019-01';
+        //$fecha = '2019-01';
         $data = [];
 
         if($tipoUnidad == "direccion"){
