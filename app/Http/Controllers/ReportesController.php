@@ -76,6 +76,8 @@ class ReportesController extends Controller
                 ->get();
             $data['movimientos'] = $movimientos;
         }
+        $data['periodo'] = $this->meses(( (int)$mes) - 1 ).' '.$ano;
+
 //        dd($data);
         $pdf = PDF::loadView('PDF.bm2', compact('data'));
         $pdf->setPaper('letter','landscape');

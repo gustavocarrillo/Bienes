@@ -40,7 +40,7 @@
     <div class="">
         <div class="">
             <div class="" style="max-width: 1000px">
-                {{--<p><strong>PERIODO DE LA CUENTA:   @{{ mes }} @{{ año }}</strong></p>--}}
+                <p><strong>PERIODO DE LA CUENTA: {{ $data['periodo'] }}</strong></p>
                 <table class="table table-bordered table-condensed" style="font-size: 10px; border: black 1px solid">
                     <thead>
                     <tr>
