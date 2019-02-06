@@ -72,7 +72,7 @@ class ReportesController extends Controller
             $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
             $movimientos = Movimiento::where(['departamento' => $id])
                 ->where('fecha','like',$fecha.'%')
-                ->with('_bien')
+                ->with('_bien','_tipo')
                 ->get();
             $data['movimientos'] = $movimientos;
         }

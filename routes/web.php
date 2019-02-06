@@ -37,6 +37,10 @@ Route::post('/registrar','Auth\RegistroController@nuevo')->name('registrar');
 
 Route::middleware(['auth'])->group(function (){
 
+    Route::get('/usuario/editar/{id}', 'UserController@editar')->name('user.editar');
+    Route::put('/usuario/editado/{id}', 'UserController@update')->name('user.update');
+
+
     Route::get('/admin', function () {
         return view('admin.admin');
     });
