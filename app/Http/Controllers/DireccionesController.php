@@ -15,7 +15,15 @@ class DireccionesController extends Controller
             'responsable' => 'required',
         ]);
 
-        Direccion::create($request->all());
+        $data = $request->all();
+
+        $valor = str_replace('.',"",$request->inventario_inicial);
+        $valor = str_replace(',',".",$valor);
+        $data['inventario_inicial'] = $valor;
+
+        dd($data);
+
+        Direccion::create($data);
         flash('Direccion registrada exitosamente')->success();
         return response()->redirectToRoute('direccion.index');
     }
@@ -45,6 +53,8 @@ class DireccionesController extends Controller
             return response()->redirectToRoute('direccion.index');
         }
 
+        $direccion->inventario_inicial = number_format($direccion->inventario_inicial,5,',','.');
+
         return view('gestion-direcciones.editar',compact('direccion'));
     }
 
@@ -69,6 +79,12 @@ class DireccionesController extends Controller
         $direccion->cedula_responsable = $request->cedula_responsable;
         $direccion->cargo_responsable = $request->cargo_responsable;
         $direccion->resolucion = $request->resolucion;
+
+        $valor = str_replace('.',"",$request->inventario_inicial);
+        $valor = str_replace(',',".",$valor);
+
+        $direccion->inventario_inicial = $valor;
+
         $direccion->save();
 
         flash('La Direccion ha sido modificada exitosamente')->success();

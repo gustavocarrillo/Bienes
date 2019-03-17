@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Bien;
+use App\Cierre;
 use App\Elemento;
 use App\Movimiento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Departamento;
 use App\Direccion;
@@ -58,7 +60,6 @@ class ReportesController extends Controller
     public function BM2($tipoUnidad ,$id,$mes,$ano)
     {
         $fecha = $ano.'-'.$mes;
-        //$fecha = '2019-01';
         $data = [];
 
         if($tipoUnidad == "direccion"){
@@ -83,6 +84,54 @@ class ReportesController extends Controller
         $pdf->setPaper('letter','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
         return $pdf->download("bm2.pdf");
+    }
+
+    public function bm4($id,$mes,$ano)
+    {
+        $fecha = Carbon::createFromFormat('Y-m-d',"{$ano}-{$mes}-01");
+
+        $f = $fecha->toDateString();
+        $f = explode('-',$f);
+
+        $movimientos = Movimiento::where(['direccion' => $id])
+            ->where('fecha','like',$f[0].'-'.$f[1].'%')
+            ->with('_bien')
+            ->get();
+
+        $incorporacion = 0;
+        $desincorporacion = 0;
+
+        $f = $fecha->subMonth(1)->toDateString();
+        $f = explode('-',$f);
+
+        $cierre = Cierre::where(['direccion' => $id,'ano' => $f[0],'mes' => $f[1]])->first();
+        $direccion = Direccion::find($id);
+        $existenciaAnterior = $cierre ? $cierre->monto : $direccion->inventario_inicial;
+
+        foreach ($movimientos as $movimiento){
+            if ($movimiento->tipo == 1){
+                $incorporacion += $movimiento->_bien->valor_actual;
+            }
+            if ($movimiento->tipo == 0){
+                $desincorporacion += $movimiento->_bien->valor_actual;
+            }
+        }
+
+        $total = $existenciaAnterior + $incorporacion - $desincorporacion;
+
+        $data = [];
+        $data['existenciaAnterior'] = $existenciaAnterior;
+        $data['incorporacion'] = $incorporacion;
+        $data['desincorporacion'] = $desincorporacion;
+        $data['direccion'] = $direccion;
+        $data['mes'] = $this->meses(( (int)$mes) - 1 );
+        $data['ano'] = $ano;
+        $data['total'] = $total;
+
+        $pdf = PDF::loadView('PDF.bm4', compact('data'));
+        $pdf->setPaper('letter','landscape');
+//        return view('PDF.bm1')->with(compact('data','bienes_dep'));
+        return $pdf->download("bm4.pdf");
     }
 
     private function meses($mes)

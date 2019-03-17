@@ -55,8 +55,9 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('desincorporacion','DesincorporacionController');
 
     //Reportes
-    Route::get('reportes/{tipoUnidad}/{id}/bm1','ReportesController@BM1')->name('reportes.bm1');
-    Route::get('reportes/{tipoUnidad}/{id}/{mes}/{ano}','ReportesController@BM2')->name('reportes.bm2');
+    Route::get('bm1/{tipoUnidad}/{id}/bm1','ReportesController@BM1')->name('reportes.bm1');
+    Route::get('bm2/{tipoUnidad}/{id}/{mes}/{ano}','ReportesController@BM2')->name('reportes.bm2');
+    Route::get('bm4/{id}/{mes}/{ano}','ReportesController@BM4')->name('reportes.bm4');
 
     Route::post('/elementos','ElementosController@getElementosAjax');
 

@@ -15,19 +15,19 @@
                             <div class="form-group">
                                 <label for="rif">Codigo:</label>
                                 <div class="form-line">
-                                    <input type="text" name="codigo" class="form-control" value="{{ $direccion->codigo  }}">
+                                    <input type="text" name="codigo" class="form-control" value="{{ $direccion->codigo }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nombre">descripcion:</label>
                                 <div class="form-line">
-                                    <input type="text" name="descripcion" class="form-control" value="{{ $direccion->descripcion  }}">
+                                    <input type="text" name="descripcion" class="form-control" value="{{ $direccion->descripcion }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Responsable:</label>
                                 <div class="form-line">
-                                    <input type="text" name="responsable" class="form-control" value="{{ $direccion->responsable  }}">
+                                    <input type="text" name="responsable" class="form-control" value="{{ $direccion->responsable }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -39,13 +39,19 @@
                             <div class="form-group">
                                 <label for="nombre">Cargo:</label>
                                 <div class="form-line">
-                                    <input type="text" name="cargo_responsable" class="form-control" value="{{ $direccion->cargo_responsable  }}">
+                                    <input type="text" name="cargo_responsable" class="form-control" value="{{ $direccion->cargo_responsable }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Resolución:</label>
                                 <div class="form-line">
-                                    <input type="text" name="resolucion" class="form-control" value="{{ $direccion->resolucion  }}" maxlength="10">
+                                    <input type="text" name="resolucion" class="form-control" value="{{ $direccion->resolucion }}" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Inventario inicial:</label>
+                                <div class="form-line">
+                                    <input type="text" name="inventario_inicial" id="inventario_inicial " class="form-control decimal" value="{{ $direccion->inventario_inicial }}">
                                 </div>
                             </div>
                         </div>
@@ -77,7 +83,7 @@
         $('.int').inputmask('numeric', { placeholder: '' });
         $('.codigo').inputmask('99', { placeholder: ""});
         $('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
-        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
+        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000"});
     })
 
     /*function attrLote(){

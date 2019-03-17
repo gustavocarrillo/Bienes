@@ -47,6 +47,12 @@
                                     <input type="text" name="resolucion" class="form-control" maxlength="10">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="nombre">Inventario inicial:</label>
+                                <div class="form-line">
+                                    <input type="text" name="inventario_inicial" class="form-control decimal">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row clearfix">
@@ -76,7 +82,7 @@
         $('.int').inputmask('numeric', { placeholder: '' });
         $('.codigo').inputmask('99', { placeholder: ""});
         $('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____' });
-        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, placeholder: "0.00", numericInput: true});
+        $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000", numericInput: true});
     })
 
     /*function attrLote(){

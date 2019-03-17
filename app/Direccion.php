@@ -15,6 +15,7 @@ class Direccion extends Model
         'cedula_responsable',
         'cargo_responsable',
         'resolucion',
+        'inventario_inicial',
     ];
 
     public function departamentos()
@@ -31,6 +32,11 @@ class Direccion extends Model
     {
         return $this->belongsToMany('App\Bien','movmimientos','direccion','bien')
             ->withPivot('t_movimiento','fecha','direccion','departamento','observacion','usuario');
+    }
+
+    public function cierres()
+    {
+        return $this->hasMany('App\Cierre','direccion');
     }
 
     public $timestamps = false;
