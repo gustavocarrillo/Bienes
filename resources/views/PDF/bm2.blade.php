@@ -49,7 +49,6 @@
                     <tr>
                         <th>N°</th>
                         <th>Codigo</th>
-                        <th>Movimiento</th>
                         <th>Descripcion</th>
                         <th>Incorporaciones (Bs)</th>
                         <th>Desincorporaciones (Bs)</th>
@@ -61,17 +60,16 @@
                         <tr>
                             <td width="5%">{{ $n }}</td>
                             <td width="15%">{{ $mov->_bien->codigo }}</td>
-                            <td width="15%">{{ $mov->_tipo->codigo }}</td>
                             <td width="50%">{{ $mov->_bien->descripcion }}</td>
-                            <td width="15%">@if($mov->tipo === 1){{ number_format($mov->_bien->valor_actual ,5,',','.') }} <span style="display: none">{{ $total_incorp += $mov->_bien->valor_actual }}</span>@endIf</td>
-                            <td width="15%">@if($mov->tipo === 0){{ number_format($mov->_bien->valor_actual ,5,',','.')}} <span style="display: none">{{ $total_desincorp += $mov->_bien->valor_actual }}</span>@endIf</td>
+                            <td width="15%">@if($mov->tipo === 1){{ number_format($mov->_bien->valor_actual ,6,',','.') }} <span style="display: none">{{ $total_incorp += $mov->_bien->valor_actual }}</span>@endIf</td>
+                            <td width="15%">@if($mov->tipo === 0){{ number_format($mov->_bien->valor_actual ,6,',','.')}} <span style="display: none">{{ $total_desincorp += $mov->_bien->valor_actual }}</span>@endIf</td>
                         </tr>
                         {{ $n++ }}
                     @endforeach
                     <tr style="background-color: #b8e834">
                         <td colspan="3"><strong>SUB TOTALES:</strong></td>
-                        <td><strong>{{ number_format($total_incorp ,5,',','.') }}</strong></td>
-                        <td><strong>{{ number_format($total_desincorp ,5,',','.') }}</strong></td>
+                        <td><strong>{{ number_format($total_incorp ,6,',','.') }}</strong></td>
+                        <td><strong>{{ number_format($total_desincorp ,6,',','.') }}</strong></td>
                     </tr>
                     </tbody>
                 </table>

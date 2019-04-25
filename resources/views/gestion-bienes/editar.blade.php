@@ -47,7 +47,7 @@
                                 <select name="direccion" id="direccion" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
                                     @foreach($direcciones as $direccion)
-                                        <option value="{{ $direccion->id }}" @if($bien->direccion == $direccion->id) selected @endIf>{{ $direccion->codigo.' -- '.$direccion->descripcion  }}</option>
+                                        <option value="{{ $direccion->id }}" @if($bien->direccion == $direccion->id) selected @endIf>{{ $direccion->codigo.' -- '.$direccion->descripcion }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -56,7 +56,7 @@
                                 <select name="departamento" id="departamento" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
                                     @foreach($departamentos as $departamento)
-                                        <option value="{{ $departamento->id }}" @if($bien->departamento == $departamento->id) selected @endIf>{{ $departamento->codigo.' -- '.$departamento->descripcion  }}</option>
+                                        <option value="{{ $departamento->id }}" @if($bien->departamento == $departamento->id) selected @endIf>{{ $departamento->codigo.' -- '.$departamento->descripcion }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -95,7 +95,7 @@
             $('.int').inputmask('numeric', { placeholder: '' });
             $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
             $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-            $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 5, placeholder: "0.00000", numericInput: true});
+            $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 6, placeholder: "0.000000", numericInput: true});
 
         })
 

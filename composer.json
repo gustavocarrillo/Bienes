@@ -14,7 +14,8 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "spatie/laravel-backup": "^5.4",
-        "villca/numeros-en-letras": "^1.2"
+        "villca/numeros-en-letras": "^1.2",
+        "bican/roles": "2.1.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

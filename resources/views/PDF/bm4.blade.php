@@ -121,7 +121,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{ number_format($data['total'] ,5,',','.') }}</td>
+                            <td>{{ number_format($data['total'] ,6,',','.') }}</td>
                         </tr>
                     </tbody>
                 </table>
