@@ -113,10 +113,58 @@
                 </div>
                 <hr>
                 <div class="row clearfix">
-                    <a href="{{ route('bienes.index') }}" class="btn btn-block btn-primary">Volver</a>
+                    <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#smallModal">Faltante por investigar</a>
+                    <a href="{{ route('bienes.index') }}" class="btn btn-primary">Volver</a>
                 </div>
             </div>
         </div>
+
+        {{--Modal--}}
+        <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+            <form action="" id="modal">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="smallModalLabel">Faltante por investigar</h4>
+                        </div>
+                        <form action="{{ route('bienes.store') }}" method="post">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="">Fecha:</label>
+                                        <div class="input-group">
+                                           <span class="input-group-addon">
+                                               <i class="material-icons">date_range</i>
+                                           </span>
+                                            <div class="form-line">
+                                                <input type="text" id="fechaModal" class="form-control date" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Observación:</label>
+                                        <div class="form-line">
+                                            <textarea name="observacion" id="observacion" class="form-control" cols="30" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">
+                                    <i class="material-icons">cancel</i>
+                                    <span>Cancelar</span>
+                                </button>
+                                <button type="submit" id="guardarModal" class="btn btn-primary waves-effect">
+                                    <i class="material-icons">save</i>
+                                    <span>GUARDAR</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {{--Fin - Modal--}}
 
         @include('flash::message')
         @if ($errors->any())
@@ -134,5 +182,8 @@
 @section('js')
     <script>
         $(".table").dataTable();
+        $(function(){
+            $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
+        })
     </script>
 @endsection
