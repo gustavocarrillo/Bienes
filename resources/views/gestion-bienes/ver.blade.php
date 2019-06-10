@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label for="estatus">Estatus:</label>
                             <div>
-                                <span class="label @if($bien->estatus == 'activo') label-success @else label-danger @endif">{{ strtoupper($bien->estatus) }}</span>
+                                <span class="label @if($bien->estatus == 'activo') label-success @elseif($bien->estatus == 'faltante') label-warning @else label-danger @endif">{{ strtoupper($bien->estatus) }}</span>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,9 @@
                 </div>
                 <hr>
                 <div class="row clearfix">
-                    <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#smallModal">Faltante por investigar</a>
+                    @if($bien->estatus != 'faltante')
+                        <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#smallModal">Faltante por investigar</a>
+                    @endif
                     <a href="{{ route('bienes.index') }}" class="btn btn-primary">Volver</a>
                 </div>
             </div>
@@ -121,45 +123,46 @@
 
         {{--Modal--}}
         <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-            <form action="" id="modal">
+            <form action="{{ route('bienes.faltante',$bien->id) }}" method="post" id="modal">
+                {{ method_field('put') }}
+                {{ csrf_field() }}
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="smallModalLabel">Faltante por investigar</h4>
                         </div>
-                        <form action="{{ route('bienes.store') }}" method="post">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label for="">Fecha:</label>
-                                        <div class="input-group">
+                        <input type="hidden" value="{{ $bien->id }}">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="">Fecha:</label>
+                                    <div class="input-group">
                                            <span class="input-group-addon">
                                                <i class="material-icons">date_range</i>
                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="fechaModal" class="form-control date" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Observación:</label>
                                         <div class="form-line">
-                                            <textarea name="observacion" id="observacion" class="form-control" cols="30" rows="3"></textarea>
+                                            <input type="text" name="fecha" class="form-control date" placeholder="">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="">Observación:</label>
+                                    <div class="form-line">
+                                        <textarea name="observacion" id="observacion" class="form-control" cols="30" rows="3"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">
-                                    <i class="material-icons">cancel</i>
-                                    <span>Cancelar</span>
-                                </button>
-                                <button type="submit" id="guardarModal" class="btn btn-primary waves-effect">
-                                    <i class="material-icons">save</i>
-                                    <span>GUARDAR</span>
-                                </button>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">
+                                <i class="material-icons">cancel</i>
+                                <span>Cancelar</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary waves-effect">
+                                <i class="material-icons">save</i>
+                                <span>GUARDAR</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>

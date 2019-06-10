@@ -145,7 +145,7 @@ class BienesController extends Controller
     {
         $bienes = Bien::with('orden')
             ->orderBy('fecha_incorp','desc')
-            ->where('estatus','=','activo')
+            ->where('estatus','!=','desincorporado')
             ->get();
 
         return view('gestion-bienes.index')->with(compact('bienes'));
@@ -365,12 +365,11 @@ class BienesController extends Controller
         return view('gestion-bienes.reportes');
     }
 
-    public function bienFaltante(Request $request)
+    public function bienFaltante(Request $request,$id)
     {
-        $bien_id = $request->id;
-        $bien = Bien::find($bien_id);
-        $bien->fecha_faltante = $request->fecha;
-        $bien->estatus = 'Faltante por investigar';
+        $bien = Bien::find($id);
+        $bien->fecha_faltante = Carbon::createFromFormat('d-m-Y',$request->fecha);
+        $bien->estatus = 'faltante';
         $bien->save();
     }
 }

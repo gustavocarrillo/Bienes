@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('bienes/{id}/desincorporar','BienesController@desincorporacion')->name('bienes.desincorporar');
     Route::put('bienes/{id}/desincorporar','BienesController@desincorporado')->name('bienes.desincorporado');
     Route::get('bienes/reportes/index','BienesController@reportes')->name('bienes.reportes');
+    Route::put('bienes/{id}/faltante','BienesController@bienFaltante')->name('bienes.faltante');
 
     //Bienes desincorporados
     Route::resource('desincorporacion','DesincorporacionController');
