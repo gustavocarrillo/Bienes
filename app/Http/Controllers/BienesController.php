@@ -364,4 +364,13 @@ class BienesController extends Controller
     {
         return view('gestion-bienes.reportes');
     }
+
+    public function bienFaltante(Request $request)
+    {
+        $bien_id = $request->id;
+        $bien = Bien::find($bien_id);
+        $bien->fecha_faltante = $request->fecha;
+        $bien->estatus = 'Faltante por investigar';
+        $bien->save();
+    }
 }
