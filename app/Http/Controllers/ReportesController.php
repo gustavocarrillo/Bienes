@@ -140,4 +140,18 @@ class ReportesController extends Controller
 
         return $meses[$mes];
     }
+
+    public function BM3($id,$mes,$ano)
+    {
+        $fecha = $ano.'-'.$mes;
+        $bienes = Bien::where('direccion',$id)
+            ->where('estatus','faltante')
+            ->where('fecha_faltante','like',$fecha.'%')
+            ->get();
+
+        $pdf = PDF::loadView('PDF.bm4', compact('data'));
+        $pdf->setPaper('letter','landscape');
+//        return view('PDF.bm1')->with(compact('data','bienes_dep'));
+        return $pdf->download("bm4.pdf");
+    }
 }
