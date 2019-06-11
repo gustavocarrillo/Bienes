@@ -20,7 +20,7 @@
         <br>
         <h4 style="text-align: right">ACTA DE ASIGNACIÓN DE BIENES (INVENTARIO)</h4>
         <br>
-        {{ dd($bienes_dep) }}
+{{--        {{ dd($bienes_dep) }}--}}
         <p>Yo, <strong>{{ $bienes_dep->responsable }}</strong>, en mi carácter de <strong>Jefe Dpto. Bienes Municipales  </strong><strong>Resolución N°{{ $bienes_dep->resolucion }}</strong>,
             adscrita a la <strong>Dirección de Administración</strong> de la Alcaldía del Municipio Maturín,
             hago constar que en esta fecha <strong>{{ date('d-m-Y',strtotime(today())) }}</strong> se realizó  inventario a la  <strong>{{ $unidad->descripcion }}</strong> de la Alcaldía del Municipio Maturín,

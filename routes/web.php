@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function (){
     //Reportes
     Route::get('bm1/{tipoUnidad}/{id}/bm1','ReportesController@BM1')->name('reportes.bm1');
     Route::get('bm2/{tipoUnidad}/{id}/{mes}/{ano}','ReportesController@BM2')->name('reportes.bm2');
+    Route::get('bm3/{tipoUnidad}/{id}/{mes}/{ano}','ReportesController@BM3')->name('reportes.bm3');
     Route::get('bm4/{id}/{mes}/{ano}','ReportesController@BM4')->name('reportes.bm4');
 
     Route::post('/elementos','ElementosController@getElementosAjax');
