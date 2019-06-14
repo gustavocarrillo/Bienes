@@ -141,17 +141,32 @@ class ReportesController extends Controller
         return $meses[$mes];
     }
 
-    public function BM3($id,$mes,$ano)
+    public function BM3($tipoUnidad,$id,$mesId,$anoId)
     {
-        $fecha = $ano.'-'.$mes;
-        $bienes = Bien::where('direccion',$id)
-            ->where('estatus','faltante')
-            ->where('fecha_faltante','like',$fecha.'%')
-            ->get();
+        $fecha = $anoId.'-'.$mesId;
+//        dd($fecha);
 
-        $pdf = PDF::loadView('PDF.bm4', compact('data'));
+        if($tipoUnidad == "direccion"){
+            $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
+            $bienes = Bien::where('direccion',$id)
+                ->where('estatus','faltante')
+                ->where('fecha_faltante','like',$fecha.'%')
+                ->get();
+            $data['bienes'] = $bienes;
+        }elseif ($tipoUnidad == "departamento"){
+            $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
+            $bienes = Bien::where('departamento',$id)
+                ->where('estatus','faltante')
+                ->where('fecha_faltante','like',$fecha.'%')
+                ->get();
+            $data['bienes'] = $bienes;
+        }
+
+//        dd($data->toArray());
+
+        $pdf = PDF::loadView('PDF.bm3', compact('data'));
         $pdf->setPaper('letter','landscape');
-//        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->download("bm4.pdf");
+        return view('PDF.bm3')->with(compact('data'));
+//        return $pdf->download("bm4.pdf");
     }
 }
