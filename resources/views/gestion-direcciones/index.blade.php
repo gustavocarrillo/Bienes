@@ -221,7 +221,7 @@
         constancia = constancia ? constancia : "";
 
         if(observacion){
-            window.open("../public/bm3/direccion/" +dir_id+ "/" + observacion + constancia )
+            window.open("../public/bm3/direccion/" +dir_id+ "/" + (observacion).toString() + (constancia).toString() )
         }
     }
 
