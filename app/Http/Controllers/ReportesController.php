@@ -141,17 +141,22 @@ class ReportesController extends Controller
         return $meses[$mes];
     }
 
-    public function BM3($tipoUnidad,$id,$mesId,$anoId)
+    public function BM3($tipoUnidad,$id,$mesId,$anoId,$observacionId,$constanciaId)
     {
         $fecha = $anoId.'-'.$mesId;
 //        dd($fecha);
 
+        $total = 0;
         if($tipoUnidad == "direccion"){
             $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
             $bienes = Bien::where('direccion',$id)
                 ->where('estatus','faltante')
                 ->where('fecha_faltante','like',$fecha.'%')
                 ->get();
+//            dd($bienes);
+            foreach ($bienes as $bien){
+                $total+=$bien['valor_actual'];
+            }
             $data['bienes'] = $bienes;
         }elseif ($tipoUnidad == "departamento"){
             $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
@@ -159,14 +164,18 @@ class ReportesController extends Controller
                 ->where('estatus','faltante')
                 ->where('fecha_faltante','like',$fecha.'%')
                 ->get();
+            foreach ($bienes as $bien){
+                $total+=$bien['valor_actual'];
+            }
             $data['bienes'] = $bienes;
         }
 
-//        dd($data->toArray());
-
+        $data['total'] = $total;
+        $data['observacion'] = $observacionId;
+        $data['constancia'] = $constanciaId;
         $pdf = PDF::loadView('PDF.bm3', compact('data'));
         $pdf->setPaper('letter','landscape');
-        return view('PDF.bm3')->with(compact('data'));
-//        return $pdf->download("bm4.pdf");
+//        return view('PDF.bm3')->with(compact('data'));
+        return $pdf->download("bm3.pdf");
     }
 }

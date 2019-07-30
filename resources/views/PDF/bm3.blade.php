@@ -55,7 +55,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{ $n = 1 }}
+                    @php
+                        $n = 1;
+                    @endphp
+
                     @foreach($data['bienes'] as $bien)
                         <tr>
                             <td width="5%">{{ $n }}</td>
@@ -64,14 +67,41 @@
                             <td width="15%">{{ $bien->valor_actual }}</td>
 {{--                            <td width="15%"></td>--}}
                         </tr>
-                        {{ $n++ }}
+
+                        @php
+                            $n++;
+                        @endphp
+
                     @endforeach
                     <tr style="background-color: #b8e834">
-                        {{--<td colspan="3"><strong>SUB TOTALES:</strong></td>
-                        <td><strong>{{ number_format($total_incorp ,6,',','.') }}</strong></td>
-                        <td><strong>{{ number_format($total_desincorp ,6,',','.') }}</strong></td>--}}
+                        <td colspan="3"><strong>TOTAL:</strong></td>
+                        <td><strong>{{ number_format($data['total'] ,6,',','.') }}</strong></td>
                     </tr>
                     </tbody>
+                </table>
+
+                <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; max-width: 500px; float: left">
+                    <tr>
+                        <td>Observación: {{ $data['observacion'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Constancia: {{ $data['constancia'] }}</td>
+                    </tr>
+
+                </table>
+                <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; max-width: 400px; float: right">
+                    <tr>
+                        <td>Faltante determinado por: <strong>Departamento de Bienes</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Cargo que desempeña: <strong>Personal de Bienes</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Dependencia de la cual esta adscrito: <strong>Dirección de Administracion</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="height: 100px">Firma del Jefe de unidad de trabajo</td>
+                    </tr>
                 </table>
             </div>
         </div>

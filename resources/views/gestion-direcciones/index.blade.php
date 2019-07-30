@@ -132,6 +132,14 @@
                             <select name="ano" class="form-control ano" id="bm3Ano">
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="">Observación</label>
+                            <textarea class="form-control" id="bm3Observacion"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Constancia</label>
+                            <textarea class="form-control" id="bm3Constancia"></textarea>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -206,7 +214,7 @@
     }
 
     function bm3() {
-        window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val())
+        window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val() + "/" + $("#bm3Observacion").val() + "/" + $("#bm3Constancia").val())
     }
 
     function bm4() {
