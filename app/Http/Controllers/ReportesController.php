@@ -141,7 +141,7 @@ class ReportesController extends Controller
         return $meses[$mes];
     }
 
-    public function BM3($tipoUnidad,$id,$mesId,$anoId,$observacionId,$constanciaId)
+    public function BM3($tipoUnidad,$id,$mesId,$anoId,$observacionId="",$constanciaId="")
     {
         $fecha = $anoId.'-'.$mesId;
 //        dd($fecha);

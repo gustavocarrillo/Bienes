@@ -212,9 +212,17 @@
     function bm2() {
         window.open("../public/bm2/direccion/" +dir_id+ "/" + $("#bm2Mes").val() + "/" + $("#bm2Ano").val())
     }
+    let constancia = $("#bm3Constancia").val();
 
     function bm3() {
-        window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val() + "/" + $("#bm3Observacion").val() + "/" + $("#bm3Constancia").val())
+        let observacion =  + '/' + $("#bm3Observacion").val() + '/';
+        observacion = observacion  ? observacion : "";
+        let constancia =  + '/' + $("#bm3Constancia").val() + '/';
+        constancia = constancia ? constancia : "";
+
+        if(observacion){
+            window.open("../public/bm3/direccion/" +dir_id+ "/" + observacion + constancia )
+        }
     }
 
     function bm4() {
