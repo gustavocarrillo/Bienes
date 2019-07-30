@@ -140,4 +140,42 @@ class ReportesController extends Controller
 
         return $meses[$mes];
     }
+
+    public function BM3($tipoUnidad,$id,$mesId,$anoId,$observacionId,$constanciaId)
+    {
+        $fecha = $anoId.'-'.$mesId;
+//        dd($fecha);
+
+        $total = 0;
+        if($tipoUnidad == "direccion"){
+            $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
+            $bienes = Bien::where('direccion',$id)
+                ->where('estatus','faltante')
+                ->where('fecha_faltante','like',$fecha.'%')
+                ->get();
+//            dd($bienes);
+            foreach ($bienes as $bien){
+                $total+=$bien['valor_actual'];
+            }
+            $data['bienes'] = $bienes;
+        }elseif ($tipoUnidad == "departamento"){
+            $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
+            $bienes = Bien::where('departamento',$id)
+                ->where('estatus','faltante')
+                ->where('fecha_faltante','like',$fecha.'%')
+                ->get();
+            foreach ($bienes as $bien){
+                $total+=$bien['valor_actual'];
+            }
+            $data['bienes'] = $bienes;
+        }
+
+        $data['total'] = $total;
+        $data['observacion'] = $observacionId;
+        $data['constancia'] = $constanciaId;
+        $pdf = PDF::loadView('PDF.bm3', compact('data'));
+        $pdf->setPaper('letter','landscape');
+//        return view('PDF.bm3')->with(compact('data'));
+        return $pdf->download("bm3.pdf");
+    }
 }

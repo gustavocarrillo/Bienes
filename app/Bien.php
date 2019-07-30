@@ -19,6 +19,7 @@ class Bien extends Model
         'direccion',
         'departamento',
         'estatus',
+        'fecha_faltante',
         'usuario'
     ];
 

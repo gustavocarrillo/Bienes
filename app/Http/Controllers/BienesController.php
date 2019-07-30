@@ -145,7 +145,7 @@ class BienesController extends Controller
     {
         $bienes = Bien::with('orden')
             ->orderBy('fecha_incorp','desc')
-            ->where('estatus','=','activo')
+            ->where('estatus','!=','desincorporado')
             ->get();
 
         return view('gestion-bienes.index')->with(compact('bienes'));
@@ -363,5 +363,30 @@ class BienesController extends Controller
     public function reportes()
     {
         return view('gestion-bienes.reportes');
+    }
+
+    public function bienFaltante(Request $request,$id)
+    {
+        $bien = Bien::find($id);
+        $bien->fecha_faltante = Carbon::now();
+        $bien->estatus = 'faltante';
+
+        $movimiento = TipoMovimiento::where('codigo','60')->first();
+
+        Movimiento::create([
+            "bien" => $bien->id,
+            "t_movimiento" => $movimiento->id,
+            "fecha" => Carbon::now(),
+            "direccion" => $bien->direccion,
+            "departamento" => $bien->departamento,
+            "idU" => $bien->id.'-'. Carbon::now().'-'.$movimiento,
+            "observacion" => $request->observacion,
+            "tipo" => 1,
+            "usuario" => Auth::id()
+        ]);
+
+        $bien->save();
+
+        return redirect()->route('bienes.show',$bien->id);
     }
 }
