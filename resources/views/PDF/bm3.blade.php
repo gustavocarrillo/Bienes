@@ -44,7 +44,7 @@
                 <table class="table table-bordered table-condensed" style="font-size: 10px; border: black 1px solid">
                     <thead>
                     <tr>
-                        <th colspan="5" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
+                        <th colspan="4" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
                     </tr>
                     <tr>
                         <th>N°</th>
@@ -79,30 +79,31 @@
                     </tr>
                     </tbody>
                 </table>
+                <div style="position: relative">
+                    <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; width: 500px; position: absolute; top: 0; left: 0">
+                        <tr>
+                            <td>Observación: {{ $data['observacion'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Constancia: {{ $data['constancia'] }}</td>
+                        </tr>
+                    </table>
 
-                <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; max-width: 500px; float: left">
-                    <tr>
-                        <td>Observación: {{ $data['observacion'] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Constancia: {{ $data['constancia'] }}</td>
-                    </tr>
-
-                </table>
-                <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; max-width: 400px; float: right">
-                    <tr>
-                        <td>Faltante determinado por: <strong>Departamento de Bienes</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Cargo que desempeña: <strong>Personal de Bienes</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Dependencia de la cual esta adscrito: <strong>Dirección de Administracion</strong></td>
-                    </tr>
-                    <tr>
-                        <td style="height: 100px">Firma del Jefe de unidad de trabajo</td>
-                    </tr>
-                </table>
+                    <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; width: 400px; position: absolute; top: 0; right: 0">
+                        <tr>
+                            <td>Faltante determinado por: <strong>Departamento de Bienes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Cargo que desempeña: <strong>Personal de Bienes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Dependencia de la cual esta adscrito: <strong>Dirección de Administracion</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 70px">Firma del Jefe de unidad de trabajo</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
