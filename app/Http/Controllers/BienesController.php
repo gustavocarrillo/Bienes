@@ -368,8 +368,25 @@ class BienesController extends Controller
     public function bienFaltante(Request $request,$id)
     {
         $bien = Bien::find($id);
-        $bien->fecha_faltante = Carbon::createFromFormat('d-m-Y',$request->fecha);
+        $bien->fecha_faltante = Carbon::now();
         $bien->estatus = 'faltante';
+
+        $movimiento = TipoMovimiento::where('codigo','60')->first();
+
+        Movimiento::create([
+            "bien" => $bien->id,
+            "t_movimiento" => $movimiento->id,
+            "fecha" => Carbon::now(),
+            "direccion" => $bien->direccion,
+            "departamento" => $bien->departamento,
+            "idU" => $bien->id.'-'. Carbon::now().'-'.$movimiento,
+            "observacion" => $request->observacion,
+            "tipo" => 1,
+            "usuario" => Auth::id()
+        ]);
+
         $bien->save();
+
+        return redirect()->route('bienes.show',$bien->id);
     }
 }

@@ -134,7 +134,7 @@
                         <input type="hidden" value="{{ $bien->id }}">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="form-group">
+                                {{--<div class="form-group">
                                     <label for="">Fecha:</label>
                                     <div class="input-group">
                                            <span class="input-group-addon">
@@ -144,7 +144,7 @@
                                             <input type="text" name="fecha" class="form-control date" placeholder="">
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                                 <div class="form-group">
                                     <label for="">Observación:</label>
                                     <div class="form-line">
