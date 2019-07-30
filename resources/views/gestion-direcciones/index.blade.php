@@ -221,7 +221,7 @@
         constancia = constancia ? constancia : "";
 
         if(observacion){
-            window.open("../public/bm3/direccion/" +dir_id+ "/" + "/" + $("#bm4Mes").val() + "/" + $("#bm4Ano").val() + (observacion).toString() + (constancia).toString() )
+            window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm4Mes").val() + "/" + $("#bm4Ano").val() + (observacion).toString() + (constancia).toString() )
         }
     }
 
