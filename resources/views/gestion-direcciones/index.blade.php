@@ -216,9 +216,8 @@
 
     function bm3() {
         let observacion = $("#bm3Observacion").val();
-        observacion = observacion ? '/' + $("#bm3Observacion").val() + '/' : '';
+        observacion = observacion ? '/' + observacion + '/' : '';
         let constancia =  $("#bm3Constancia").val();
-        constancia = constancia ? '/' + $("#bm3Constancia").val() + '/' : '';
 
         window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val() + observacion  + constancia );
     }
