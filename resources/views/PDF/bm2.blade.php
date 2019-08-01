@@ -26,7 +26,7 @@
     </style>
 </head>
 <body style="background-color: white">
-<div class="col-lg-12 col-md-2">
+<div class="">
     {{--<div class="saltopagina"></div>--}}
     <div>
         <h4 style="text-align: center"><strong>DEPARTAMENTO DE BIENES MUNICIPALES</strong></h4>
@@ -40,7 +40,7 @@
                     <p>Municipio: <strong>Maturín</strong></p>
                     <p>Dirección: <strong>Calle Azcúe, Edificio Palacio Municipal, Maturín Estado Monagas. </strong></p>
                 </td>
-                <td style="padding-left: 10px">
+                <td style="padding-left: 150px">
                     <p>Dependencia o unidad primaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
                     <p>Servicio:<strong> @if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
                     <p>Unida de trabajo o dependencia:<strong>@if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
@@ -51,9 +51,9 @@
     <br>
     <div class="">
         <div class="">
-            <div class="" style="max-width: 1000px">
+            <div class="" style="">
                 <p><strong>PERIODO DE LA CUENTA: {{ $data['periodo'] }}</strong></p>
-                <table class="data" style="">
+                <table class="data" style="width: 100%">
                     <thead>
                     <tr>
                         <th colspan="5" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
@@ -73,8 +73,8 @@
                             <td width="5%">{{ $n }}</td>
                             <td width="15%">{{ $mov->_bien->codigo }}</td>
                             <td width="50%">{{ $mov->_bien->descripcion }}</td>
-                            <td width="15%">@if($mov->tipo === 1){{ number_format($mov->_bien->valor_actual ,6,',','.') }} <span style="display: none">{{ $total_incorp += $mov->_bien->valor_actual }}</span>@endIf</td>
-                            <td width="15%">@if($mov->tipo === 0){{ number_format($mov->_bien->valor_actual ,6,',','.')}} <span style="display: none">{{ $total_desincorp += $mov->_bien->valor_actual }}</span>@endIf</td>
+                            <td width="15%">@if($mov->tipo === "1"){{ number_format($mov->_bien->valor_actual ,6,',','.') }} <span style="display: none">{{ $total_incorp += $mov->_bien->valor_actual }}</span>@endIf</td>
+                            <td width="15%">@if($mov->tipo === "0"){{ number_format($mov->_bien->valor_actual ,6,',','.')}} <span style="display: none">{{ $total_desincorp += $mov->_bien->valor_actual }}</span>@endIf</td>
                         </tr>
                         {{ $n++ }}
                     @endforeach
