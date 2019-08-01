@@ -26,7 +26,7 @@ class ReportesController extends Controller
 
         if($tipoUnidad == "direccion") {
             $unidad = Direccion::find($id);
-            $data = Bien::where('direccion', $id);
+            $data = Bien::where('direccion', $id)->where('estatus','activo');
             $count = $data->count();
             foreach ($data->get() as $bien){
                 $total+=$bien->valor_actual;
@@ -34,7 +34,7 @@ class ReportesController extends Controller
             }
         }elseif ($tipoUnidad == "departamento"){
             $unidad = Departamento::where('id',$id)->with('_direccion')->first();
-            $data = Bien::where('departamento', $id);
+            $data = Bien::where('departamento', $id)->where('estatus','activo');
             $count = $data->count();
             foreach ($data->get() as $bien){
                 $total+=$bien->valor_actual;
