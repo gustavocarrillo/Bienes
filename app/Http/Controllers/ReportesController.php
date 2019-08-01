@@ -65,6 +65,7 @@ class ReportesController extends Controller
         if($tipoUnidad == "direccion"){
             $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
             $movimientos = Movimiento::where(['direccion' => $id])
+                ->whereIn('tipo',['0','1'])
                 ->where('fecha','like',$fecha.'%')
                 ->with('_bien')
                 ->get();
