@@ -40,7 +40,7 @@
                     <p>Municipio: <strong>Maturín</strong></p>
                     <p>Dirección: <strong>Calle Azcúe, Edificio Palacio Municipal, Maturín Estado Monagas. </strong></p>
                 </td>
-                <td style="padding-left: 10px">
+                <td style="padding-left: 60px">
                     <p>Dependencia o unidad primaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
                     <p>Servicio:<strong> @if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
                     <p>Unida de trabajo o dependencia:<strong>@if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
@@ -51,9 +51,9 @@
     <br>
     <div class="">
         <div class="">
-            <div class="" style="max-width: 1000px">
+            <div class="data" style="">
 {{--                <p><strong>PERIODO DE LA CUENTA: {{ $data['periodo'] }}</strong></p>--}}
-                <table class="data" style="">
+                <table class="data" style="width: 100%">
                     <thead>
                     <tr>
                         <th colspan="4" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
@@ -91,7 +91,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div style="position: relative">
+                <div style="margin-top: 10px;position: relative">
                     <table class="" style="font-size: 11px; border: black 1px solid; width: 500px; position: absolute; top: 0; left: 0">
                         <tr>
                             <td>Observación: {{ $data['observacion'] }}</td>
