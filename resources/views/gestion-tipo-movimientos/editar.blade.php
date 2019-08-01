@@ -29,7 +29,7 @@
                                 <select name="tipo" name="tipo" class="form-control">
                                     <option value="1" @if($tipo->tipo == 1) selected @endif>Incorporación</option>
                                     <option value="0" @if($tipo->tipo == 0) selected @endif>Desincorporación</option>
-                                    <option value="2" @if($tipo->tipo == 2) selected @endif>Por investigar</option>
+                                    <option value="2" @if($tipo->tipo == 2) selected @endif>Faltante por investigar</option>
                                 </select>
                             </div>
                         </div>

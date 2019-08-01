@@ -381,7 +381,7 @@ class BienesController extends Controller
             "departamento" => $bien->departamento,
             "idU" => $bien->id.'-'. Carbon::now().'-'.$movimiento,
             "observacion" => $request->observacion,
-            "tipo" => 1,
+            "tipo" => 2,
             "usuario" => Auth::id()
         ]);
 

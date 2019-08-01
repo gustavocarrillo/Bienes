@@ -28,6 +28,7 @@
                                 <select name="tipo" name="tipo" class="form-control">
                                     <option value="1">Incorporación</option>
                                     <option value="0">Desincorporación</option>
+                                    <option value="2">Faltante por investigar</option>
                                 </select>
                             </div>
                         </div>
