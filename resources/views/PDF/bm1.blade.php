@@ -1,20 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{{--    <meta name="viewport"--}}
+{{--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--}}
+{{--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
     <title>Document</title>
     <!-- Bootstrap Core Css -->
-    <link href="{{ asset("plugins/bootstrap/css/bootstrap.css") }}" rel="stylesheet">
-    <link href="{{ asset("css/style.css") }}" rel="stylesheet">
+{{--    <link href="{{ asset("plugins/bootstrap/css/bootstrap.css") }}" rel="stylesheet">--}}
+{{--    <link href="{{ asset("css/style.css") }}" rel="stylesheet">--}}
     <style>
         .saltopagina{page-break-after:always;}
+
+        table.data , table.data th, table.data td {
+            font-size: 9px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table.firma {
+            text-align: center;
+            font-size: 11px;
+        }
+
     </style>
 </head>
 <body style="background-color: white">
-<div class="col-lg-6 col-md-6">
+<div class="">
     <div style="text-align: justify">
         <h3 style="text-align: center">Alcaldía Bolivariana del Municipio Maturín Estado Monagas</h3>
         <br>
@@ -83,7 +95,7 @@
     <div class="">
         <div class="">
             <div class="" style="max-width: 780px">
-                <table class="table table-bordered" style="font-size: 9px">
+                <table class="data" style="">
                     <thead>
                     <tr>
                         <th>N°</th>
@@ -129,7 +141,7 @@
     <br>
 </div>
 {{--<div class="saltopagina"></div>--}}
-<table class="table-responsive" style="border: 0px; font-size: 12px">
+<table class="firma" style="">
     {{--<tr>
         <td class="align-center">DEPARTAMENTO DE BIENES</td>
         <td class="align-center">@if($data->_direccion) {{ $data->_direccion->descripcion }} @else {{ $data->descripcion }} @endif</td>

@@ -2,15 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
+    {{--<meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- Bootstrap Core Css -->
     <link href="{{ asset("plugins/bootstrap/css/bootstrap.css") }}" rel="stylesheet">
-    <link href="{{ asset("css/style.css") }}" rel="stylesheet">
+    <link href="{{ asset("css/style.css") }}" rel="stylesheet">--}}
     <style>
         .saltopagina{page-break-after:always;}
+
+        table.data , table.data th, table.data td {
+            font-size: 9px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table.firma {
+            text-align: center;
+            font-size: 11px;
+        }
+
     </style>
 </head>
 <body style="background-color: white">
@@ -41,7 +53,7 @@
         <div class="">
             <div class="" style="max-width: 1000px">
 {{--                <p><strong>PERIODO DE LA CUENTA: {{ $data['periodo'] }}</strong></p>--}}
-                <table class="table table-bordered table-condensed" style="font-size: 10px; border: black 1px solid">
+                <table class="data" style="">
                     <thead>
                     <tr>
                         <th colspan="4" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
@@ -80,7 +92,7 @@
                     </tbody>
                 </table>
                 <div style="position: relative">
-                    <table class="table table-bordered table-condensed" style="font-size: 11px; border: black 1px solid; width: 500px; position: absolute; top: 0; left: 0">
+                    <table class="" style="font-size: 11px; border: black 1px solid; width: 500px; position: absolute; top: 0; left: 0">
                         <tr>
                             <td>Observación: {{ $data['observacion'] }}</td>
                         </tr>
