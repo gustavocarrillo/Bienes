@@ -220,7 +220,7 @@
         let constancia =  $("#bm3Constancia").val();
         constancia = constancia ? '/' + $("#bm3Constancia").val() + '/' : '';
 
-        window.open("../bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val() + observacion  + constancia );
+        window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val() + observacion  + constancia );
     }
 
     function bm4() {
