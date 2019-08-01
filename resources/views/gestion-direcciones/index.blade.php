@@ -215,12 +215,12 @@
     let constancia = $("#bm3Constancia").val();
 
     function bm3() {
-        let observacion =  $("#bm3Observacion").val();
+        let observacion = $("#bm3Observacion").val();
+        observacion = observacion ? '/' + $("#bm3Observacion").val() + '/' : '';
         let constancia =  $("#bm3Constancia").val();
+        constancia = constancia ? '/' + $("#bm3Constancia").val() + '/' : '';
 
-        if(observacion){
-            window.open("../public/bm3/direccion/" +dir_id+ "/" + $("#bm4Mes").val() + "/" + $("#bm4Ano").val() + '/' + observacion + '/' + constancia )
-        }
+        window.open("../bm3/direccion/" +dir_id+ "/" + $("#bm3Mes").val() + "/" + $("#bm3Ano").val() + observacion  + constancia );
     }
 
     function bm4() {
