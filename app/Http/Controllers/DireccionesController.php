@@ -21,7 +21,7 @@ class DireccionesController extends Controller
         $valor = str_replace(',',".",$valor);
         $data['inventario_inicial'] = $valor;
 
-        dd($data);
+//        dd($data);
 
         Direccion::create($data);
         flash('Direccion registrada exitosamente')->success();

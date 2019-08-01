@@ -7,7 +7,7 @@
                 <h2><b>Registrar Departamento</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('direccion.store') }}" method="post">
+                <form action="{{ route('departamento.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="row clearfix">
                         <div class="col-md-12 col-lg-12">
