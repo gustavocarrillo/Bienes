@@ -116,7 +116,7 @@
                             {{--
                                                         <td>{{ $bien->count }}</td>
                             --}}
-                            <td width="14%">{{ number_format($bien->valor_actual ,5,',','.') }}</td>
+                            <td width="14%">{{ number_format($bien->valor_actual ,6,',','.') }}</td>
                             {{--
                                                         <td>{{ $bien->valor_actual * $bien->count }}</td>
                             --}}
