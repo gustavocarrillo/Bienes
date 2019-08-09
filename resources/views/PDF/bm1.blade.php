@@ -94,8 +94,8 @@
     <br>
     <div class="">
         <div class="">
-            <div class="" style="max-width: 780px">
-                <table class="data" style="">
+            <div class="" style="">
+                <table class="data" style="width: 100%">
                     <thead>
                     <tr>
                         <th>N°</th>
