@@ -108,10 +108,10 @@
                     <tbody>
                     {{ $n = 1 }}
                     @foreach($data as $bien)
-                        <tr>
+                        <tr @if($bien->estatus == "faltante") style="background-color: red; color: white; font-weight: bold"  @endif>
                             <td width="4%">{{ $n }}</td>
                             <td width="10%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
-                            <td width="14%">{{ $bien->codigo }}</td>
+                            <td width="14%" >{{ $bien->codigo }}</td>
                             <td width="58%">{{ $bien->descripcion }}</td>
                             {{--
                                                         <td>{{ $bien->count }}</td>

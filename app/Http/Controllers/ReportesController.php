@@ -54,7 +54,7 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('PDF.bm1', compact('data','bienes_dep','unidad','fecha','total','totalLetras','count'));
 //        $pdf->setPaper('A4','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->download("BM2-{$unidad->descripcion}.pdf");
+        return $pdf->download("BM1-{$unidad->descripcion}.pdf");
     }
 
     public function BM2($tipoUnidad ,$id,$mes,$ano)
