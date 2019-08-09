@@ -54,16 +54,18 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('PDF.bm1', compact('data','bienes_dep','unidad','fecha','total','totalLetras','count'));
 //        $pdf->setPaper('A4','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->download("bm1.pdf");
+        return $pdf->download("BM2-{$unidad->descripcion}.pdf");
     }
 
     public function BM2($tipoUnidad ,$id,$mes,$ano)
     {
         $fecha = $ano.'-'.$mes;
         $data = [];
+        $unidad = "";
 
         if($tipoUnidad == "direccion"){
             $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
+            $unidad = $data['direccion']['descripcion'];
             $movimientos = Movimiento::where(['direccion' => $id])
                 ->whereIn('tipo',['0','1'])
                 ->where('fecha','like',$fecha.'%')
@@ -72,6 +74,7 @@ class ReportesController extends Controller
             $data['movimientos'] = $movimientos;
         }elseif ($tipoUnidad == "departamento"){
             $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
+            $unidad = $data['departamento']['descripcion'];
             $movimientos = Movimiento::where(['departamento' => $id])
                 ->whereIn('tipo',['0','1'])
                 ->where('fecha','like',$fecha.'%')
@@ -85,7 +88,7 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('PDF.bm2', compact('data'));
         $pdf->setPaper('letter','landscape');
 //        return view('PDF.bm1')->with(compact('data','bienes_dep'));
-        return $pdf->download("bm2.pdf");
+        return $pdf->download("BM2-{$unidad}.pdf");
     }
 
     public function bm4($id,$mes,$ano)
@@ -147,10 +150,11 @@ class ReportesController extends Controller
     {
         $fecha = $anoId.'-'.$mesId;
 //        dd($fecha);
-
+        $unidad = "";
         $total = 0;
         if($tipoUnidad == "direccion"){
             $data['direccion'] = Direccion::where('id',$id)->first()->toArray();
+            $unidad = $data['direccion']['descripcion'];
             $bienes = Bien::where('direccion',$id)
                 ->where('estatus','faltante')
                 ->where('fecha_faltante','like',$fecha.'%')
@@ -162,6 +166,7 @@ class ReportesController extends Controller
             $data['bienes'] = $bienes;
         }elseif ($tipoUnidad == "departamento"){
             $data['departamento'] = Departamento::with('_direccion')->where('id',$id)->first()->toArray();
+            $unidad = $data['departamento']['descripcion'];
             $bienes = Bien::where('departamento',$id)
                 ->where('estatus','faltante')
                 ->where('fecha_faltante','like',$fecha.'%')
@@ -178,6 +183,6 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('PDF.bm3', compact('data'));
         $pdf->setPaper('letter','landscape');
 //        return view('PDF.bm3')->with(compact('data'));
-        return $pdf->download("bm3.pdf");
+        return $pdf->download("BM3-{$unidad}.pdf");
     }
 }
