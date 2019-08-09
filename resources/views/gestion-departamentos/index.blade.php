@@ -36,7 +36,7 @@
                                         <a href="{{ route('departamento.edit',$departamento->id) }}" class="btn btn-xs btn-success"><i class="material-icons">remove_red_eye</i></a>
                                         {{ method_field('delete') }}
                                         {{ csrf_field()  }}
-                                        <a href="{{ route('reportes.bm1',['departamento',$departamento->id]) }}" class="btn btn-xs btn-primary @if(count($departamento->bienes) == 0) disabled @endif"><i class="material-icons">assignment_returned</i></a>
+                                        <a href="{{ route('reportes.bm1',['departamento',$departamento->id]) }}" class="btn btn-xs btn-warning @if(count($departamento->bienes) == 0) disabled @endif">BM1</a>
                                         <button class="btn btn-xs btn-danger" onclick="if (! window.confirm('¿Desea elminar este Departamento?')){ return false }"><i class="material-icons">delete</i></button>
                                     </form>
                                 </td>
