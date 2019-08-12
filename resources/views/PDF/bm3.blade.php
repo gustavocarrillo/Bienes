@@ -42,8 +42,8 @@
                 </td>
                 <td style="padding-left: 60px">
                     <p>Dependencia o unidad primaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
-                    <p>Servicio:<strong> @if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
-                    <p>Unida de trabajo o dependencia:<strong>@if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
+                    <p>Servicio:<strong> @if(isset($data['direccion'])) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['_direccion']['descripcion'] }} @endif</strong></p>
+                    <p>Unida de trabajo o dependencia:<strong>@if(isset($data['direccion'])) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
                 </td>
             </tr>
         </table>
@@ -56,7 +56,10 @@
                 <table class="data" style="width: 100%">
                     <thead>
                     <tr>
+{{--
                         <th colspan="4" style="text-align: center; font-size: 13px"><strong>En el mes de la Cuenta ha ocurrido el siguiente movimiento en los Bienes a cargo de esta Dependencia:</strong></th>
+--}}
+                        <th colspan="4" style="font-size: 13px"><strong>Periodo: {{ $data['periodo'] }}</strong></th>
                     </tr>
                     <tr>
                         <th>N°</th>

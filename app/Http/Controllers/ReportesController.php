@@ -178,6 +178,7 @@ class ReportesController extends Controller
         }
 
         $data['total'] = $total;
+        $data['periodo'] = $mesId.'-'.$anoId;
         $data['observacion'] = $observacionId;
         $data['constancia'] = $constanciaId;
         $pdf = PDF::loadView('PDF.bm3', compact('data'));
