@@ -57,6 +57,46 @@ class OrdenesController extends Controller
         return response()->redirectToRoute('orden.index');
     }
 
+    public function storeAjax(Request $request)
+    {
+        $request->validate([
+            'numero' => 'required|numeric',
+            'fecha' => 'required',
+            'proveedores' => 'required',
+            'f_factura' => 'required',
+            'nro_factura' => 'required',
+            'nro_control' => 'required',
+            'total' => 'required',
+        ]);
+
+        $idU = $request->numero.$request->anno;
+
+        $_idU = Orden::where('idU',$idU)->first();
+
+        if ($_idU){
+            return response()->json(false,400);
+        }
+
+        $total = str_replace('.',"",$request->total);
+        $total = str_replace(',',".",$total);
+        $now = Carbon::now();
+
+        Orden::create([
+            "numero" => $request->numero,
+            "fecha" => date('Y-m-d',strtotime($request->fecha)),
+            "anno" => $now->year,
+            'proveedor_id' => $request->proveedores,
+            'f_factura' => date('Y-m-d',strtotime($request->f_factura)),
+            'nro_factura' => $request->nro_factura,
+            'nro_control' => $request->nro_control,
+            'total' => $total,
+            'idU' => $idU,
+            'usuario' => Auth::id(),
+        ]);
+
+        return response()->json(true,200);
+    }
+
     public function edit($id)
     {
         $orden = Orden::with('proveedor')->where('id',$id)->first();
@@ -136,5 +176,13 @@ class OrdenesController extends Controller
         $orden->delete();
 
         flash("La orden ha sido eliminada")->success();
-        return response()->redirectToRoute('orden.index');    }
+        return response()->redirectToRoute('orden.index');
+    }
+
+    public function getOrdenesAjax()
+    {
+        $ordenes = Orden::orderBy('fecha','desc')->get();
+
+        return response()->json($ordenes,200);
+    }
 }

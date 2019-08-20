@@ -77,15 +77,15 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="orden">Orden de Compra:</label>
-                                        <div class="form-line">
+                                        {{--<div class="form-line">
                                             <input type="text" id="orden" name="nro_orden" class="form-control">
-                                        </div>
-                                        {{--<select name="nro_orden" id="orden" class="form-control show-tick" data-live-search="true">
+                                        </div>--}}
+                                        <select name="nro_orden" id="orden" class="form-control show-tick" data-live-search="true">
                                             <option value="" selected>Seleccione..</option>
-                                            @foreach($ordenes as $orden)
+                                            {{--@foreach($ordenes as $orden)
                                                 <option value="{{ $orden->id }}">{{ $orden->numero }}</option>
-                                            @endforeach
-                                        </select>--}}
+                                            @endforeach--}}
+                                        </select>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-2">
@@ -94,11 +94,11 @@
                                         <label for="basic_checkbox_2">N/A</label>
                                     </div>
                                 </div>--}}
-                                {{--<div class="col-sm-2">
+                                <div class="col-sm-2">
                                     <div class="p-t-30">
-                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#smallModal">Nueva</button>
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#smallModal" onclick="stop(event)">Nueva</button>
                                     </div>
-                                </div>--}}
+                                </div>
                                 <div class="col-sm-4 col-md-offset-3">
                                     <div class="form-group">
                                         <label for="orden">Valor del Bien:</label>
@@ -197,11 +197,17 @@
             </div>
         </div>
     </div>
+
     {{--Modal--}}
     <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
         <form action="" id="modal">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
+                    <div class="modal-header hidden" id="modalMsgHeader">
+                        <div class="alert" id="modalMsg">
+
+                        </div>
+                    </div>
                     <div class="modal-header">
                         <h4 class="modal-title" id="smallModalLabel">Nueva Orden de Compra</h4>
                     </div>
@@ -223,7 +229,7 @@
                                        <i class="material-icons">date_range</i>
                                    </span>
                                         <div class="form-line">
-                                            <input type="text" id="fechaModal"class="form-control date" placeholder="">
+                                            <input type="text" id="fechaModal" class="form-control date" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -232,10 +238,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Proveedor:</label>
-                                    <div class="form-line">
-                                        <input type="text" id="proveedorModal" class="form-control">
-                                    </div>
+                                    <label for="orden">Proveedor:</label>
+                                    <select name="proveedores" id="proveedores" class="form-control show-tick">
+                                        <option>Seleccione..</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -244,7 +250,7 @@
                                 <div class="form-group">
                                     <label for="">Rif:</label>
                                     <div class="form-line">
-                                        <input type="text" id="rifModal" class="form-control">
+                                        <input type="text" id="rifModal" class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +260,7 @@
                                 <div class="form-group">
                                     <label for="">Factura N°:</label>
                                     <div class="form-line">
-                                        <input type="text" id="nro_ordenModal" class="form-control int">
+                                        <input type="text" id="nro_facturaModal" class="form-control int">
                                     </div>
                                 </div>
                             </div>
@@ -306,7 +312,7 @@
                 </div>
             </div>
         </form>
-    </div>
+
     {{--Fin - Modal--}}
 @endsection
 
@@ -326,6 +332,10 @@
                 $('#orden').prop('disabled',false);
             }
         })
+
+        function stop(e) {
+            e.preventDefault()
+        }
 
         /*if($('#basic_checkbox_2').change === true ){
             alert('checked')
@@ -394,6 +404,83 @@
             })
         })
 
+        var proveedores = [];
+
+        //PROVEEDORES
+        $.ajax({
+            method: 'POST',
+            url: "../proveedorJson",
+            data : {_token : "{{ csrf_token() }}" },
+            dataType: 'JSON',
+        }).done(function (x) {
+            proveedores = x;
+
+            $.each( x, function(i,v){
+                var option = '<option value="'+v.id+'">'+v.nombre+'</option>';
+                $("#proveedores").append(option);
+            })
+            $("#proveedores").selectpicker('refresh');
+        }).fail(function (x) {
+            console.log(x)
+            alert("NO SE HAN PODIDO CARGAR LOS PROVEEDORES")
+        });
+
+        $('#proveedores').change(function (e) {
+            console.log('PROVEEDOR',proveedores);
+
+            let proveedor = proveedores.filter( function(p){
+                return p.id == $('#proveedores').val();
+            });
+
+            // $('#rifModal').val(proveedor.rif)
+        });
+
+        $('#guardarModal').click(function () {
+
+                let data = {
+                    _token : "{{ csrf_token() }}",
+                    numero: $('#nro_ordenModal').val(),
+                    fecha: $('#fechaModal').val(),
+                    proveedores: $('#proveedores').val(),
+                    f_factura: $('#fechaFacturaModal').val(),
+                    nro_factura: $('#nro_facturaModal').val(),
+                    nro_control: $('#nro_controlModal').val(),
+                    total: $('#totalModal').val(),
+                };
+
+                $.ajax({
+                    method: 'POST',
+                    url: "../ordenAjax",
+                    data: data,
+                    dataType: 'JSON',
+                }).done(function (x) {
+                    $('#modalMsg').addClass('alert-success').append('Se ha guardado la orden de compra');
+                    $('#modalMsgHeader').removeClass('hidden');
+                    setTimeout(function () {
+                        $('#modalMsgHeader').addClass('hidden');
+                        $('#modalMsg').append('');
+                        // $("#smallModal").modal('hide');
+                    },4000);
+                    $('#nro_ordenModal').val('')
+                    $('#fechaModal').val('')
+                    $('#proveedores').val('')
+                    $('#rifModal').val('')
+                    $('#fechaFacturaModal').val('')
+                    $('#nro_facturaModal').val('')
+                    $('#nro_controlModal').val('')
+                    $('#totalModal').val('')
+                    getOrdenes();
+                }).fail(function () {
+                    $('#modalMsg').addClass('alert-danger').append('Ya existe una orden de compra con ese N° en el año indicado');
+                    $('#modalMsgHeader').removeClass('hidden');
+                    setTimeout(function () {
+                        $('#modalMsgHeader').addClass('hidden');
+                        $('#modalMsg').append('');
+                    },4000);
+                })
+            }
+        );
+
         $('#cantidad').change(function () {
             $.ajax({
                 method: 'get',
@@ -423,5 +510,27 @@
             $('#mdModal .modal-content').removeAttr('class').addClass('modal-content modal-col-' + color);
             $('#mdModal').modal('show');
         });
+
+        function getOrdenes() {
+            $.ajax({
+                method: 'POST',
+                url: "../ordenesAjax",
+                data : {_token : "{{ csrf_token() }}" },
+                dataType: 'JSON',
+            }).done(function (x) {
+                proveedores = x;
+                $.each( x, function(i,v){
+                    let ano = v.fecha.split('-')
+                    var option = '<option value="'+v.id+'">'+v.numero+'-'+ano[0]+'</option>';
+                    $("#orden").append(option);
+                })
+                $("#orden").selectpicker('refresh');
+            }).fail(function (x) {
+                console.log(x)
+                alert("NO SE HAN PODIDO CARGAR LAS ORDENES")
+            })
+        }
+
+        getOrdenes();
     </script>
 @endsection

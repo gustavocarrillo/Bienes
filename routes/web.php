@@ -74,6 +74,8 @@ Route::middleware(['auth'])->group(function (){
 
     //Ordenes
     Route::resource('orden','OrdenesController');
+    Route::post('ordenAjax','OrdenesController@storeAjax');
+    Route::post('ordenesAjax','OrdenesController@getOrdenesAjax');
 
     //Proveedores
     Route::resource('proveedor','ProveedoresController');
