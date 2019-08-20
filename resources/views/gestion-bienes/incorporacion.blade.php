@@ -430,9 +430,9 @@
 
             let proveedor = proveedores.filter( function(p){
                 return p.id == $('#proveedores').val();
-            });
+            })[0];
 
-            // $('#rifModal').val(proveedor.rif)
+            $('#rifModal').val(proveedor.rif)
         });
 
         $('#guardarModal').click(function () {
@@ -459,7 +459,7 @@
                     setTimeout(function () {
                         $('#modalMsgHeader').addClass('hidden');
                         $('#modalMsg').append('');
-                        // $("#smallModal").modal('hide');
+                        $("#smallModal").modal('hide');
                     },4000);
                     $('#nro_ordenModal').val('')
                     $('#fechaModal').val('')
@@ -518,7 +518,6 @@
                 data : {_token : "{{ csrf_token() }}" },
                 dataType: 'JSON',
             }).done(function (x) {
-                proveedores = x;
                 $.each( x, function(i,v){
                     let ano = v.fecha.split('-')
                     var option = '<option value="'+v.id+'">'+v.numero+'-'+ano[0]+'</option>';
