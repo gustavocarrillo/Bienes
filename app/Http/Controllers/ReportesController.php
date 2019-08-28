@@ -48,7 +48,7 @@ class ReportesController extends Controller
              array_push($count, $bien);
          }*/
 
-        $data = $data->get();
+        $data = $data->orderBy("codigo","asc")->get();
         $fecha = date('d',strtotime(today())).' del mes de '.$this->meses((date('m',strtotime(today())) - 1)).' de '.date('Y',strtotime(today()));
         /*        $data = $count;*/
         $pdf = PDF::loadView('PDF.bm1', compact('data','bienes_dep','unidad','fecha','total','totalLetras','count'));
