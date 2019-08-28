@@ -15,7 +15,10 @@
                             <div class="form-group">
                                 <label for="numero">Descripcion:</label>
                                 <div class="form-line">
+{{--
                                     <input type="text" name="descripcion" class="form-control" value="{{ $bien->descripcion }}" maxlength="65">
+--}}
+                                    <textarea name="descripcion" class="form-control"  id="" rows="4">{{ $bien->descripcion }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
