@@ -18,7 +18,7 @@
 {{--
                                     <input type="text" name="descripcion" class="form-control" value="{{ $bien->descripcion }}" maxlength="65">
 --}}
-                                    <textarea name="descripcion" class="form-control"  id="" rows="4">{{ $bien->descripcion }}</textarea>
+                                    <textarea name="descripcion" class="form-control"  id="" rows="">{{ $bien->descripcion }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">

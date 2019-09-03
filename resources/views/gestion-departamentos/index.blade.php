@@ -37,6 +37,7 @@
                                         {{ method_field('delete') }}
                                         {{ csrf_field()  }}
                                         <a href="{{ route('reportes.bm1',['departamento',$departamento->id]) }}" class="btn btn-xs btn-warning @if(count($departamento->bienes) == 0) disabled @endif">BM1</a>
+                                        <a title="BM2" class="btn btn-xs btn-warning  @if(count($departamento->bienes) == 0) disabled @endif" data-toggle="modal" data-target="#bm2Modal" onclick="getId({{ $departamento->id }})">BM2</a>
                                         <a title="BM3" class="btn btn-xs btn-warning  @if(count($departamento->bienes) == 0) disabled @endif" data-toggle="modal" data-target="#bm3Modal" onclick="getId({{ $departamento->id }})">BM3</a>
                                         <button class="btn btn-xs btn-danger" onclick="if (! window.confirm('¿Desea elminar este Departamento?')){ return false }"><i class="material-icons">delete</i></button>
                                     </form>
@@ -58,6 +59,47 @@
                 </ul>
             </div>
         @endif
+
+        {{--BM2--}}
+        <div class="modal fade" id="bm2Modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="smallModalLabel">Seleccionar Período</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Mes</label>
+                            <select name="mes" id="bm2Mes" class="form-control">
+                                <option value="01">Enero</option>
+                                <option value="02">Febrero</option>
+                                <option value="03">Marzo</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Mayo</option>
+                                <option value="06">Junio</option>
+                                <option value="07">Julio</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Año</label>
+                            <select name="ano" class="form-control ano" id="bm2Ano">
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="bm2" onclick="bm2({{ $departamento->id }})">Generar BM2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--//BM2--}}
 
         {{--BM3--}}
         <div class="modal fade" id="bm3Modal" tabindex="-1" role="dialog">
@@ -123,6 +165,10 @@
 
     function getId(id) {
         dep_id = id;
+    }
+
+    function bm2() {
+        window.open("../public/bm2/departamento/" +dep_id+ "/" + $("#bm2Mes").val() + "/" + $("#bm2Ano").val())
     }
 
     function bm3() {

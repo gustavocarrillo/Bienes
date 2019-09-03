@@ -42,8 +42,8 @@
                 </td>
                 <td style="padding-left: 150px">
                     <p>Dependencia o unidad primaria: <strong>ALCALDÍA DE MATURÍN</strong></p>
-                    <p>Servicio:<strong> @if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
-                    <p>Unida de trabajo o dependencia:<strong>@if($data['direccion']) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
+                    <p>Servicio:<strong> @if(isset($data['direccion'])) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['_direccion']['descripcion'] }} @endif</strong></p>
+                    <p>Unida de trabajo o dependencia:<strong>@if(isset($data['direccion'])) {{ $data['direccion']['descripcion'] }} @else {{ $data['departamento']['descripcion'] }} @endif</strong></p>
                 </td>
             </tr>
         </table>

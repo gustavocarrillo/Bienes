@@ -210,7 +210,7 @@
     }
 
     function bm2() {
-        window.open("../bm2/direccion/" +dir_id+ "/" + $("#bm2Mes").val() + "/" + $("#bm2Ano").val())
+        window.open("../public/bm2/direccion/" +dir_id+ "/" + $("#bm2Mes").val() + "/" + $("#bm2Ano").val())
     }
     let constancia = $("#bm3Constancia").val();
 
