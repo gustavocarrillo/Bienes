@@ -176,7 +176,7 @@ class BienesController extends Controller
 
     public function update(Request $request,$id)
     {
-        //dd($request->all());
+//        dd($request->all());
         $bien = Bien::find($id);
 
         $this->validate($request,[
@@ -207,8 +207,9 @@ class BienesController extends Controller
         if($request->hasFile('foto')){
             $bien = Bien::find($id);
             $foto = $request->file('foto');
-            $bien->foto = $request->codigo.'.'.$request->file('foto')->extension();
-            $foto->move(public_path().'/fotos/',$request->codigo.'.'.$request->file('foto')->extension());
+            $bien->foto = $bien->codigo.'.'.$request->file('foto')->extension();
+//            dd($bien->codigo.'.'.$request->file('foto')->extension());
+            $foto->move(public_path().'/fotos/',$bien->codigo.'.'.$request->file('foto')->extension());
             $bien->save();
         }
 
