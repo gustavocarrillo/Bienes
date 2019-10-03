@@ -98,7 +98,7 @@
             $('.int').inputmask('numeric', { placeholder: '' });
             $('#rifModal').inputmask('J-99999999-9', { placeholder: "J-00000000-0"});
             $('.date').inputmask('dd-mm-yyyy', { placeholder: '__-__-____' });
-            $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 6, placeholder: "0.000000", numericInput: true});
+            $('.decimal').inputmask('decimal', { radixPoint: ",", groupSeparator: ".", autoGroup: true, digits: 6, placeholder: "0.000000", numericInput: false});
 
         })
 
