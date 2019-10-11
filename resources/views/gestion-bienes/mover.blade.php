@@ -24,7 +24,7 @@
                     <div class="row clearfix">
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label for="orden">Tipo de desincorporacón:</label>
+                                <label for="orden">Tipos de movimiento:</label>
                                 <select name="movimiento" id="movimiento" class="form-control show-tick" data-live-search="true">
                                     <option value="">Seleccione..</option>
                                     @foreach($tipos as $tipo)
