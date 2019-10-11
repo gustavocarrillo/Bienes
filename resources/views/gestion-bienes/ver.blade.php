@@ -113,10 +113,13 @@
                 </div>
                 <hr>
                 <div class="row clearfix">
-                    @if($bien->estatus != 'faltante')
-                        <a class="btn btn-warning pull-right" data-toggle="modal" data-target="#smallModal">Faltante por investigar</a>
-                    @endif
                     <a href="{{ route('bienes.index') }}" class="btn btn-primary">Volver</a>
+                    <a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-info pull-right">Editar</a>
+                    <a href="{{ route('bienes.mover',$bien->id) }}" class="btn btn-success pull-right m-r-5">Mover</a>
+                    <a href="{{ route('bienes.desincorporar',$bien->id) }}" class="btn btn-danger pull-right m-r-5">Desincorporar</a>
+                    @if($bien->estatus != 'faltante' && $bien->estatus != 'desincorporado')
+                        <a class="btn btn-warning pull-right m-r-5" data-toggle="modal" data-target="#smallModal">Faltante por investigar</a>
+                    @endif
                 </div>
             </div>
         </div>

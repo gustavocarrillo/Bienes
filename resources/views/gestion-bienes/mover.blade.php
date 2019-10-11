@@ -14,10 +14,10 @@
         @endif
         <div class="card">
             <div class="header">
-                <h2><b>Desincorpación de BIEN: {{ $bien->codigo }}</b></h2>
+                <h2><b>Movimiento de BIEN: {{ $bien->codigo }}</b></h2>
             </div>
             <div class="body">
-                <form action="{{ route('bienes.desincorporado',$bien->id) }}" method="post">
+                <form action="{{ route('bienes.movido',$bien->id) }}" method="post">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     <input type="hidden" name="id" id="token" value="{{ $bien->id }}">
                     {{ method_field('put') }}
@@ -33,7 +33,7 @@
                                 </select>
                             </div>
 
-                            <div id="traspaso" class="hidden">
+                            <div id="traspaso">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="orden">Dirección</label>
@@ -72,7 +72,7 @@
                     <div class="row clearfix">
                         <div class="col-md-12">
                             <a href="{{ route('bienes.show', $bien->id) }}" class="btn btn-primary" >Volver</a>
-                            <input type="submit" class="btn btn-success pull-right" value="Desincorporar">
+                            <input type="submit" class="btn btn-success pull-right" value="Mover">
                         </div>
                     </div>
                 </form>
@@ -91,12 +91,5 @@
             dep = fillSelect("../departamentos/"+$(this).val(),"#departamento","#departamentos_div",'un departamento');
         })
 
-        $('#movimiento').change(function () {
-            if ($("#movimiento").val() === "18") {
-                $("#traspaso").removeClass('hidden');
-            } else {
-                $("#traspaso").addClass('hidden');
-            }
-        })
     </script>
 @endsection

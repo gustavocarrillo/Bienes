@@ -176,7 +176,6 @@ class BienesController extends Controller
 
     public function update(Request $request,$id)
     {
-//        dd($request->all());
         $bien = Bien::find($id);
 
         $this->validate($request,[
@@ -214,7 +213,7 @@ class BienesController extends Controller
         }
 
         flash('El bien ha sido modificado exitosamente')->success();
-        return response()->redirectToRoute('bienes.index');
+        return response()->redirectToRoute('bienes.show',$bien->id);
     }
 
     public function getLastAjax($bienid,$cantidadid)
@@ -297,10 +296,18 @@ class BienesController extends Controller
         return view('gestion-bienes.desincorporar')->with(compact(['bien','direcciones','departamentos','tipos']));
     }
 
+    public function movimiento($id)
+    {
+        $bien = Bien::find($id);
+        $direcciones = Direccion::all();
+        $departamentos = Departamento::all();
+        $tipos = TipoMovimiento::where('tipo',1)->get();
+
+        return view('gestion-bienes.mover')->with(compact(['bien','direcciones','departamentos','tipos']));
+    }
+
     public function desincorporado(Request $request,$id)
     {
-//        dd($request->all());
-
         $this->validate($request,[
             "movimiento" => "required",
             "fecha" => "required",
@@ -315,15 +322,11 @@ class BienesController extends Controller
 
         $tmovimiento = TipoMovimiento::find($request->movimiento);
 
-//        dd($tmovimiento->codigo);
-
         $bien = Bien::find($id);
 
         if ($tmovimiento->codigo !== "51"){
             $bien->estatus = 'desincorporado';
         }
-
-        //$fecha = Carbon::now()->toDateString();
 
         Movimiento::create([
             "bien" => $id,
@@ -358,7 +361,45 @@ class BienesController extends Controller
 
         $bien->save();
         flash('El bien ha sido desincorporado','success');
-        return response()->redirectToRoute('bienes.index');
+        return response()->redirectToRoute('bienes.show',$bien->id);
+    }
+
+    public function mover(Request $request,$id)
+    {
+        $this->validate($request,[
+            "movimiento" => "required",
+            "fecha" => "required",
+            "direccion" => "required_if:movimiento,18",
+            "departamento" => "required_if:movimiento,18",
+        ],[
+            "movimiento.required" => "Debe selccionar un tipo de movimiento",
+            "fecha.required" => "Debe introducir un fecha",
+            "direccion.required_if" => "Debe seleccionar una dirección",
+            "departamento.required_if" => "Debe seleccionar un departamento",
+        ]);
+
+        $bien = Bien::find($id);
+
+        if(!$bien){
+            flash('El bien que intenta mover no existe','warning');
+        }
+
+        Movimiento::create([
+            "bien" => $id,
+            "t_movimiento" => $request->movimiento,
+            "fecha" => date('Y-m-d',strtotime($request->fecha)),
+            "direccion" => $bien->direccion,
+            "departamento" => $bien->departamento,
+            "idU" => $id.'-'. date('Y-m-d',strtotime($request->fecha)).'-'.$request->movimiento,
+            "observacion" => $request->observacion,
+            "tipo" => 1,
+            "usuario" => Auth::id()
+        ]);
+        $bien->direccion = $request->direccion;
+        $bien->departamento = $request->departamento;
+        $bien->save();
+        flash('El bien ha sido movido','success');
+        return response()->redirectToRoute('bienes.show',$bien->id);
     }
 
     public function reportes()

@@ -70,8 +70,9 @@
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <div class="form-group ">
-                            <input type="submit" class="form-control btn btn-primary" value="Modificar">
+                        <div class="col-md-12">
+                            <a href="{{ route('bienes.show', $bien->id) }}" class="btn btn-primary" >Volver</a>
+                            <input type="submit" class="btn btn-success pull-right" value="Modificar">
                         </div>
                     </div>
                 </form>

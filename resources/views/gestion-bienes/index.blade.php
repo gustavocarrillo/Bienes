@@ -24,13 +24,14 @@
                         <tbody>
                         @foreach($bienes as $bien)
                             <tr>
-                                <td width="10%">{{ $bien->codigo }}</td>
-                                <td width="55%">{{ $bien->descripcion }}</td>
+                                <td width="15%">{{ $bien->codigo }}</td>
+                                <td width="68%">{{ $bien->descripcion }}</td>
                                 <td width="10%">{{ date('d-m-Y',strtotime($bien->fecha_incorp)) }}</td>
-                                <td width="20%">
+                                <td width="2%">
                                         <a href="{{ route('bienes.show',$bien->id) }}" class="btn btn-xs bg-indigo"><i class="material-icons">remove_red_eye</i></a>
-                                        <a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-xs btn-success"><i class="material-icons">create</i></a>
-                                        <a href="{{ route('bienes.desincorporar',$bien->id) }}" class="btn btn-xs btn-danger" ><i class="material-icons">delete</i></a>
+                                        {{--<a href="{{ route('bienes.edit',$bien->id) }}" class="btn btn-xs btn-success"><i class="material-icons">create</i></a>
+                                        <a href="{{ route('bienes.mover',$bien->id) }}" class="btn btn-xs btn-warning" ><i class="material-icons">swap_horiz</i></a>
+                                        <a href="{{ route('bienes.desincorporar',$bien->id) }}" class="btn btn-xs btn-danger" ><i class="material-icons">delete</i></a>--}}
                                     </form>
                                 </td>
                             </tr>

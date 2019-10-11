@@ -48,7 +48,9 @@ Route::middleware(['auth'])->group(function (){
     //Bienes
     Route::resource('bienes','BienesController');
     Route::get('bienes/{id}/desincorporar','BienesController@desincorporacion')->name('bienes.desincorporar');
-    Route::put('bienes/{id}/desincorporar','BienesController@desincorporado')->name('bienes.desincorporado');
+    Route::put('bienes/{id}/desincorporado','BienesController@desincorporado')->name('bienes.desincorporado');
+    Route::get('bienes/{id}/mover','BienesController@movimiento')->name('bienes.mover');
+    Route::put('bienes/{id}/movido','BienesController@mover')->name('bienes.movido');
     Route::get('bienes/reportes/index','BienesController@reportes')->name('bienes.reportes');
     Route::put('bienes/{id}/faltante','BienesController@bienFaltante')->name('bienes.faltante');
 
