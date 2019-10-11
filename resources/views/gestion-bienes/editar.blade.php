@@ -39,13 +39,13 @@
                                     <input type="text" name="valor_actual" id="total" class="form-control decimal" value="{{ $bien->valor_actual }}">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label for="orden">Nro de Orden:</label>
                                 <div class="form-line">
                                     <input type="text" class="form-control" name="nro_orden" value="{{ $bien->nro_orden }}">
                                 </div>
                             </div>
-                            {{--<div class="form-group">
+                            <div class="form-group">
                                 <label for="orden">Dirección:</label>
                                 <select name="direccion" id="direccion" class="form-control show-tick">
                                     <option value="">Seleccione..</option>
