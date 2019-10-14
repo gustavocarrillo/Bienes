@@ -39,7 +39,7 @@
                                     <input type="text" name="valor_actual" id="total" class="form-control decimal" value="{{ $bien->valor_actual }}">
                                 </div>
                             </div>
-                            {{--<div class="form-group">
+                            <div class="form-group">
                                 <label for="orden">Nro de Orden:</label>
                                 <div class="form-line">
                                     <input type="text" class="form-control" name="nro_orden" value="{{ $bien->nro_orden }}">
@@ -62,7 +62,7 @@
                                         <option value="{{ $departamento->id }}" @if($bien->departamento == $departamento->id) selected @endIf>{{ $departamento->codigo.' -- '.$departamento->descripcion }}</option>
                                     @endforeach
                                 </select>
-                            </div>--}}
+                            </div>
                             <div class="form-group">
                                 <label for="">Foto</label>
                                 <input type="file" name="foto">
